@@ -38,7 +38,7 @@ function init3D(){
  camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,250);
  camera.position.set(20,14,27);
  renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
- renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+ renderer.setPixelRatio(Math.min(devicePixelRatio,2));
  renderer.setSize(innerWidth,innerHeight-72);
  renderer.outputColorSpace=THREE.SRGBColorSpace;
  renderer.toneMapping=THREE.ACESFilmicToneMapping;
@@ -57,45 +57,80 @@ function init3D(){
  addEventListener("resize",resize); animate();
  setTimeout(()=>document.querySelector("#boot").style.display="none",700);
 }
+function canvasTexture(type, seed=1){
+ const c=document.createElement("canvas"); c.width=1024; c.height=1024; const x=c.getContext("2d");
+ const rand=n=>{const v=Math.sin(n*12.9898+seed*78.233)*43758.5453;return v-Math.floor(v)};
+ if(type==="ground"){
+   x.fillStyle="#708e5b";x.fillRect(0,0,1024,1024);
+   for(let i=0;i<9000;i++){const px=rand(i)*1024,py=rand(i+17)*1024,r=.35+rand(i+31)*1.8; x.fillStyle=rand(i+51)>.55?"rgba(46,76,43,.16)":"rgba(210,190,115,.10)";x.beginPath();x.arc(px,py,r,0,Math.PI*2);x.fill()}
+ } else if(type==="stone"){
+   x.fillStyle="#b8b19b";x.fillRect(0,0,1024,1024);
+   for(let i=0;i<1700;i++){const px=rand(i)*1024,py=rand(i+2)*1024,r=1+rand(i+4)*5;x.fillStyle=`rgba(65,61,51,${.035+rand(i+8)*.08})`;x.beginPath();x.arc(px,py,r,0,Math.PI*2);x.fill()}
+ } else if(type==="plaster"){
+   x.fillStyle="#e4dcc7";x.fillRect(0,0,1024,1024);
+   for(let i=0;i<3200;i++){const px=rand(i)*1024,py=rand(i+3)*1024;x.fillStyle=`rgba(90,75,53,${.025+rand(i+9)*.06})`;x.fillRect(px,py,1+rand(i+11)*4,1+rand(i+13)*4)}
+ } else if(type==="brick"){
+   x.fillStyle="#9a684d";x.fillRect(0,0,1024,1024);
+   for(let yy=0;yy<1024;yy+=38){for(let xx=0;xx<1024;xx+=72){const off=(yy/38)%2?36:0;x.fillStyle="#704b39";x.fillRect(xx+off,yy,68,30);x.fillStyle="rgba(245,220,190,.12)";x.fillRect(xx+off,yy,68,2)}}
+ } else if(type==="wood"){
+   x.fillStyle="#6f5037";x.fillRect(0,0,1024,1024);
+   for(let i=0;i<70;i++){x.strokeStyle=`rgba(35,23,14,${.15+rand(i)*.18})`;x.lineWidth=2+rand(i+4)*4;x.beginPath();x.moveTo(0,i*16+rand(i)*10);x.lineTo(1024,i*16+rand(i)*10+rand(i+2)*20);x.stroke()}
+ }
+ const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();t.wrapS=t.wrapT=THREE.RepeatWrapping;return t;
+}
+function buildingMaterial(type,color){const m=new THREE.MeshStandardMaterial({color,roughness:.78}); if(type)m.map=canvasTexture(type,Math.floor(color)); return m}
+function detailedBuilding(key,label,x,z,w,d,h,wall,roof){
+ const g=new THREE.Group();g.position.set(x,0,z);
+ const body=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),buildingMaterial("plaster",wall));body.position.y=h/2;g.add(body);
+ const roofGeo=new THREE.ConeGeometry(Math.max(w,d)*.78,Math.max(2.2,h*.22),4);const r=new THREE.Mesh(roofGeo,new THREE.MeshStandardMaterial({color:roof,roughness:.9}));r.rotation.y=Math.PI/4;r.position.y=h+.75;g.add(r);
+ const door=new THREE.Mesh(new THREE.BoxGeometry(.9,1.8,.08),buildingMaterial("wood",0x6a4b34));door.position.set(0,.9,d/2+.045);g.add(door);
+ const winMat=new THREE.MeshStandardMaterial({color:0xb8d4c1,roughness:.35,metalness:.05,emissive:0x6e9278,emissiveIntensity:.08});
+ for(const side of [-1,1]){for(const yy of [h*.43,h*.68]){const win=new THREE.Mesh(new THREE.BoxGeometry(1.05,.82,.07),winMat);win.position.set(side*(w/2+.04),yy,0);win.rotation.y=Math.PI/2;g.add(win)}}
+ for(const xx of [-w*.27,w*.27]){const win=new THREE.Mesh(new THREE.BoxGeometry(1.0,.8,.07),winMat);win.position.set(xx,h*.56,d/2+.04);g.add(win)}
+ const chimney=new THREE.Mesh(new THREE.BoxGeometry(.45,.9,.45),buildingMaterial("brick",0x9b684d));chimney.position.set(w*.22,h+.95,0);g.add(chimney);
+ g.userData={key,label,base:h};scene.add(g);objects.push(g);return g;
+}
+function officeBuilding(key,label,x,z,w,d,h,wall,roof){
+ const g=new THREE.Group();g.position.set(x,0,z);
+ const body=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),buildingMaterial("plaster",wall));body.position.y=h/2;g.add(body);
+ const roof=new THREE.Mesh(new THREE.BoxGeometry(w+.35,.35,d+.35),new THREE.MeshStandardMaterial({color:roof,roughness:.9}));roof.position.y=h+.2;g.add(roof);
+ const glass=new THREE.MeshStandardMaterial({color:0x789f91,roughness:.28,metalness:.12,emissive:0x314f46,emissiveIntensity:.12});
+ for(let yy=1.8;yy<h;yy+=1.9) for(let xx=-w/2+1.2;xx<w/2-.4;xx+=1.55){const win=new THREE.Mesh(new THREE.BoxGeometry(.95,.72,.07),glass);win.position.set(xx,yy,d/2+.05);g.add(win)}
+ const sign=new THREE.Mesh(new THREE.BoxGeometry(Math.min(4,w*.55),.62,.08),new THREE.MeshStandardMaterial({color:0xf0e5c5,roughness:.8}));sign.position.set(0,h*.64,d/2+.09);g.add(sign);
+ g.userData={key,label,base:h};scene.add(g);objects.push(g);return g;
+}
 function createLivingLandscape(){
- const meadow=new THREE.Mesh(new THREE.CircleGeometry(42,128),new THREE.MeshStandardMaterial({color:0x6f9562,roughness:1}));
- meadow.rotation.x=-Math.PI/2; meadow.position.y=-.65; scene.add(meadow);
- [7,13,20,29,38].forEach((r,i)=>{const ring=new THREE.Mesh(new THREE.RingGeometry(r,r+.035,128),new THREE.MeshBasicMaterial({color:i%2?0xd6b96a:0x9ebc78,transparent:true,opacity:.22}));ring.rotation.x=-Math.PI/2;ring.position.y=-.62+i*.002;scene.add(ring)});
- const riverPts=[];for(let i=0;i<=24;i++)riverPts.push(new THREE.Vector3(-7+Math.sin(i*.55)*2.8,-.57,-28+i*2.2));
- scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(riverPts),new THREE.LineBasicMaterial({color:0x6fa8a0,transparent:true,opacity:.7})));
- const plaza=new THREE.Mesh(new THREE.CircleGeometry(5.2,64),new THREE.MeshStandardMaterial({color:0xd9c79a,roughness:.95}));
- plaza.rotation.x=-Math.PI/2;plaza.position.y=-.54;scene.add(plaza);
- const pathMat=new THREE.MeshStandardMaterial({color:0xcbbd91,roughness:1});
- [[0,0,10,0],[0,0,0,-11],[0,0,9,8],[0,0,-10,7]].forEach(([x,z,x2,z2])=>{const dx=x2-x,dz=z2-z,len=Math.hypot(dx,dz);const path=new THREE.Mesh(new THREE.PlaneGeometry(len,.55),pathMat);path.rotation.x=-Math.PI/2;path.rotation.z=-Math.atan2(dz,dx);path.position.set((x+x2)/2,-.53,(z+z2)/2);scene.add(path)});
- const trunkMat=new THREE.MeshStandardMaterial({color:0x6b5038,roughness:1});
- const leafMats=[0x5d824e,0x769b5b,0x8baa69].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
- for(let i=0;i<42;i++){const a=i/42*Math.PI*2,r=20+(i%5)*2.2,g=new THREE.Group();const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.12,.2,1.3,7),trunkMat);trunk.position.y=.05;g.add(trunk);const crown=new THREE.Mesh(new THREE.IcosahedronGeometry(.85+(i%3)*.14,1),leafMats[i%3]);crown.position.y=1.05+(i%2)*.15;crown.scale.y=.9+(i%3)*.12;g.add(crown);g.position.set(Math.cos(a)*r,0,Math.sin(a)*r);scene.add(g)}
- const cropMat=new THREE.MeshStandardMaterial({color:0x9b9650,roughness:1});
- for(let i=0;i<10;i++){const p=new THREE.Mesh(new THREE.BoxGeometry(2.6,.12,1.2),cropMat);p.position.set(-16+(i%5)*3.1,-.48,-8+Math.floor(i/5)*2);scene.add(p)}
- const stone=new THREE.Mesh(new THREE.DodecahedronGeometry(1.35,1),new THREE.MeshStandardMaterial({color:0x8f8b77,roughness:.92}));stone.position.y=.65;scene.add(stone);
- const positions=[["democracy",0,3.0,0x8fae67],["health",-7,.45,0x9f765f],["education",7,.45,0xc49b54],["economy",-8,-7,0x8a9c69],["food",8,-7,0x829f5b],["capital",-11,6,0x9c8756],["crisis",11,6,0x748f83]];
- positions.forEach(([key,x,z,color])=>{const g=new THREE.Group();g.position.set(x,-.15,z);const base=new THREE.Mesh(new THREE.CylinderGeometry(.65,.85,.18,32),new THREE.MeshStandardMaterial({color:0xd7c79a,roughness:1}));base.position.y=.1;g.add(base);const marker=new THREE.Mesh(new THREE.SphereGeometry(.28,18,12),new THREE.MeshStandardMaterial({color,roughness:.55}));marker.position.y=.43;g.add(marker);g.userData={key,label:(blocks[key]||{}).title||key,baseY:0,color};scene.add(g);objects.push(g)});
- const pts=[];for(let i=0;i<90;i++)pts.push((Math.random()-.5)*45,1+Math.random()*7,(Math.random()-.5)*45);
- const geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.Float32BufferAttribute(pts,3));scene.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xf3e6ad,size:.09,transparent:true,opacity:.55})));
+ const ground=new THREE.Mesh(new THREE.PlaneGeometry(110,110,32,32),new THREE.MeshStandardMaterial({map:canvasTexture("ground",7),roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.65;scene.add(ground);
+ const roadMat=new THREE.MeshStandardMaterial({map:canvasTexture("stone",11),roughness:.96});
+ const road=(x,z,w,d,rot=0)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),roadMat);m.rotation.x=-Math.PI/2;m.rotation.z=rot;m.position.set(x,-.60,z);scene.add(m)};
+ road(0,0,8,58);road(0,0,58,7);road(-16,-13,7,28,.18);road(16,13,7,28,.18);
+ const riverPts=[];for(let i=0;i<=32;i++)riverPts.push(new THREE.Vector3(-30+Math.sin(i*.45)*3.2,-.57,-34+i*2.15));
+ const riverCurve=new THREE.CatmullRomCurve3(riverPts);const river=new THREE.Mesh(new THREE.TubeGeometry(riverCurve,64,.72,10,false),new THREE.MeshStandardMaterial({color:0x6fa7a0,roughness:.28,metalness:.02}));scene.add(river);
+ const green=new THREE.Mesh(new THREE.BoxGeometry(18,.16,16),new THREE.MeshStandardMaterial({map:canvasTexture("ground",19),roughness:1}));green.position.set(0,-.51,0);scene.add(green);
+ // Seven real, distinct civic buildings replace the floating circles.
+ officeBuilding("democracy","DEMOKRATIE",-11,-9,8,7,6.5,0xd8d0bb,0x5d664d);
+ officeBuilding("health","GESUNDHEIT",0,-12,8.5,7.5,8.5,0xd9d2bf,0x66705b);
+ officeBuilding("education","BILDUNG",11,-9,8,7,7.2,0xd7c9ae,0x68735d);
+ officeBuilding("economy","WIRTSCHAFT",-12,9,9,7.5,9.2,0xcfc5ad,0x62584a);
+ detailedBuilding("food","ERNÄHRUNG",0,9,8,7,5.5,0xd5c69f,0x6f7650);
+ detailedBuilding("capital","BÜRGERKAPITAL",12,8,8,7,7.4,0xd7ccb8,0x665c4d);
+ detailedBuilding("crisis","KRISENZENTRUM",0,0,10,8,10.5,0xd1c8b4,0x55584b);
+ // Homes and farm buildings create depth instead of a ring of anonymous blocks.
+ const houseColors=[0xd8cdb5,0xcdbfa4,0xe0d4bd];
+ for(let i=0;i<16;i++){const side=i%4, row=Math.floor(i/4),x=-31+side*20+(row%2)*5,z=-25+row*17;detailedBuilding("","",x,z,5,4,3.5+row*.25,houseColors[i%3],0x665844)}
+ // Fields with rows, not geometric circles.
+ const crop=new THREE.MeshStandardMaterial({color:0x9a9a58,roughness:1});
+ for(let f=0;f<6;f++){const x=-25+(f%3)*7,z=19+Math.floor(f/3)*7;for(let r=0;r<7;r++){const row=new THREE.Mesh(new THREE.BoxGeometry(5,.09,.18),crop);row.position.set(x,-.52,z+r*.65);scene.add(row)}}
+ // Tree belts, varied height and canopy shape.
+ const trunkMat=new THREE.MeshStandardMaterial({map:canvasTexture("wood",29),roughness:1});
+ const leafMats=[0x4f7547,0x638b51,0x78975d].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
+ for(let i=0;i<54;i++){const a=i/54*Math.PI*2,r=28+(i%6)*1.7,g=new THREE.Group();const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.13,.24,1.6,8),trunkMat);trunk.position.y=.15;g.add(trunk);const crown=new THREE.Mesh(new THREE.IcosahedronGeometry(.95+(i%3)*.18,2),leafMats[i%3]);crown.position.y=1.3;crown.scale.set(1,1.15,1);g.add(crown);g.position.set(Math.cos(a)*r,0,Math.sin(a)*r);scene.add(g)}
+ // Small civic square, deliberately irregular rather than circular.
+ const square=new THREE.Mesh(new THREE.ShapeGeometry(new THREE.Shape([new THREE.Vector2(-6,-4),new THREE.Vector2(5,-4),new THREE.Vector2(7,1),new THREE.Vector2(4,5),new THREE.Vector2(-5,4),new THREE.Vector2(-7,0),new THREE.Vector2(-6,-4)])),new THREE.MeshStandardMaterial({map:canvasTexture("stone",41),roughness:1}));square.rotation.x=-Math.PI/2;square.position.y=-.39;scene.add(square);
+ const treeSmall=new THREE.Mesh(new THREE.CylinderGeometry(.18,.28,1.5,8),trunkMat);treeSmall.position.set(0,.35,2);scene.add(treeSmall);const crownSmall=new THREE.Mesh(new THREE.IcosahedronGeometry(1.1,2),leafMats[1]);crownSmall.position.set(0,1.5,2);scene.add(crownSmall);
+ const pts=[];for(let i=0;i<110;i++)pts.push((Math.random()-.5)*65,1+Math.random()*8,(Math.random()-.5)*65);const geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.Float32BufferAttribute(pts,3));scene.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xf1e4ac,size:.07,transparent:true,opacity:.38})));
 }
 function mat(c,em=0){return new THREE.MeshStandardMaterial({color:c,roughness:.62,metalness:.18,emissive:em?c:0,emissiveIntensity:em?0.22:0})}
-function building(key,label,x,z,h,color){
- const g=new THREE.Group(); g.position.set(x,0,z);
- const body=new THREE.Mesh(new THREE.BoxGeometry(6,h,6),mat(color)); body.position.y=h/2; g.add(body);
- const roof=new THREE.Mesh(new THREE.BoxGeometry(6.5,.25,6.5),mat(0x202b36)); roof.position.y=h+.15; g.add(roof);
- for(let yy=2;yy<h;yy+=2.2){for(let s=-2;s<=2;s+=2){const win=new THREE.Mesh(new THREE.BoxGeometry(.12,.7,.9),mat(0xa8ffcc,1));win.position.set(3.02,yy,s);g.add(win)}}
- g.userData={key,label,base:h}; scene.add(g); objects.push(g);
-}
-function createCity(){
- building("democracy","DEMOKRATIE",-14,-8,10,0x273b4b);
- building("health","GESUNDHEIT",0,-10,15,0x2d3f48);
- building("education","BILDUNG",14,-7,12,0x304338);
- building("economy","WIRTSCHAFT",-15,8,18,0x3b3847);
- building("food","ERNÄHRUNG",0,8,9,0x33463b);
- building("capital","BÜRGERKAPITAL",14,8,14,0x403d31);
- building("crisis","KRISENZENTRUM",0,0,23,0x3f3535);
- for(let i=0;i<18;i++){const a=i/18*Math.PI*2,r=26;const b=new THREE.Mesh(new THREE.BoxGeometry(2+Math.random()*2,3+Math.random()*9,2+Math.random()*2),mat(0x1c252d));b.position.set(Math.cos(a)*r,(b.geometry.parameters.height/2)-.1,Math.sin(a)*r);scene.add(b)}
-}
 function onPointer(e){
  const rect=renderer.domElement.getBoundingClientRect(); mouse.x=(e.clientX-rect.left)/rect.width*2-1; mouse.y=-(e.clientY-rect.top)/rect.height*2+1;
  raycaster.setFromCamera(mouse,camera); const hit=raycaster.intersectObjects(objects,true)[0]; if(!hit)return;
