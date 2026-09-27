@@ -1,4 +1,4 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
+import * as THREE from "three";
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/controls/OrbitControls.js";
 
 import { constitution as constitutionData } from "./constitution.js";

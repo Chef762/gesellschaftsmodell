@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gesellschaftsmodell — 3D Labor</title>
+<meta name="theme-color" content="#071014">
+<meta name="description" content="Gesellschaftsmodell — interaktives 3D-Systemmodell und Arbeitsfassung 1.0">
+<title>Gesellschaftsmodell · Interaktives Systemmodell</title>
 <link rel="stylesheet" href="./style.css">
 <script type="importmap">
 {
@@ -14,85 +16,95 @@
 </script>
 </head>
 <body>
-<div id="boot"><div class="bootmark">GM</div><div>System wird aufgebaut …</div></div>
+<div id="boot">
+  <div class="boot-orbit"><span>GM</span></div>
+  <div class="boot-title">GESELLSCHAFTSMODELL</div>
+  <div class="boot-sub">INTERAKTIVES SYSTEMMODELL · FASSUNG 1.0</div>
+</div>
 
 <header class="topbar">
-  <div class="brand"><span class="brand-dot"></span><div><strong>GESELLSCHAFTSMODELL</strong><small>3D · LABOR · FASSUNG</small></div></div>
-  <nav>
-    <button class="navbtn active" data-view="world">Welt</button>
-    <button class="navbtn" data-view="simulation">Simulation</button>
-    <button class="navbtn" data-view="constitution">Verfassung</button>
-    <button class="navbtn" data-view="critique">Kritik</button>
+  <button class="brand" data-view="world" aria-label="Zur Startansicht">
+    <span class="brand-mark"><i></i><i></i><i></i></span>
+    <span><strong>GESELLSCHAFTS<span>MODELL</span></strong><small>3D · SYSTEMLABOR · FASSUNG 1.0</small></span>
+  </button>
+  <nav aria-label="Hauptnavigation">
+    <button class="navbtn active" data-view="world"><span>01</span> Welt</button>
+    <button class="navbtn" data-view="simulation"><span>02</span> Simulation</button>
+    <button class="navbtn" data-view="constitution"><span>03</span> Verfassung</button>
+    <button class="navbtn" data-view="critique"><span>04</span> Prüfung</button>
   </nav>
-  <button id="downloadAll" class="download">↓ Fassung 1.0</button>
+  <button id="downloadAll" class="download">Fassung 1.0 <b>↓</b></button>
 </header>
 
 <main>
-  <section id="world" class="view active">
-    <div id="canvasWrap"></div>
-    <div class="hero">
-      <div class="eyebrow">INTERAKTIVES SYSTEMMODELL</div>
-      <h1>Eine Gesellschaft,<br><em>die sich testen lässt.</em></h1>
-      <p>Erkunde die Bereiche des Modells. Klicke Gebäude an, verändere Rahmenbedingungen und beobachte, wie sich Versorgung, Energie, Reserve und Vertrauen verändern.</p>
-      <div class="hero-actions">
-        <button class="primary" data-focus="democracy">System erkunden</button>
-        <button class="ghost" data-view="constitution">Verfassung öffnen</button>
-      </div>
+<section id="world" class="view active">
+  <div id="canvasWrap"></div>
+  <div class="world-vignette"></div>
+  <div class="hero">
+    <div class="eyebrow"><span class="pulse"></span> INTERAKTIVES SYSTEMMODELL</div>
+    <h1>Eine Gesellschaft,<br><em>die sich testen lässt.</em></h1>
+    <p>Erkunde die Bereiche des Modells, öffne einzelne Institutionen und verändere im Simulationslabor zentrale Rahmenbedingungen.</p>
+    <div class="hero-actions">
+      <button class="primary" data-focus="democracy">System erkunden <b>→</b></button>
+      <button class="ghost" data-view="constitution">Verfassung öffnen</button>
     </div>
-    <div class="metrics" id="metrics"></div>
-    <div id="statusHint" class="hint">Maus ziehen · scrollen zum Zoomen · Gebäude anklicken · <kbd>R</kbd> zurücksetzen</div>
-  </section>
+  </div>
+  <div class="world-label"><span>LIVE MODEL</span><b>7</b> SYSTEMBEREICHE</div>
+  <div class="metrics" id="metrics"></div>
+  <div id="statusHint" class="hint"><span>DRAG</span> drehen · <span>SCROLL</span> zoomen · Gebäude anklicken · <kbd>R</kbd> Reset</div>
+  <div class="world-corner">GM / 01<br><small>EXPLORATION MODE</small></div>
+</section>
 
-  <section id="simulation" class="view panelview">
-    <div class="section-head">
-      <div><span class="eyebrow">SIMULATIONSLABOR</span><h2>Was passiert, wenn …?</h2><p>Die Zahlen sind <strong>Modellannahmen</strong>, keine Prognosen. Verändere einzelne Faktoren und beobachte die Reaktion des vereinfachten Systems.</p></div>
+<section id="simulation" class="view panelview">
+  <div class="section-head">
+    <div class="section-kicker">02 / SIMULATIONSLABOR</div>
+    <div class="head-row">
+      <div><h2>Was passiert,<br><em>wenn …?</em></h2><p>Die Werte sind <strong>Modellannahmen</strong>, keine Prognosen. Verändere Faktoren und beobachte die Reaktion des vereinfachten Systems.</p></div>
       <button id="resetSim" class="ghost">↺ Ausgangslage</button>
     </div>
-    <div class="simgrid">
-      <div class="card controls">
-        <h3>Rahmenbedingungen</h3>
-        <label>Ernte / Lebensmittel <output id="foodOut">100</output><input id="food" type="range" min="50" max="120" value="100"></label>
-        <label>Energieversorgung <output id="energyOut">100</output><input id="energy" type="range" min="50" max="120" value="100"></label>
-        <label>Vertrauen <output id="trustOut">88</output><input id="trust" type="range" min="30" max="100" value="88"></label>
-        <label>Marktkonzentration <output id="concOut">20</output><input id="conc" type="range" min="0" max="100" value="20"></label>
-        <label>Investitionen Bürgerkapital <output id="investOut">60</output><input id="invest" type="range" min="0" max="100" value="60"></label>
-      </div>
-      <div class="card systemcard">
-        <h3>Systemreaktion</h3>
-        <div id="simBars"></div>
-        <div class="formula">Versorgung = Lebensmittel + Energie + Reserve − Krisendruck</div>
-      </div>
-      <div class="card scenarios">
-        <h3>Szenarien</h3>
-        <button data-scenario="digital">Digitalausfall</button>
-        <button data-scenario="harvest">Erntekrise</button>
-        <button data-scenario="energy">Energieschock</button>
-        <button data-scenario="trust">Vertrauenskrise</button>
-        <button data-scenario="compound">Mehrfachkrise</button>
-      </div>
-      <div class="card logcard"><h3>Systemprotokoll</h3><div id="simLog"></div></div>
+  </div>
+  <div class="simgrid">
+    <div class="card controls"><div class="card-top"><span>01</span><h3>Rahmenbedingungen</h3></div>
+      <label>Ernte / Lebensmittel <output id="foodOut">100</output><input id="food" type="range" min="50" max="120" value="100"></label>
+      <label>Energieversorgung <output id="energyOut">100</output><input id="energy" type="range" min="50" max="120" value="100"></label>
+      <label>Vertrauen <output id="trustOut">88</output><input id="trust" type="range" min="30" max="100" value="88"></label>
+      <label>Marktkonzentration <output id="concOut">20</output><input id="conc" type="range" min="0" max="100" value="20"></label>
+      <label>Investitionen Bürgerkapital <output id="investOut">60</output><input id="invest" type="range" min="0" max="100" value="60"></label>
     </div>
-  </section>
+    <div class="card systemcard"><div class="card-top"><span>02</span><h3>Systemreaktion</h3></div><div id="simBars"></div><div class="formula">Versorgung = Lebensmittel + Energie + Reserve − Krisendruck</div></div>
+    <div class="card scenarios"><div class="card-top"><span>03</span><h3>Szenarien</h3></div>
+      <button data-scenario="digital">Digitalausfall <b>→</b></button>
+      <button data-scenario="harvest">Erntekrise <b>→</b></button>
+      <button data-scenario="energy">Energieschock <b>→</b></button>
+      <button data-scenario="trust">Vertrauenskrise <b>→</b></button>
+      <button data-scenario="compound">Mehrfachkrise <b>→</b></button>
+    </div>
+    <div class="card logcard"><div class="card-top"><span>04</span><h3>Systemprotokoll</h3></div><div id="simLog"></div></div>
+  </div>
+</section>
 
-  <section id="constitution" class="view panelview">
-    <div class="section-head">
-      <div><span class="eyebrow">DOKUMENTENZENTRUM</span><h2>Die Fassung online</h2><p>Lesen, durchsuchen, einzelne Teile öffnen oder die aktuelle Arbeitsfassung als Text/Markdown herunterladen.</p></div>
-      <div class="docactions"><button id="downloadMd" class="primary">↓ Markdown</button><button id="downloadTxt" class="ghost">↓ TXT</button></div>
+<section id="constitution" class="view panelview">
+  <div class="section-head">
+    <div class="section-kicker">03 / DOKUMENTENZENTRUM</div>
+    <div class="head-row"><div><h2>Die Fassung <em>online.</em></h2><p>Lesen, durchsuchen und einzelne Teile öffnen. Die Arbeitsfassung bleibt ausdrücklich offen für Kritik, Änderung und Streichung.</p></div>
+      <div class="docactions"><button id="downloadMd" class="primary">Markdown ↓</button><button id="downloadTxt" class="ghost">TXT ↓</button></div>
     </div>
-    <div class="docgrid">
-      <aside class="toc" id="toc"></aside>
-      <article class="document" id="document"></article>
-    </div>
-  </section>
+  </div>
+  <div class="docgrid"><aside class="toc" id="toc"></aside><article class="document" id="document"></article></div>
+</section>
 
-  <section id="critique" class="view panelview">
-    <div class="section-head"><div><span class="eyebrow">OFFENE PRÜFUNG</span><h2>Stärken, Gegenargumente, offene Punkte</h2><p>Die Seite soll das Modell nicht als fertige Wahrheit darstellen. Jede Idee soll angreifbar und überprüfbar bleiben.</p></div></div>
-    <div class="critgrid" id="critgrid"></div>
-  </section>
+<section id="critique" class="view panelview">
+  <div class="section-head">
+    <div class="section-kicker">04 / OFFENE PRÜFUNG</div>
+    <div class="head-row"><div><h2>Stärken, Gegenargumente,<br><em>offene Punkte.</em></h2><p>Das Modell wird hier nicht als fertige Wahrheit präsentiert. Ideen sollen angreifbar, überprüfbar und veränderbar bleiben.</p></div></div>
+  </div>
+  <div class="critgrid" id="critgrid"></div>
+</section>
 </main>
 
 <aside id="infoPanel" class="info-panel">
-  <button id="closePanel" class="close">×</button>
+  <button id="closePanel" class="close" aria-label="Schließen">×</button>
+  <div class="panel-line"></div>
   <div id="panelContent"></div>
 </aside>
 
