@@ -113,41 +113,36 @@ function officeBuilding(key,label,x,z,w,d,h,wall,roofColor){
  g.userData={key,label,base:h};scene.add(g);objects.push(g);return g;
 }
 
-function makeCar(color=0x4f6f5c){
+function makeCar(color=0x4f6f5c, variant=0){
  const g=new THREE.Group();
- const body=new THREE.Mesh(new THREE.BoxGeometry(1.35,.42,2.35),new THREE.MeshStandardMaterial({color,roughness:.55}));
- body.position.y=.48; g.add(body);
- const cabin=new THREE.Mesh(new THREE.BoxGeometry(1.02,.38,1.05),new THREE.MeshStandardMaterial({color:0x587267,roughness:.25,metalness:.08}));
- cabin.position.set(0,.78,-.08); g.add(cabin);
- const wheelMat=new THREE.MeshStandardMaterial({color:0x252622,roughness:.9});
- for(const x of [-.62,.62]) for(const z of [-.72,.72]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.18,.18,.12,12),wheelMat);w.rotation.z=Math.PI/2;w.position.set(x,.3,z);g.add(w)}
- const lamp=new THREE.MeshStandardMaterial({color:0xf4e8b5,emissive:0xc9b86a,emissiveIntensity:.35});
- for(const x of [-.38,.38]){const l=new THREE.Mesh(new THREE.BoxGeometry(.22,.12,.06),lamp);l.position.set(x,.52,1.19);g.add(l)}
+ const paint=new THREE.MeshStandardMaterial({color,roughness:.42,metalness:.18});
+ const dark=new THREE.MeshStandardMaterial({color:0x202522,roughness:.78});
+ const glass=new THREE.MeshStandardMaterial({color:0x344f4a,roughness:.18,metalness:.08,transparent:true,opacity:.9});
+ const body=new THREE.Mesh(new THREE.BoxGeometry(1.48,.42,2.55),paint); body.position.y=.46; g.add(body);
+ const hood=new THREE.Mesh(new THREE.BoxGeometry(1.32,.18,.72),paint); hood.position.set(0,.69,.83); g.add(hood);
+ const cabin=new THREE.Mesh(new THREE.BoxGeometry(1.08,.48,1.25),glass); cabin.position.set(0,.84,-.05); g.add(cabin);
+ const roof=new THREE.Mesh(new THREE.BoxGeometry(.98,.06,1.08),paint); roof.position.set(0,1.08,-.05); g.add(roof);
+ for(const x of [-.58,.58]) for(const z of [-.78,.78]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,.13,16),dark);w.rotation.z=Math.PI/2;w.position.set(x,.29,z);g.add(w);}
+ const head=new THREE.MeshStandardMaterial({color:0xfff0b0,emissive:0xffd36a,emissiveIntensity:.7}),tail=new THREE.MeshStandardMaterial({color:0x8b3d35,emissive:0x5b1510,emissiveIntensity:.45});
+ for(const x of [-.4,.4]){const a=new THREE.Mesh(new THREE.BoxGeometry(.23,.13,.06),head);a.position.set(x,.52,1.3);g.add(a);const b=new THREE.Mesh(new THREE.BoxGeometry(.23,.12,.06),tail);b.position.set(x,.52,-1.3);g.add(b)}
  return g;
 }
-function addMovingCar(axis, lane, start, speed, color){
- const g=makeCar(color); scene.add(g); movingCars.push({g,axis,lane,start,speed});
+function addMovingCar(axis,lane,start,speed,color,variant=0){const g=makeCar(color,variant);scene.add(g);movingCars.push({g,axis,lane,start,speed,variant});}
+function makePerson(shirt=0x6b7c63,skin=0xd1a27c,hair=0x40362d,variant=0){
+ const g=new THREE.Group(), skinMat=new THREE.MeshStandardMaterial({color:skin,roughness:.8}), shirtMat=new THREE.MeshStandardMaterial({color:shirt,roughness:.72}), pantsMat=new THREE.MeshStandardMaterial({color:[0x3f463e,0x4b4d52,0x5c4e3f][variant%3],roughness:.88}), shoeMat=new THREE.MeshStandardMaterial({color:0x2c2d29,roughness:.92}), hairMat=new THREE.MeshStandardMaterial({color:hair,roughness:.9});
+ const pelvis=new THREE.Mesh(new THREE.BoxGeometry(.34,.24,.24),pantsMat);pelvis.position.y=.78;g.add(pelvis);
+ const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.23,.52,4,8),shirtMat);torso.position.y=1.08;g.add(torso);
+ const neck=new THREE.Mesh(new THREE.CylinderGeometry(.09,.09,.12,8),skinMat);neck.position.y=1.42;g.add(neck);
+ const head=new THREE.Mesh(new THREE.SphereGeometry(.21,14,10),skinMat);head.position.y=1.62;g.add(head);
+ const hairCap=new THREE.Mesh(new THREE.SphereGeometry(.215,14,8,0,Math.PI*2,0,Math.PI*.52),hairMat);hairCap.position.y=1.68;g.add(hairCap);
+ const armL=new THREE.Group(),armR=new THREE.Group(),upperL=new THREE.Mesh(new THREE.CapsuleGeometry(.075,.38,3,6),shirtMat);upperL.position.y=-.19;armL.add(upperL);armL.position.set(-.28,1.28,0);g.add(armL);const upperR=upperL.clone();armR.add(upperR);armR.position.set(.28,1.28,0);g.add(armR);
+ const legL=new THREE.Group(),legR=new THREE.Group(),lowerL=new THREE.Mesh(new THREE.CapsuleGeometry(.08,.42,3,6),pantsMat);lowerL.position.y=-.25;legL.add(lowerL);legL.position.set(-.11,.7,0);g.add(legL);const lowerR=lowerL.clone();legR.add(lowerR);legR.position.set(.11,.7,0);g.add(legR);
+ for(const x of [-.11,.11]){const sh=new THREE.Mesh(new THREE.BoxGeometry(.17,.10,.30),shoeMat);sh.position.set(x,.20,.06);g.add(sh)}
+ g.userData.parts={armL,armR,legL,legR};return g;
 }
-function makePerson(shirt=0x6b7c63,skin=0xd1a27c){
- const g=new THREE.Group();
- const legs=new THREE.Mesh(new THREE.CylinderGeometry(.12,.14,.75,7),new THREE.MeshStandardMaterial({color:0x3f463e,roughness:.9}));
- legs.position.set(-.13,.38,0);g.add(legs);
- const leg2=legs.clone();leg2.position.x=.13;g.add(leg2);
- const torso=new THREE.Mesh(new THREE.CylinderGeometry(.25,.29,.7,8),new THREE.MeshStandardMaterial({color:shirt,roughness:.75}));torso.position.y=1.02;g.add(torso);
- const head=new THREE.Mesh(new THREE.SphereGeometry(.2,12,8),new THREE.MeshStandardMaterial({color:skin,roughness:.8}));head.position.y=1.52;g.add(head);
- return g;
-}
-function addWalker(x,z,dx,dz,speed,color,phase=0){
- const g=makePerson(color);g.position.set(x,.0,z);scene.add(g);walkers.push({g,x,z,dx,dz,speed,phase});
-}
-function makeFarmer(x,z,flip=1){
- const g=makePerson(0x75834d,0xc49372);
- const hat=new THREE.Mesh(new THREE.CylinderGeometry(.28,.3,.10,12),new THREE.MeshStandardMaterial({color:0x8b7046,roughness:1}));
- hat.position.y=1.72;g.add(hat);
- const tool=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,1.25,7),new THREE.MeshStandardMaterial({color:0x6b4c31,roughness:1}));
- tool.rotation.z=-.55*flip;tool.position.set(.38*flip,1.0,.02);g.add(tool);
- g.position.set(x,0,z);scene.add(g);farmers.push({g,x,z,phase:Math.random()*6.28});
-}
+function addWalker(x,z,dx,dz,speed,color,phase=0,variant=0){const shirts=[color,0x9a765c,0x637f70,0x756b58,0x4f6b86],skins=[0xd1a27c,0xb97855,0xe0b18e,0x8e5a3f],hairs=[0x40362d,0x6a4a31,0x22231f,0x8a6749];const g=makePerson(shirts[variant%5],skins[variant%4],hairs[variant%4],variant);g.position.set(x,0,z);scene.add(g);walkers.push({g,x,z,dx,dz,speed,phase,variant});}
+function makeFarmer(x,z,flip=1,variant=0){const g=makePerson(variant%2?0x5f7047:0x78834d,variant%3?0xc49372:0xd1a27c,0x493a2c,variant),hatMat=new THREE.MeshStandardMaterial({color:variant%2?0x9b7a4a:0x725b3c,roughness:1});const hat=new THREE.Mesh(new THREE.CylinderGeometry(.30,.34,.11,16),hatMat);hat.position.y=1.82;g.add(hat);const brim=new THREE.Mesh(new THREE.CylinderGeometry(.43,.43,.035,16),hatMat);brim.position.y=1.76;g.add(brim);const tool=new THREE.Group();const handle=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,1.35,8),new THREE.MeshStandardMaterial({color:0x6b4c31,roughness:1}));handle.rotation.z=-.48*flip;handle.position.set(.38*flip,1,.03);tool.add(handle);const blade=new THREE.Mesh(new THREE.BoxGeometry(.38,.08,.10),new THREE.MeshStandardMaterial({color:0x777a6c,metalness:.55,roughness:.42}));blade.position.set(.67*flip,.67,.03);blade.rotation.z=-.48*flip;tool.add(blade);g.add(tool);g.position.set(x,0,z);scene.add(g);farmers.push({g,x,z,phase:Math.random()*6.28,tool});}
+
 function addUndergroundFarmEntrance(){
  const g=new THREE.Group();g.position.set(-7,-.5,29);
  const apron=new THREE.Mesh(new THREE.BoxGeometry(5,.22,3.2),new THREE.MeshStandardMaterial({map:canvasTexture("stone",77),roughness:.96}));apron.position.y=.12;g.add(apron);
@@ -188,18 +183,25 @@ function createLivingLandscape(){
  const crop=new THREE.MeshStandardMaterial({color:0x9a9a58,roughness:1});
  for(let f=0;f<6;f++){const x=-25+(f%3)*7,z=19+Math.floor(f/3)*7;for(let r=0;r<7;r++){const row=new THREE.Mesh(new THREE.BoxGeometry(5,.09,.18),crop);row.position.set(x,-.52,z+r*.65);scene.add(row)}}
  // Living traffic, pedestrians and agricultural work.
- addMovingCar("z", -2.0, -28, 5.2, 0x587766);
- addMovingCar("z",  2.0,  20, -4.4, 0x8a6f4f);
- addMovingCar("x", -2.0, -25, 4.0, 0x6f7b58);
- addMovingCar("x",  2.0,  18, -3.6, 0x7a6657);
+ addMovingCar("z", -2.0, -28, 5.2, 0x587766,0);
+ addMovingCar("z",  2.0,  20, -4.4, 0x8a6f4f,1);
+ addMovingCar("x", -2.0, -25, 4.0, 0x6f7b58,2);
+ addMovingCar("x",  2.0,  18, -3.6, 0x7a6657,3);
  for(let i=0;i<12;i++){
    const horizontal=i%2===0, side=(i%3)-1;
    addWalker(horizontal?-24+i*4:side*2.7, horizontal?side*2.7:-24+i*4,
      horizontal?(i%4<2?1:-1):0, horizontal?0:(i%4<2?1:-1), .55+(i%3)*.08,
-     [0x66775c,0x806d5b,0x5e746e][i%3], i*.7);
+     [0x66775c,0x806d5b,0x5e746e][i%3], i*.7, i%5);
  }
- for(let i=0;i<7;i++) makeFarmer(-25+(i%4)*3.1,20+Math.floor(i/4)*7,(i%2?1:-1));
+ for(let i=0;i<7;i++) makeFarmer(-25+(i%4)*3.1,20+Math.floor(i/4)*7,(i%2?1:-1),i);
  addUndergroundFarmEntrance();
+ // Small moving details make the landscape feel like a living painting.
+ const lampMat=new THREE.MeshStandardMaterial({color:0x3f4b3e,roughness:.78}),lampGlow=new THREE.MeshStandardMaterial({color:0xffe9ae,emissive:0xffc85d,emissiveIntensity:.8});
+ for(let i=0;i<14;i++){const horizontal=i%2===0,lane=horizontal?-2:2,q=-25+(i%7)*8,pole=new THREE.Mesh(new THREE.CylinderGeometry(.055,.08,2.7,8),lampMat);pole.position.set(horizontal?q:lane,.8,horizontal?lane:q);scene.add(pole);const glow=new THREE.Mesh(new THREE.SphereGeometry(.11,10,8),lampGlow);glow.position.set(pole.position.x,2.0,pole.position.z);scene.add(glow);}
+ const crateWood=new THREE.MeshStandardMaterial({color:0x80603e,roughness:.92});for(let i=0;i<10;i++){const c=new THREE.Mesh(new THREE.BoxGeometry(.5,.4,.5),crateWood);c.position.set(-25+(i%5)*1.15,-.25,19+Math.floor(i/5)*1.0);scene.add(c)}
+ const birds=[],birdMat=new THREE.MeshStandardMaterial({color:0x46544a,roughness:.9});for(let i=0;i<7;i++){const b=new THREE.Group(),l=new THREE.Mesh(new THREE.ConeGeometry(.10,.48,5),birdMat);l.rotation.z=Math.PI/2;l.position.x=-.22;b.add(l);const r=l.clone();r.position.x=.22;b.add(r);b.position.set(-22+i*6,7.5+(i%3)*1.2,-18+(i%4)*7);scene.add(b);birds.push({g:b,phase:i*.9,speed:.7+i*.08})}
+ const cloudMat=new THREE.MeshStandardMaterial({color:0xf2f0e2,roughness:1,transparent:true,opacity:.82}),clouds=[];for(let i=0;i<5;i++){const c=new THREE.Group();for(let j=0;j<4;j++){const p=new THREE.Mesh(new THREE.SphereGeometry(1.2+(j%2)*.45,12,8),cloudMat);p.position.set(j*1.15,Math.sin(j)*.25,Math.cos(j)*.25);c.add(p)}c.position.set(-32+i*16,11+(i%2)*2,-20+i*9);c.scale.setScalar(.7+(i%3)*.18);scene.add(c);clouds.push({g:c,speed:.12+i*.025})}
+ const windFlags=[];for(let i=0;i<6;i++){const pole=new THREE.Mesh(new THREE.CylinderGeometry(.025,.035,1.8,6),lampMat);pole.position.set(-28+i*3,-.05,27);scene.add(pole);const flag=new THREE.Mesh(new THREE.PlaneGeometry(.72,.36),new THREE.MeshStandardMaterial({color:[0x7d8d61,0xa17c5c,0x6c8175d][i%3],side:THREE.DoubleSide,roughness:.9}));flag.position.set(.36,-.02,0);flag.position.y=.75;pole.add(flag);windFlags.push({flag,phase:i*.6})}
  // Tree belts, varied height and canopy shape.
  const trunkMat=new THREE.MeshStandardMaterial({map:canvasTexture("wood",29),roughness:1});
  const leafMats=[0x4f7547,0x638b51,0x78975d].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
@@ -227,9 +229,13 @@ function animate(){
  walkers.forEach((p,i)=>{
    p.g.position.x+=p.dx*p.speed*.006; p.g.position.z+=p.dz*p.speed*.006;
    if(p.g.position.x>27||p.g.position.x<-27||p.g.position.z>27||p.g.position.z<-27){p.dx*=-1;p.dz*=-1;}
-   p.g.rotation.y=Math.atan2(p.dx,p.dz); p.g.position.y=Math.abs(Math.sin(t*4+p.phase))*.025;
+   p.g.rotation.y=Math.atan2(p.dx,p.dz);const walk=Math.sin(t*(7+p.speed*2)+p.phase),parts=p.g.userData.parts;
+   if(parts){parts.legL.rotation.x=walk*.48;parts.legR.rotation.x=-walk*.48;parts.armL.rotation.x=-walk*.32;parts.armR.rotation.x=walk*.32;}p.g.position.y=Math.abs(walk)*.025;
  });
- farmers.forEach((f,i)=>{f.g.rotation.y=Math.sin(t*.45+f.phase)*.18;f.g.position.y=Math.abs(Math.sin(t*2.0+f.phase))*.018;});
+ farmers.forEach((f,i)=>{const work=Math.sin(t*1.8+f.phase);f.g.rotation.y=Math.sin(t*.45+f.phase)*.18;f.g.position.y=Math.abs(work)*.018;if(f.tool)f.tool.rotation.z=-.55+Math.sin(t*1.7+f.phase)*.35;});
+ if(typeof birds!=='undefined')birds.forEach(b=>{b.g.position.x+=b.speed*.012;b.g.position.y+=Math.sin(t*2+b.phase)*.004;if(b.g.position.x>34)b.g.position.x=-34;const flap=Math.sin(t*8+b.phase)*.22;b.g.children.forEach((w,j)=>w.rotation.z=(j?-.3:.3)+flap*(j?-.7:.7))});
+ if(typeof clouds!=='undefined')clouds.forEach(c=>{c.g.position.x+=c.speed*.01;if(c.g.position.x>38)c.g.position.x=-38});
+ if(typeof windFlags!=='undefined')windFlags.forEach(f=>{f.flag.rotation.y=Math.sin(t*2.2+f.phase)*.35;f.flag.rotation.z=Math.sin(t*1.4+f.phase)*.05});
  undergroundDoors.forEach(u=>{u.light.intensity=1.8+Math.sin(t*1.7)*.35;});
  renderer.render(scene,camera);
 }
