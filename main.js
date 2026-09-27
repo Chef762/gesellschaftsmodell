@@ -4,6 +4,7 @@ import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.186.0/exampl
 import { constitution as constitutionData } from "./constitution.js";
 
 const constitution = Object.entries(constitutionData).map(([part, value]) => ({part, title:value.title, articles:value.articles.map(a=>[String(a.number),a.title,a.text])}));
+const movingCars=[]; const walkers=[]; const farmers=[]; const undergroundDoors=[];
 
 const critique = [
 ["Grundidee","Gleichwertigkeit und Vielfalt sind als Leitprinzipien klar formulierbar.","Wie werden Zielkonflikte zwischen individueller Freiheit und gemeinschaftlichen Pflichten entschieden?"],
@@ -99,6 +100,59 @@ function officeBuilding(key,label,x,z,w,d,h,wall,roof){
  const sign=new THREE.Mesh(new THREE.BoxGeometry(Math.min(4,w*.55),.62,.08),new THREE.MeshStandardMaterial({color:0xf0e5c5,roughness:.8}));sign.position.set(0,h*.64,d/2+.09);g.add(sign);
  g.userData={key,label,base:h};scene.add(g);objects.push(g);return g;
 }
+
+function makeCar(color=0x4f6f5c){
+ const g=new THREE.Group();
+ const body=new THREE.Mesh(new THREE.BoxGeometry(1.35,.42,2.35),new THREE.MeshStandardMaterial({color,roughness:.55}));
+ body.position.y=.48; g.add(body);
+ const cabin=new THREE.Mesh(new THREE.BoxGeometry(1.02,.38,1.05),new THREE.MeshStandardMaterial({color:0x587267,roughness:.25,metalness:.08}));
+ cabin.position.set(0,.78,-.08); g.add(cabin);
+ const wheelMat=new THREE.MeshStandardMaterial({color:0x252622,roughness:.9});
+ for(const x of [-.62,.62]) for(const z of [-.72,.72]){const w=new THREE.Mesh(new THREE.CylinderGeometry(.18,.18,.12,12),wheelMat);w.rotation.z=Math.PI/2;w.position.set(x,.3,z);g.add(w)}
+ const lamp=new THREE.MeshStandardMaterial({color:0xf4e8b5,emissive:0xc9b86a,emissiveIntensity:.35});
+ for(const x of [-.38,.38]){const l=new THREE.Mesh(new THREE.BoxGeometry(.22,.12,.06),lamp);l.position.set(x,.52,1.19);g.add(l)}
+ return g;
+}
+function addMovingCar(axis, lane, start, speed, color){
+ const g=makeCar(color); scene.add(g); movingCars.push({g,axis,lane,start,speed});
+}
+function makePerson(shirt=0x6b7c63,skin=0xd1a27c){
+ const g=new THREE.Group();
+ const legs=new THREE.Mesh(new THREE.CylinderGeometry(.12,.14,.75,7),new THREE.MeshStandardMaterial({color:0x3f463e,roughness:.9}));
+ legs.position.set(-.13,.38,0);g.add(legs);
+ const leg2=legs.clone();leg2.position.x=.13;g.add(leg2);
+ const torso=new THREE.Mesh(new THREE.CylinderGeometry(.25,.29,.7,8),new THREE.MeshStandardMaterial({color:shirt,roughness:.75}));torso.position.y=1.02;g.add(torso);
+ const head=new THREE.Mesh(new THREE.SphereGeometry(.2,12,8),new THREE.MeshStandardMaterial({color:skin,roughness:.8}));head.position.y=1.52;g.add(head);
+ return g;
+}
+function addWalker(x,z,dx,dz,speed,color,phase=0){
+ const g=makePerson(color);g.position.set(x,.0,z);scene.add(g);walkers.push({g,x,z,dx,dz,speed,phase});
+}
+function makeFarmer(x,z,flip=1){
+ const g=makePerson(0x75834d,0xc49372);
+ const hat=new THREE.Mesh(new THREE.CylinderGeometry(.28,.3,.10,12),new THREE.MeshStandardMaterial({color:0x8b7046,roughness:1}));
+ hat.position.y=1.72;g.add(hat);
+ const tool=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,1.25,7),new THREE.MeshStandardMaterial({color:0x6b4c31,roughness:1}));
+ tool.rotation.z=-.55*flip;tool.position.set(.38*flip,1.0,.02);g.add(tool);
+ g.position.set(x,0,z);scene.add(g);farmers.push({g,x,z,phase:Math.random()*6.28});
+}
+function addUndergroundFarmEntrance(){
+ const g=new THREE.Group();g.position.set(-7,-.5,29);
+ const apron=new THREE.Mesh(new THREE.BoxGeometry(5,.22,3.2),new THREE.MeshStandardMaterial({map:canvasTexture("stone",77),roughness:.96}));apron.position.y=.12;g.add(apron);
+ const wallMat=buildingMaterial("brick",0x805944);
+ const left=new THREE.Mesh(new THREE.BoxGeometry(.45,2.4,3.0),wallMat);left.position.set(-2.05,1.2,0);g.add(left);
+ const right=left.clone();right.position.x=2.05;g.add(right);
+ const top=new THREE.Mesh(new THREE.BoxGeometry(4.55,.45,3.0),wallMat);top.position.y=2.18;g.add(top);
+ const dark=new THREE.Mesh(new THREE.PlaneGeometry(3.65,1.85),new THREE.MeshStandardMaterial({color:0x111814,roughness:1,emissive:0x09120e,emissiveIntensity:.25}));
+ dark.position.set(0,1.1,-1.51);dark.rotation.x=0;g.add(dark);
+ // stairs descend behind the entrance
+ for(let i=0;i<7;i++){const st=new THREE.Mesh(new THREE.BoxGeometry(3.25,.16,.52),new THREE.MeshStandardMaterial({color:0x6d6b5b,roughness:.95}));st.position.set(0,.92-i*.17,-1.72-i*.52);g.add(st)}
+ const sign=new THREE.Mesh(new THREE.BoxGeometry(3.0,.5,.10),new THREE.MeshStandardMaterial({color:0xd6c58d,roughness:.7}));
+ sign.position.set(0,2.72,0);g.add(sign);
+ const light=new THREE.PointLight(0xd9b86b,2.2,8);light.position.set(0,1.5,-1.5);g.add(light);
+ g.userData={key:"food",label:"UNTERGRUNDPLANTAGEN"};scene.add(g);objects.push(g);
+ undergroundDoors.push({g,light});
+}
 function createLivingLandscape(){
  const ground=new THREE.Mesh(new THREE.PlaneGeometry(110,110,32,32),new THREE.MeshStandardMaterial({map:canvasTexture("ground",7),roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.65;scene.add(ground);
  const roadMat=new THREE.MeshStandardMaterial({map:canvasTexture("stone",11),roughness:.96});
@@ -121,6 +175,19 @@ function createLivingLandscape(){
  // Fields with rows, not geometric circles.
  const crop=new THREE.MeshStandardMaterial({color:0x9a9a58,roughness:1});
  for(let f=0;f<6;f++){const x=-25+(f%3)*7,z=19+Math.floor(f/3)*7;for(let r=0;r<7;r++){const row=new THREE.Mesh(new THREE.BoxGeometry(5,.09,.18),crop);row.position.set(x,-.52,z+r*.65);scene.add(row)}}
+ // Living traffic, pedestrians and agricultural work.
+ addMovingCar("z", -2.0, -28, 5.2, 0x587766);
+ addMovingCar("z",  2.0,  20, -4.4, 0x8a6f4f);
+ addMovingCar("x", -2.0, -25, 4.0, 0x6f7b58);
+ addMovingCar("x",  2.0,  18, -3.6, 0x7a6657);
+ for(let i=0;i<12;i++){
+   const horizontal=i%2===0, side=(i%3)-1;
+   addWalker(horizontal?-24+i*4:side*2.7, horizontal?side*2.7:-24+i*4,
+     horizontal?(i%4<2?1:-1):0, horizontal?0:(i%4<2?1:-1), .55+(i%3)*.08,
+     [0x66775c,0x806d5b,0x5e746e][i%3], i*.7);
+ }
+ for(let i=0;i<7;i++) makeFarmer(-25+(i%4)*3.1,20+Math.floor(i/4)*7,(i%2?1:-1));
+ addUndergroundFarmEntrance();
  // Tree belts, varied height and canopy shape.
  const trunkMat=new THREE.MeshStandardMaterial({map:canvasTexture("wood",29),roughness:1});
  const leafMats=[0x4f7547,0x638b51,0x78975d].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
@@ -138,7 +205,22 @@ function onPointer(e){
 }
 function focus(o){const p=o.position.clone();controls.target.lerp(p,.35);camera.position.lerp(new THREE.Vector3(p.x+17,p.y+15,p.z+17),.35)}
 function showInfo(key){const d=blocks[key]; if(!d)return; document.querySelector("#panelContent").innerHTML=`<span class="tag">${d.tag}</span><h2>${d.title}</h2><p>${d.text}</p><div class="proscons"><div><h4>Mögliche Stärken</h4><ul>${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h4>Offene Fragen</h4><ul>${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`;document.querySelector("#infoPanel").classList.add("open")}
-function animate(){requestAnimationFrame(animate);controls.update();const t=performance.now()/1000;objects.forEach((o,i)=>{o.position.y=Math.sin(t*.65+i)*.05;o.rotation.y=Math.sin(t*.18+i)*.008});renderer.render(scene,camera)}
+function animate(){
+ requestAnimationFrame(animate); controls.update();
+ const t=performance.now()/1000;
+ movingCars.forEach(c=>{
+   if(c.axis==="z"){c.g.position.z+=c.speed*.012;if(c.g.position.z>31)c.g.position.z=-31;if(c.g.position.z<-31)c.g.position.z=31;c.g.position.x=c.lane;c.g.rotation.y=c.speed>0?0:Math.PI;}
+   else{c.g.position.x+=c.speed*.012;if(c.g.position.x>31)c.g.position.x=-31;if(c.g.position.x<-31)c.g.position.x=31;c.g.position.z=c.lane;c.g.rotation.y=c.speed>0?Math.PI/2:-Math.PI/2;}
+ });
+ walkers.forEach((p,i)=>{
+   p.g.position.x+=p.dx*p.speed*.006; p.g.position.z+=p.dz*p.speed*.006;
+   if(p.g.position.x>27||p.g.position.x<-27||p.g.position.z>27||p.g.position.z<-27){p.dx*=-1;p.dz*=-1;}
+   p.g.rotation.y=Math.atan2(p.dx,p.dz); p.g.position.y=Math.abs(Math.sin(t*4+p.phase))*.025;
+ });
+ farmers.forEach((f,i)=>{f.g.rotation.y=Math.sin(t*.45+f.phase)*.18;f.g.position.y=Math.abs(Math.sin(t*2.0+f.phase))*.018;});
+ undergroundDoors.forEach(u=>{u.light.intensity=1.8+Math.sin(t*1.7)*.35;});
+ renderer.render(scene,camera);
+}
 function resize(){if(!renderer)return;camera.aspect=innerWidth/(innerHeight-72);camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight-72)}
 function resetCamera(){camera.position.set(28,27,34);controls.target.set(0,0,0)}
 
