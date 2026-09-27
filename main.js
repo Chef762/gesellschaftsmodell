@@ -1,4 +1,4 @@
-import * as THREE from "three";
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/controls/OrbitControls.js";
 
 import { constitution as constitutionData } from "./constitution.js";
@@ -33,53 +33,174 @@ const objects=[];
 
 function init3D(){
  scene=new THREE.Scene();
- scene.fog=new THREE.Fog(0x070a0f,45,135);
- camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,300);
- camera.position.set(28,27,34);
+ scene.fog=new THREE.FogExp2(0x05070b,.012);
+ camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,500);
+ camera.position.set(31,24,34);
  renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
- renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight-72);
+ renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));
+ renderer.setSize(innerWidth,innerHeight-72);
  renderer.outputColorSpace=THREE.SRGBColorSpace;
+ renderer.toneMapping=THREE.ACESFilmicToneMapping;
+ renderer.toneMappingExposure=1.12;
  document.querySelector("#canvasWrap").appendChild(renderer.domElement);
- controls=new OrbitControls(camera,renderer.domElement); controls.enableDamping=true; controls.dampingFactor=.06; controls.minDistance=13; controls.maxDistance=85; controls.maxPolarAngle=Math.PI/2.08; controls.target.set(0,0,0);
- scene.add(new THREE.HemisphereLight(0xbdd5ff,0x11151b,2));
- const sun=new THREE.DirectionalLight(0xffffff,2.2); sun.position.set(25,40,10); scene.add(sun);
- const grid=new THREE.GridHelper(120,40,0x27313b,0x151b22); grid.position.y=-.05; scene.add(grid);
- const ground=new THREE.Mesh(new THREE.CylinderGeometry(54,58,1,64),new THREE.MeshStandardMaterial({color:0x0b1016,roughness:1})); ground.position.y=-.55; scene.add(ground);
- createCity();
+
+ controls=new OrbitControls(camera,renderer.domElement);
+ controls.enableDamping=true; controls.dampingFactor=.055;
+ controls.minDistance=15; controls.maxDistance=100;
+ controls.maxPolarAngle=Math.PI/2.12; controls.target.set(0,2,0);
+
+ scene.add(new THREE.AmbientLight(0x8da2bf,.7));
+ const keyLight=new THREE.DirectionalLight(0xdcecff,2.8);
+ keyLight.position.set(18,35,20); scene.add(keyLight);
+ const rim=new THREE.PointLight(0x72ffc1,90,80); rim.position.set(-18,12,-12); scene.add(rim);
+ const violet=new THREE.PointLight(0x8d7cff,70,75); violet.position.set(22,9,-18); scene.add(violet);
+
+ createCivicWorld();
  raycaster=new THREE.Raycaster(); mouse=new THREE.Vector2();
  renderer.domElement.addEventListener("pointerdown",onPointer);
  addEventListener("resize",resize);
  animate();
- setTimeout(()=>document.querySelector("#boot").style.display="none",650);
+ setTimeout(()=>document.querySelector("#boot").style.display="none",700);
 }
-function mat(c,em=0){return new THREE.MeshStandardMaterial({color:c,roughness:.62,metalness:.18,emissive:em?c:0,emissiveIntensity:em?0.22:0})}
-function building(key,label,x,z,h,color){
- const g=new THREE.Group(); g.position.set(x,0,z);
- const body=new THREE.Mesh(new THREE.BoxGeometry(6,h,6),mat(color)); body.position.y=h/2; g.add(body);
- const roof=new THREE.Mesh(new THREE.BoxGeometry(6.5,.25,6.5),mat(0x202b36)); roof.position.y=h+.15; g.add(roof);
- for(let yy=2;yy<h;yy+=2.2){for(let s=-2;s<=2;s+=2){const win=new THREE.Mesh(new THREE.BoxGeometry(.12,.7,.9),mat(0xa8ffcc,1));win.position.set(3.02,yy,s);g.add(win)}}
- g.userData={key,label,base:h}; scene.add(g); objects.push(g);
+
+function glowMat(color,emissive=color,opacity=1){
+ return new THREE.MeshStandardMaterial({
+   color, emissive, emissiveIntensity:1.35, metalness:.48, roughness:.26,
+   transparent:opacity<1, opacity
+ });
 }
-function createCity(){
- building("democracy","DEMOKRATIE",-14,-8,10,0x273b4b);
- building("health","GESUNDHEIT",0,-10,15,0x2d3f48);
- building("education","BILDUNG",14,-7,12,0x304338);
- building("economy","WIRTSCHAFT",-15,8,18,0x3b3847);
- building("food","ERNÄHRUNG",0,8,9,0x33463b);
- building("capital","BÜRGERKAPITAL",14,8,14,0x403d31);
- building("crisis","KRISENZENTRUM",0,0,23,0x3f3535);
- for(let i=0;i<18;i++){const a=i/18*Math.PI*2,r=26;const b=new THREE.Mesh(new THREE.BoxGeometry(2+Math.random()*2,3+Math.random()*9,2+Math.random()*2),mat(0x1c252d));b.position.set(Math.cos(a)*r,(b.geometry.parameters.height/2)-.1,Math.sin(a)*r);scene.add(b)}
+function solidMat(color){
+ return new THREE.MeshStandardMaterial({color,metalness:.62,roughness:.3});
 }
+function addRing(radius,y,color,opacity=.35){
+ const ring=new THREE.Mesh(
+   new THREE.TorusGeometry(radius,.025,8,160),
+   new THREE.MeshBasicMaterial({color,transparent:true,opacity})
+ );
+ ring.rotation.x=Math.PI/2; ring.position.y=y; scene.add(ring);
+ return ring;
+}
+function createModule(key,label,x,z,color,icon,scale=1){
+ const g=new THREE.Group(); g.position.set(x,0,z); g.scale.setScalar(scale);
+ const base=new THREE.Mesh(new THREE.CylinderGeometry(3.2,3.8,.55,48),solidMat(0x111923));
+ base.position.y=.28; g.add(base);
+ const halo=new THREE.Mesh(new THREE.TorusGeometry(2.8,.055,10,64),new THREE.MeshBasicMaterial({color,transparent:true,opacity:.55}));
+ halo.rotation.x=Math.PI/2; halo.position.y=.65; g.add(halo);
+ const core=new THREE.Mesh(new THREE.OctahedronGeometry(1.65,1),glowMat(color));
+ core.position.y=2.15; g.add(core);
+ const orb=new THREE.Mesh(new THREE.SphereGeometry(.46,24,24),new THREE.MeshBasicMaterial({color}));
+ orb.position.y=2.15; g.add(orb);
+ for(let i=0;i<4;i++){
+   const p=new THREE.Mesh(new THREE.BoxGeometry(.18,.18,1.7),new THREE.MeshBasicMaterial({color,transparent:true,opacity:.5}));
+   p.position.y=2.15; p.rotation.y=i*Math.PI/2; g.add(p);
+ }
+ g.userData={key,label,baseY:0,color};
+ scene.add(g); objects.push(g);
+ return g;
+}
+function createCivicWorld(){
+ // Deep platform: the city floats above a dark civic "datum".
+ const ground=new THREE.Mesh(
+   new THREE.CylinderGeometry(49,53,1.2,96),
+   new THREE.MeshStandardMaterial({color:0x070b11,metalness:.55,roughness:.55})
+ );
+ ground.position.y=-.72; scene.add(ground);
+
+ for(let r=9;r<=43;r+=8) addRing(r,-.08,0x3c5060,.20);
+ const inner=addRing(6.2,.05,0x79ffd0,.45);
+
+ // Central civic core
+ const coreGroup=new THREE.Group(); coreGroup.userData={key:"democracy",label:"DEMOKRATIE"};
+ const pedestal=new THREE.Mesh(new THREE.CylinderGeometry(4.2,5.1,.9,64),solidMat(0x121b24));
+ pedestal.position.y=.45; coreGroup.add(pedestal);
+ const sphere=new THREE.Mesh(new THREE.IcosahedronGeometry(3.0,3),glowMat(0x73ffc5));
+ sphere.position.y=4.0; coreGroup.add(sphere);
+ const innerSphere=new THREE.Mesh(new THREE.SphereGeometry(1.15,32,32),new THREE.MeshBasicMaterial({color:0xeafff5}));
+ innerSphere.position.y=4; coreGroup.add(innerSphere);
+ [4.5,5.5,6.5].forEach((r,i)=>{
+   const rr=new THREE.Mesh(new THREE.TorusGeometry(r,.035,8,160),new THREE.MeshBasicMaterial({color:i===1?0x8d7cff:0x6df7c0,transparent:true,opacity:.34}));
+   rr.rotation.set(Math.PI/2 + i*.22,i*.38,0); rr.position.y=4; coreGroup.add(rr);
+ });
+ scene.add(coreGroup); objects.push(coreGroup);
+
+ const modules=[
+  ["health","GESUNDHEIT",-14,-8,0xff7397,1],
+  ["education","BILDUNG",0,-16,0x71a7ff,.95],
+  ["economy","WIRTSCHAFT",15,-7,0xffc76d,1.05],
+  ["food","ERNÄHRUNG",-15,8,0x78e8a5,.92],
+  ["capital","BÜRGERKAPITAL",15,8,0xb08cff,1],
+  ["crisis","KRISENZENTRUM",0,16,0x72d8ff,1.1]
+ ];
+ modules.forEach(m=>createModule(...m));
+
+ // Energy/data paths from center to each module.
+ modules.forEach((m,i)=>{
+   const [key,label,x,z,color]=m;
+   const pts=new THREE.CatmullRomCurve3([
+     new THREE.Vector3(0,.15,0),
+     new THREE.Vector3(x*.45,.3,z*.45),
+     new THREE.Vector3(x,.15,z)
+   ]);
+   const tube=new THREE.Mesh(new THREE.TubeGeometry(pts,32,.035,6,false),new THREE.MeshBasicMaterial({color,transparent:true,opacity:.45}));
+   scene.add(tube);
+   const pulse=new THREE.Mesh(new THREE.SphereGeometry(.11,12,12),new THREE.MeshBasicMaterial({color}));
+   pulse.userData={curve:pts,phase:i/6}; scene.add(pulse);
+ });
+
+ // Peripheral skyline: intentionally abstract, not a blocky city.
+ for(let i=0;i<28;i++){
+   const a=i/28*Math.PI*2, r=31+Math.sin(i*2.1)*5;
+   const h=2+((i*17)%9);
+   const b=new THREE.Mesh(new THREE.CylinderGeometry(.55+((i%3)*.18),.8+((i%2)*.2),h,6),solidMat(0x101821));
+   b.position.set(Math.cos(a)*r,h/2-.2,Math.sin(a)*r);
+   b.rotation.y=a; scene.add(b);
+ }
+}
+
 function onPointer(e){
- const rect=renderer.domElement.getBoundingClientRect(); mouse.x=(e.clientX-rect.left)/rect.width*2-1; mouse.y=-(e.clientY-rect.top)/rect.height*2+1;
- raycaster.setFromCamera(mouse,camera); const hit=raycaster.intersectObjects(objects,true)[0]; if(!hit)return;
- let o=hit.object; while(o.parent && !o.userData.key)o=o.parent; showInfo(o.userData.key); focus(o);
+ const rect=renderer.domElement.getBoundingClientRect();
+ mouse.x=(e.clientX-rect.left)/rect.width*2-1;
+ mouse.y=-(e.clientY-rect.top)/rect.height*2+1;
+ raycaster.setFromCamera(mouse,camera);
+ const hit=raycaster.intersectObjects(objects,true)[0]; if(!hit)return;
+ let o=hit.object; while(o.parent && !o.userData.key)o=o.parent;
+ showInfo(o.userData.key); focus(o);
 }
-function focus(o){const p=o.position.clone();controls.target.lerp(p,.35);camera.position.lerp(new THREE.Vector3(p.x+17,p.y+15,p.z+17),.35)}
-function showInfo(key){const d=blocks[key]; if(!d)return; document.querySelector("#panelContent").innerHTML=`<span class="tag">${d.tag}</span><h2>${d.title}</h2><p>${d.text}</p><div class="proscons"><div><h4>Mögliche Stärken</h4><ul>${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h4>Offene Fragen</h4><ul>${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`;document.querySelector("#infoPanel").classList.add("open")}
-function animate(){requestAnimationFrame(animate);controls.update();const t=performance.now()/1000;objects.forEach((o,i)=>{o.position.y=Math.sin(t*.65+i)*.05;o.rotation.y=Math.sin(t*.18+i)*.008});renderer.render(scene,camera)}
-function resize(){if(!renderer)return;camera.aspect=innerWidth/(innerHeight-72);camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight-72)}
-function resetCamera(){camera.position.set(28,27,34);controls.target.set(0,0,0)}
+function focus(o){
+ const p=o.position.clone(); p.y+=2;
+ controls.target.lerp(p,.5);
+ camera.position.lerp(new THREE.Vector3(p.x+15,p.y+12,p.z+15),.5);
+}
+function showInfo(key){
+ const d=blocks[key]; if(!d)return;
+ document.querySelector("#panelContent").innerHTML=
+ `<span class="tag">${d.tag}</span><h2>${d.title}</h2><p>${d.text}</p><div class="proscons"><div><h4>Mögliche Stärken</h4><ul>${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h4>Offene Fragen</h4><ul>${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`;
+ document.querySelector("#infoPanel").classList.add("open");
+}
+function animate(){
+ requestAnimationFrame(animate);
+ controls.update();
+ const t=performance.now()/1000;
+ objects.forEach((o,i)=>{
+   o.position.y=o.userData.baseY+Math.sin(t*.65+i)*.06;
+   o.rotation.y+=.0009*(i%2?1:-1);
+ });
+ scene.traverse(o=>{
+   if(o.userData && o.userData.curve){
+     const u=(t*.09+o.userData.phase)%1;
+     const p=o.userData.curve.getPointAt(u);
+     o.position.copy(p);
+   }
+ });
+ renderer.render(scene,camera);
+}
+function resize(){
+ if(!renderer)return;
+ camera.aspect=innerWidth/(innerHeight-72);
+ camera.updateProjectionMatrix();
+ renderer.setSize(innerWidth,innerHeight-72);
+}
+function resetCamera(){camera.position.set(31,24,34);controls.target.set(0,2,0)}
 
 function updateMetrics(){
  const supply=Math.round((state.food*.52+state.energy*.48)*.96);
@@ -141,3 +262,82 @@ document.querySelector("#critgrid").innerHTML=critique.map(x=>`<article class="c
 setupViews();simRender();
 init3D();
 window.addEventListener("error", e => { const el=document.querySelector("#statusHint"); if(el) el.textContent="Fehler beim Laden der 3D-Ansicht: bitte Startskript verwenden und Internetverbindung prüfen."; });
+
+
+/* --- DEMETER NATURE LAYER --- */
+(function(){
+  try{
+    if(typeof THREE === "undefined") return;
+    const sceneRef = (typeof scene !== "undefined") ? scene : null;
+    if(!sceneRef) return;
+
+    // Soft ground: a living meadow instead of a hard sci-fi platform.
+    const ground = new THREE.Mesh(
+      new THREE.CircleGeometry(22,96),
+      new THREE.MeshStandardMaterial({
+        color:0x173522, roughness:.96, metalness:0,
+        transparent:true, opacity:.82
+      })
+    );
+    ground.rotation.x = -Math.PI/2;
+    ground.position.y = -0.55;
+    sceneRef.add(ground);
+
+    // Concentric planting/field rings.
+    [5.5,9.5,14.5,20].forEach((r,i)=>{
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(r,r+.035,128),
+        new THREE.MeshBasicMaterial({
+          color:i%2 ? 0xd8b66a : 0x7fa85a,
+          transparent:true, opacity:.18
+        })
+      );
+      ring.rotation.x=-Math.PI/2;
+      ring.position.y=-0.49+i*.002;
+      sceneRef.add(ring);
+    });
+
+    // Stylized trees around the perimeter.
+    const trunkMat = new THREE.MeshStandardMaterial({color:0x705238,roughness:1});
+    const leafMat = new THREE.MeshStandardMaterial({color:0x6f9450,roughness:1});
+    for(let i=0;i<26;i++){
+      const a=(i/26)*Math.PI*2;
+      const r=16.5+(i%3)*1.25;
+      const x=Math.cos(a)*r, z=Math.sin(a)*r;
+      const g=new THREE.Group();
+      const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.12,.18,1.3,7),trunkMat);
+      trunk.position.y=.15;
+      g.add(trunk);
+      for(let j=0;j<3;j++){
+        const crown=new THREE.Mesh(new THREE.IcosahedronGeometry(.72-j*.10,1),leafMat);
+        crown.position.set((j-1)*.28,.85+j*.18,(j%2)*.18);
+        crown.scale.y=1.15;
+        g.add(crown);
+      }
+      g.position.set(x,0,z);
+      g.rotation.y=-a;
+      sceneRef.add(g);
+    }
+
+    // A calm central "source" rather than a neon reactor.
+    const source=new THREE.Mesh(
+      new THREE.SphereGeometry(1.15,32,20),
+      new THREE.MeshStandardMaterial({
+        color:0xd8b66a, emissive:0x6d5a2c,
+        emissiveIntensity:.22, roughness:.48, metalness:.05
+      })
+    );
+    source.position.y=.65;
+    sceneRef.add(source);
+
+    // Slow breathing motion.
+    const tick=()=>{
+      const t=performance.now()*.00045;
+      source.scale.setScalar(1+Math.sin(t)*.035);
+    };
+    function demeterFrame(){ tick(); requestAnimationFrame(demeterFrame); }
+    demeterFrame();
+  }catch(e){
+    console.warn("Nature layer skipped:",e);
+  }
+})();
