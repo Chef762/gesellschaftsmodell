@@ -37,7 +37,7 @@ function init3D(){
  scene.background=new THREE.Color(0xb8d3c0);
  scene.fog=new THREE.Fog(0xb8d3c0,35,95);
  camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,250);
- camera.position.set(20,14,27);
+ camera.position.set(34,24,48);
  renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
  renderer.setSize(innerWidth,innerHeight-72);
@@ -47,8 +47,8 @@ function init3D(){
  document.querySelector("#canvasWrap").appendChild(renderer.domElement);
  controls=new OrbitControls(camera,renderer.domElement);
  controls.enableDamping=true; controls.dampingFactor=.045;
- controls.minDistance=12; controls.maxDistance=55;
- controls.maxPolarAngle=Math.PI/2.18; controls.target.set(0,1.5,0);
+ controls.minDistance=16; controls.maxDistance=92;
+ controls.maxPolarAngle=Math.PI/2.18; controls.target.set(0,0,0);
  scene.add(new THREE.HemisphereLight(0xeaf5e9,0x58715b,2.1));
  const sun=new THREE.DirectionalLight(0xfff3d6,2.6);
  sun.position.set(-20,30,12); scene.add(sun);
@@ -161,55 +161,82 @@ function addUndergroundFarmEntrance(){
  undergroundDoors.push({g,light});
 }
 function createLivingLandscape(){
- const ground=new THREE.Mesh(new THREE.PlaneGeometry(110,110,32,32),new THREE.MeshStandardMaterial({map:canvasTexture("ground",7),roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.65;scene.add(ground);
- const roadMat=new THREE.MeshStandardMaterial({map:canvasTexture("stone",11),roughness:.96});
- const road=(x,z,w,d,rot=0)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),roadMat);m.rotation.x=-Math.PI/2;m.rotation.z=rot;m.position.set(x,-.60,z);scene.add(m)};
- road(0,0,8,58);road(0,0,58,7);road(-16,-13,7,28,.18);road(16,13,7,28,.18);
- const riverPts=[];for(let i=0;i<=32;i++)riverPts.push(new THREE.Vector3(-30+Math.sin(i*.45)*3.2,-.57,-34+i*2.15));
- const riverCurve=new THREE.CatmullRomCurve3(riverPts);const river=new THREE.Mesh(new THREE.TubeGeometry(riverCurve,64,.72,10,false),new THREE.MeshStandardMaterial({color:0x6fa7a0,roughness:.28,metalness:.02}));scene.add(river);
- const green=new THREE.Mesh(new THREE.BoxGeometry(18,.16,16),new THREE.MeshStandardMaterial({map:canvasTexture("ground",19),roughness:1}));green.position.set(0,-.51,0);scene.add(green);
- // Seven real, distinct civic buildings replace the floating circles.
- officeBuilding("democracy","DEMOKRATIE",-11,-9,8,7,6.5,0xd8d0bb,0x5d664d);
- officeBuilding("health","GESUNDHEIT",0,-12,8.5,7.5,8.5,0xd9d2bf,0x66705b);
- officeBuilding("education","BILDUNG",11,-9,8,7,7.2,0xd7c9ae,0x68735d);
- officeBuilding("economy","WIRTSCHAFT",-12,9,9,7.5,9.2,0xcfc5ad,0x62584a);
- detailedBuilding("food","ERNÄHRUNG",0,9,8,7,5.5,0xd5c69f,0x6f7650);
- detailedBuilding("capital","BÜRGERKAPITAL",12,8,8,7,7.4,0xd7ccb8,0x665c4d);
- detailedBuilding("crisis","KRISENZENTRUM",0,0,10,8,10.5,0xd1c8b4,0x55584b);
- // Homes and farm buildings create depth instead of a ring of anonymous blocks.
- const houseColors=[0xd8cdb5,0xcdbfa4,0xe0d4bd];
- for(let i=0;i<16;i++){const side=i%4, row=Math.floor(i/4),x=-31+side*20+(row%2)*5,z=-25+row*17;detailedBuilding("","",x,z,5,4,3.5+row*.25,houseColors[i%3],0x665844)}
- // Fields with rows, not geometric circles.
- const crop=new THREE.MeshStandardMaterial({color:0x9a9a58,roughness:1});
- for(let f=0;f<6;f++){const x=-25+(f%3)*7,z=19+Math.floor(f/3)*7;for(let r=0;r<7;r++){const row=new THREE.Mesh(new THREE.BoxGeometry(5,.09,.18),crop);row.position.set(x,-.52,z+r*.65);scene.add(row)}}
- // Living traffic, pedestrians and agricultural work.
- addMovingCar("z", -2.0, -28, 5.2, 0x587766,0);
- addMovingCar("z",  2.0,  20, -4.4, 0x8a6f4f,1);
- addMovingCar("x", -2.0, -25, 4.0, 0x6f7b58,2);
- addMovingCar("x",  2.0,  18, -3.6, 0x7a6657,3);
- for(let i=0;i<12;i++){
-   const horizontal=i%2===0, side=(i%3)-1;
-   addWalker(horizontal?-24+i*4:side*2.7, horizontal?side*2.7:-24+i*4,
-     horizontal?(i%4<2?1:-1):0, horizontal?0:(i%4<2?1:-1), .55+(i%3)*.08,
-     [0x66775c,0x806d5b,0x5e746e][i%3], i*.7, i%5);
- }
- for(let i=0;i<7;i++) makeFarmer(-25+(i%4)*3.1,20+Math.floor(i/4)*7,(i%2?1:-1),i);
+ const ground=new THREE.Mesh(new THREE.PlaneGeometry(150,150,48,48),new THREE.MeshStandardMaterial({map:canvasTexture("ground",7),roughness:1}));
+ ground.rotation.x=-Math.PI/2;ground.position.y=-.72;scene.add(ground);
+ const roadMat=new THREE.MeshStandardMaterial({color:0x4f514b,roughness:.96});
+ const sidewalkMat=new THREE.MeshStandardMaterial({map:canvasTexture("stone",11),roughness:.95});
+ const lineMat=new THREE.MeshStandardMaterial({color:0xe8dfc5,roughness:.8});
+ const road=(x,z,w,d,rot=0)=>{const r=new THREE.Mesh(new THREE.PlaneGeometry(w,d),roadMat);r.rotation.x=-Math.PI/2;r.rotation.z=rot;r.position.set(x,-.69,z);scene.add(r);
+   const s1=new THREE.Mesh(new THREE.PlaneGeometry(w+.8,.75),sidewalkMat);s1.rotation.x=-Math.PI/2;s1.rotation.z=rot;s1.position.set(x,-.665,z+d/2+.4);scene.add(s1);
+   const s2=s1.clone();s2.position.set(x,-.665,z-d/2-.4);scene.add(s2);
+   for(let i=-Math.floor(w/5);i<Math.floor(w/5);i++){const l=new THREE.Mesh(new THREE.PlaneGeometry(.12,1.8),lineMat);l.rotation.x=-Math.PI/2;l.rotation.z=rot;l.position.set(x+i*4,-.675,z);scene.add(l)}
+ };
+ road(0,0,10,72); road(0,0,72,8); road(-19,-10,8,34,.16); road(19,11,8,34,.16); road(8,-23,7,24,-.32);
+ // pedestrian paths with paving slabs and crossings
+ const path=(x,z,w,d,rot=0)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),sidewalkMat);m.rotation.x=-Math.PI/2;m.rotation.z=rot;m.position.set(x,-.62,z);scene.add(m)};
+ path(-9,2,2.5,38,.02);path(9,2,2.5,38,.02);path(0,10,34,2.2,0);
+ for(let i=-3;i<=3;i++){const cross=new THREE.Mesh(new THREE.PlaneGeometry(.5,5),new THREE.MeshStandardMaterial({color:0xf2ead6,roughness:.8}));cross.rotation.x=-Math.PI/2;cross.position.set(i*.9,-.66,4);scene.add(cross)}
+ // River and a calm pond
+ const riverPts=[];for(let i=0;i<=42;i++)riverPts.push(new THREE.Vector3(-42+Math.sin(i*.38)*4.5,-.66,-40+i*1.9));
+ const riverCurve=new THREE.CatmullRomCurve3(riverPts);const river=new THREE.Mesh(new THREE.TubeGeometry(riverCurve,84,.95,12,false),new THREE.MeshStandardMaterial({color:0x679ca0,roughness:.22,metalness:.04}));scene.add(river);
+ const pond=new THREE.Mesh(new THREE.CylinderGeometry(6.5,7.2,.22,48),new THREE.MeshStandardMaterial({color:0x6ca3a4,roughness:.18,metalness:.05}));pond.scale.z=.72;pond.position.set(-17,-.57,8);scene.add(pond);
+ const pondRim=new THREE.Mesh(new THREE.TorusGeometry(6.2,.28,8,48),new THREE.MeshStandardMaterial({map:canvasTexture("stone",55),roughness:1}));pondRim.scale.z=.72;pondRim.rotation.x=Math.PI/2;pondRim.position.set(-17,-.43,8);scene.add(pondRim);
+ // Freibad with pool, deck and tiny changing building
+ const pool=new THREE.Mesh(new THREE.BoxGeometry(11,.22,6),new THREE.MeshStandardMaterial({color:0x66a8b1,roughness:.18,metalness:.04}));pool.position.set(18,-.56,-13);scene.add(pool);
+ const deck=new THREE.Mesh(new THREE.BoxGeometry(14,.12,9),new THREE.MeshStandardMaterial({map:canvasTexture("wood",63),roughness:.86}));deck.position.set(18,-.61,-13);scene.add(deck); // pool surface sits just above deck visually
+ pool.position.y=-.49;
+ const poolhouse=officeBuilding("health","FREIBAD",25,-13,4.8,3.8,2.8,0xd8c9ac,0x66745c);
+ // Civic / commercial core — distinct building types
+ officeBuilding("democracy","RATHAUS",-11,-8,9,7,7.2,0xd8d0bb,0x555c49);
+ officeBuilding("health","GESUNDHEIT",0,-12,8.5,7.5,8.8,0xd9d2bf,0x66705b);
+ officeBuilding("education","SCHULE",11,-8,9,7,6.5,0xd7c9ae,0x68735d);
+ detailedBuilding("economy","WERKSTATT",-14,10,7.5,6,5.2,0x9a684d,0x51483e);
+ detailedBuilding("food","HOFVERKAUF",-2,10,7,5.5,4.4,0xe1d0a7,0x6f7650);
+ detailedBuilding("capital","BÜRGERHAUS",12,9,7.5,6.2,7.0,0xd7ccb8,0x665c4d);
+ // Old building / landmark with tower
+ const old=detailedBuilding("crisis","ALTES HAUS",-1,1,8.5,7,6.2,0x9a684d,0x433b33);
+ const tower=new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.8,10,8),buildingMaterial("plaster",0xb59c7c));tower.position.set(-1,5,1);scene.add(tower);
+ const towerRoof=new THREE.Mesh(new THREE.ConeGeometry(2.2,3.0,8),new THREE.MeshStandardMaterial({color:0x4c493e,roughness:.95}));towerRoof.position.set(-1,11.4,1);scene.add(towerRoof);
+ // Multi-family blocks
+ const apartment=(x,z,w,d,h,wall,roof)=>{const g=officeBuilding("","MEHRFAMILIENHAUS",x,z,w,d,h,wall,roof);for(let yy=1.5;yy<h-.4;yy+=1.65){for(let xx=-w/2+1.0;xx<w/2-.4;xx+=1.55){const balcony=new THREE.Mesh(new THREE.BoxGeometry(1.1,.08,.62),new THREE.MeshStandardMaterial({color:0x8f8a78,roughness:.85}));balcony.position.set(xx,yy-.38,d/2+.32);g.add(balcony);}}return g;};
+ apartment(-25,-12,9,7,10.5,0xd2c5ae,0x5b5d52); apartment(26,7,10,8,12,0xe0d6c4,0x62675c); apartment(-25,4,8,7,8.5,0xc9b8a0,0x594d42);
+ // Charm shops along the market street
+ const shop=(x,z,color,label)=>{const g=detailedBuilding("economy",label,x,z,4.2,3.8,3.3,color,0x5b4d3e);const aw=new THREE.Mesh(new THREE.BoxGeometry(3.7,.12,1.15),new THREE.MeshStandardMaterial({color:0xa85f47,roughness:.75}));aw.position.set(0,2.5,2.0);aw.rotation.x=-.18;g.add(aw);return g};
+ shop(-8,-20,0xd8c4a4,"CAFÉ");shop(-3,-20,0xb8c8b0,"BÄCKEREI");shop(2,-20,0xd4b79e,"LADEN");shop(7,-20,0xc6bfa9,"WERKSTATT");
+ // Factory / industry zone at the edge, with chimneys and tanks
+ const factory=new THREE.Group();factory.position.set(28,0,22);scene.add(factory);
+ const facBody=new THREE.Mesh(new THREE.BoxGeometry(15,8,11),buildingMaterial("brick",0x8a5b45));facBody.position.y=4;factory.add(facBody);
+ for(let i=-5;i<=5;i+=2.5){const win=new THREE.Mesh(new THREE.BoxGeometry(1.2,1.1,.08),new THREE.MeshStandardMaterial({color:0x879d8c,roughness:.25,emissive:0x263b31,emissiveIntensity:.12}));win.position.set(i,5.1,5.56);factory.add(win)}
+ for(let i=0;i<3;i++){const stack=new THREE.Mesh(new THREE.CylinderGeometry(.55,.7,10,16),buildingMaterial("brick",0x765042));stack.position.set(-4+i*4,9,1);factory.add(stack);}
+ const tank=new THREE.Mesh(new THREE.CylinderGeometry(2,2,6,24),new THREE.MeshStandardMaterial({color:0x7c8b7a,metalness:.4,roughness:.45}));tank.position.set(7,3,1);factory.add(tank);
+ factory.userData={key:"economy",label:"FABRIK"};objects.push(factory);
+ // Hills around the settlement
+ const hillMat=[0x78945f,0x6f8a58,0x8ba26b].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
+ const hill=(x,z,sx,sy,sz,c)=>{const h=new THREE.Mesh(new THREE.SphereGeometry(8,24,16),hillMat[c%3]);h.scale.set(sx,sy,sz);h.position.set(x,sy*3.2-1,z);scene.add(h)};
+ hill(-44,-6,2.8,1.5,1.6,0);hill(45,-5,3.0,1.8,1.8,1);hill(-35,28,2.8,1.6,1.9,2);hill(34,34,3.2,1.7,2.1,0);hill(0,43,4.0,2.0,2.2,1);
+ // Distant mountain wall behind the town
+ const mountainMat=new THREE.MeshStandardMaterial({color:0x657d72,roughness:1});const snowMat=new THREE.MeshStandardMaterial({color:0xe9e5d6,roughness:.95});
+ for(let i=0;i<9;i++){const x=-48+i*12,base=19+(i%3)*2,h=13+(i%4)*4;const m=new THREE.Mesh(new THREE.ConeGeometry(8+(i%2)*3,h,7),mountainMat);m.position.set(x,h/2-1,-52);m.rotation.y=i*.37;scene.add(m);const s=new THREE.Mesh(new THREE.ConeGeometry(3.1+(i%2),3.0,7),snowMat);s.position.set(x,h-1.0,-52);s.rotation.y=i*.37;scene.add(s)}
+ // Farms with real rows, greenhouses and farmers
+ const cropMat=new THREE.MeshStandardMaterial({color:0x829a55,roughness:1});
+ for(let f=0;f<8;f++){const x=-35+(f%4)*6,z=19+Math.floor(f/4)*8;for(let r=0;r<8;r++){const row=new THREE.Mesh(new THREE.BoxGeometry(4.8,.10,.16),cropMat);row.position.set(x,-.59,z+r*.62);scene.add(row)}}
+ for(let i=0;i<2;i++){const gh=new THREE.Mesh(new THREE.BoxGeometry(7,2.8,4.5),new THREE.MeshStandardMaterial({color:0xc8ded0,transparent:true,opacity:.42,roughness:.2}));gh.position.set(-27+i*10,1,31);scene.add(gh)}
+ for(let i=0;i<8;i++) makeFarmer(-34+(i%4)*5.8,20+Math.floor(i/4)*8,(i%2?1:-1),i);
  addUndergroundFarmEntrance();
- // Small moving details make the landscape feel like a living painting.
+ // Street furniture, crossings, trees and small gardens
  const lampMat=new THREE.MeshStandardMaterial({color:0x3f4b3e,roughness:.78}),lampGlow=new THREE.MeshStandardMaterial({color:0xffe9ae,emissive:0xffc85d,emissiveIntensity:.8});
- for(let i=0;i<14;i++){const horizontal=i%2===0,lane=horizontal?-2:2,q=-25+(i%7)*8,pole=new THREE.Mesh(new THREE.CylinderGeometry(.055,.08,2.7,8),lampMat);pole.position.set(horizontal?q:lane,.8,horizontal?lane:q);scene.add(pole);const glow=new THREE.Mesh(new THREE.SphereGeometry(.11,10,8),lampGlow);glow.position.set(pole.position.x,2.0,pole.position.z);scene.add(glow);}
- const crateWood=new THREE.MeshStandardMaterial({color:0x80603e,roughness:.92});for(let i=0;i<10;i++){const c=new THREE.Mesh(new THREE.BoxGeometry(.5,.4,.5),crateWood);c.position.set(-25+(i%5)*1.15,-.25,19+Math.floor(i/5)*1.0);scene.add(c)}
- const birds=[],birdMat=new THREE.MeshStandardMaterial({color:0x46544a,roughness:.9});for(let i=0;i<7;i++){const b=new THREE.Group(),l=new THREE.Mesh(new THREE.ConeGeometry(.10,.48,5),birdMat);l.rotation.z=Math.PI/2;l.position.x=-.22;b.add(l);const r=l.clone();r.position.x=.22;b.add(r);b.position.set(-22+i*6,7.5+(i%3)*1.2,-18+(i%4)*7);scene.add(b);birds.push({g:b,phase:i*.9,speed:.7+i*.08})}
- const cloudMat=new THREE.MeshStandardMaterial({color:0xf2f0e2,roughness:1,transparent:true,opacity:.82}),clouds=[];for(let i=0;i<5;i++){const c=new THREE.Group();for(let j=0;j<4;j++){const p=new THREE.Mesh(new THREE.SphereGeometry(1.2+(j%2)*.45,12,8),cloudMat);p.position.set(j*1.15,Math.sin(j)*.25,Math.cos(j)*.25);c.add(p)}c.position.set(-32+i*16,11+(i%2)*2,-20+i*9);c.scale.setScalar(.7+(i%3)*.18);scene.add(c);clouds.push({g:c,speed:.12+i*.025})}
- const windFlags=[];for(let i=0;i<6;i++){const pole=new THREE.Mesh(new THREE.CylinderGeometry(.025,.035,1.8,6),lampMat);pole.position.set(-28+i*3,-.05,27);scene.add(pole);const flag=new THREE.Mesh(new THREE.PlaneGeometry(.72,.36),new THREE.MeshStandardMaterial({color:[0x7d8d61,0xa17c5c,0x6c8175d][i%3],side:THREE.DoubleSide,roughness:.9}));flag.position.set(.36,-.02,0);flag.position.y=.75;pole.add(flag);windFlags.push({flag,phase:i*.6})}
- // Tree belts, varied height and canopy shape.
- const trunkMat=new THREE.MeshStandardMaterial({map:canvasTexture("wood",29),roughness:1});
- const leafMats=[0x4f7547,0x638b51,0x78975d].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
- for(let i=0;i<54;i++){const a=i/54*Math.PI*2,r=28+(i%6)*1.7,g=new THREE.Group();const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.13,.24,1.6,8),trunkMat);trunk.position.y=.15;g.add(trunk);const crown=new THREE.Mesh(new THREE.IcosahedronGeometry(.95+(i%3)*.18,2),leafMats[i%3]);crown.position.y=1.3;crown.scale.set(1,1.15,1);g.add(crown);g.position.set(Math.cos(a)*r,0,Math.sin(a)*r);scene.add(g)}
- // Small civic square, deliberately irregular rather than circular.
- const square=new THREE.Mesh(new THREE.ShapeGeometry(new THREE.Shape([new THREE.Vector2(-6,-4),new THREE.Vector2(5,-4),new THREE.Vector2(7,1),new THREE.Vector2(4,5),new THREE.Vector2(-5,4),new THREE.Vector2(-7,0),new THREE.Vector2(-6,-4)])),new THREE.MeshStandardMaterial({map:canvasTexture("stone",41),roughness:1}));square.rotation.x=-Math.PI/2;square.position.y=-.39;scene.add(square);
- const treeSmall=new THREE.Mesh(new THREE.CylinderGeometry(.18,.28,1.5,8),trunkMat);treeSmall.position.set(0,.35,2);scene.add(treeSmall);const crownSmall=new THREE.Mesh(new THREE.IcosahedronGeometry(1.1,2),leafMats[1]);crownSmall.position.set(0,1.5,2);scene.add(crownSmall);
- const pts=[];for(let i=0;i<110;i++)pts.push((Math.random()-.5)*65,1+Math.random()*8,(Math.random()-.5)*65);const geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.Float32BufferAttribute(pts,3));scene.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xf1e4ac,size:.07,transparent:true,opacity:.38})));
+ for(let i=0;i<22;i++){const horizontal=i%2===0,lane=horizontal?-2.3:2.3,q=-32+(i%11)*6;const pole=new THREE.Mesh(new THREE.CylinderGeometry(.055,.08,2.7,8),lampMat);pole.position.set(horizontal?q:lane,.75,horizontal?lane:q);scene.add(pole);const glow=new THREE.Mesh(new THREE.SphereGeometry(.11,10,8),lampGlow);glow.position.set(pole.position.x,2.0,pole.position.z);scene.add(glow)}
+ const trunkMat=new THREE.MeshStandardMaterial({map:canvasTexture("wood",29),roughness:1});const leafMats=[0x4f7547,0x638b51,0x78975d,0x557c55].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
+ for(let i=0;i<78;i++){const a=i/78*Math.PI*2,r=27+(i%8)*1.7,g=new THREE.Group();const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.13,.24,1.6+(i%3)*.25,8),trunkMat);trunk.position.y=.15;g.add(trunk);const crown=new THREE.Mesh(new THREE.IcosahedronGeometry(1.0+(i%4)*.16,2),leafMats[i%4]);crown.position.y=1.4;crown.scale.set(1,1.12+(i%2)*.15,1);g.add(crown);g.position.set(Math.cos(a)*r,0,Math.sin(a)*r);scene.add(g)}
+ // Cars, buses and many residents
+ addMovingCar("z",-2.0,-28,5.2,0x587766,0);addMovingCar("z",2.0,20,-4.4,0x8a6f4f,1);addMovingCar("x",-2.0,-25,4.0,0x6f7b58,2);addMovingCar("x",2.0,18,-3.6,0x7a6657,3);
+ addMovingCar("x",-23,-28,2.6,0x667d72,1);addMovingCar("x",23,12,-2.8,0x8a5e4e,2);
+ for(let i=0;i<22;i++){const horizontal=i%2===0,side=(i%4)-1.5;addWalker(horizontal?-30+i*2.7:side*2.6,horizontal?side*2.6:-29+i*2.7,horizontal?(i%4<2?1:-1):0,horizontal?0:(i%4<2?1:-1),.5+(i%4)*.08,0x66775c,i*.55,i%5)}
+ // Clouds stay high enough to pass visibly over the town and mountains
+ const birds=[],birdMat=new THREE.MeshStandardMaterial({color:0x46544a,roughness:.9});for(let i=0;i<9;i++){const b=new THREE.Group(),l=new THREE.Mesh(new THREE.ConeGeometry(.10,.48,5),birdMat);l.rotation.z=Math.PI/2;l.position.x=-.22;b.add(l);const r=l.clone();r.position.x=.22;b.add(r);b.position.set(-35+i*8,14+(i%3)*1.2,-28+(i%4)*8);scene.add(b);birds.push({g:b,phase:i*.9,speed:.7+i*.08})}
+ const cloudMat=new THREE.MeshStandardMaterial({color:0xf4f1e7,roughness:1,transparent:true,opacity:.86}),clouds=[];for(let i=0;i<7;i++){const c=new THREE.Group();for(let j=0;j<5;j++){const p=new THREE.Mesh(new THREE.SphereGeometry(1.8+(j%2)*.7,14,10),cloudMat);p.position.set(j*1.6,Math.sin(j)*.35,Math.cos(j)*.35);c.add(p)}c.position.set(-55+i*18,15+(i%2)*2,-25+i*8);c.scale.setScalar(.85+(i%3)*.2);scene.add(c);clouds.push({g:c,speed:.11+i*.018})}
+ const windFlags=[];for(let i=0;i<7;i++){const pole=new THREE.Mesh(new THREE.CylinderGeometry(.025,.035,1.8,6),lampMat);pole.position.set(-28+i*5,-.05,29);scene.add(pole);const flag=new THREE.Mesh(new THREE.PlaneGeometry(.72,.36),new THREE.MeshStandardMaterial({color:[0x7d8d61,0xa17c5c,0x6c8175d][i%3],side:THREE.DoubleSide,roughness:.9}));flag.position.set(.36,.75,0);pole.add(flag);windFlags.push({flag,phase:i*.6})}
+ const pts=[];for(let i=0;i<150;i++)pts.push((Math.random()-.5)*90,2+Math.random()*10,(Math.random()-.5)*90);const geo=new THREE.BufferGeometry();geo.setAttribute("position",new THREE.Float32BufferAttribute(pts,3));scene.add(new THREE.Points(geo,new THREE.PointsMaterial({color:0xf1e4ac,size:.07,transparent:true,opacity:.28})));
 }
 function mat(c,em=0){return new THREE.MeshStandardMaterial({color:c,roughness:.62,metalness:.18,emissive:em?c:0,emissiveIntensity:em?0.22:0})}
 function onPointer(e){
@@ -240,7 +267,7 @@ function animate(){
  renderer.render(scene,camera);
 }
 function resize(){if(!renderer)return;camera.aspect=innerWidth/(innerHeight-72);camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight-72)}
-function resetCamera(){camera.position.set(28,27,34);controls.target.set(0,0,0)}
+function resetCamera(){camera.position.set(34,24,48);controls.target.set(0,0,0)}
 
 function updateMetrics(){
  const supply=Math.round((state.food*.52+state.energy*.48)*.96);
@@ -284,8 +311,25 @@ function fullText(){
 function download(name,type,data){const blob=new Blob([data],{type});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function downloadAll(){download("gesellschaftsmodell-arbeitsfassung.md","text/markdown;charset=utf-8",fullText())}
 
+
+const heroSlides=[
+ {eyebrow:"INTERAKTIVES SYSTEMMODELL",title:"Eine Gesellschaft, die sich erkunden lässt.",text:"Eine lebendige Landschaft als Modell: Wohnen, Versorgung, Bildung, Wirtschaft, Landwirtschaft und Gemeinschaft liegen sichtbar nebeneinander.",part:"Überblick"},
+ {eyebrow:"I · GRUNDLAGEN",title:"Gemeinschaft braucht Räume.",text:"Öffentliche Plätze, Wege und Nachbarschaften zeigen, wie gemeinschaftliche Entscheidungen im Alltag sichtbar werden.",part:"Teil I"},
+ {eyebrow:"II · DEMOKRATIE",title:"Entscheidungen bleiben sichtbar.",text:"Rathaus, Marktplatz und öffentliche Einrichtungen bilden die Orte demokratischer Organisation.",part:"Teil II"},
+ {eyebrow:"III · GESUNDHEIT",title:"Versorgung gehört zum Alltag.",text:"Gesundheit, Bildung und soziale Infrastruktur liegen nicht abstrakt nebeneinander, sondern mitten in der Stadt.",part:"Teil III"},
+ {eyebrow:"IV · WIRTSCHAFT",title:"Arbeit hat viele Formen.",text:"Werkstätten, kleine Läden, Mehrfamilienhäuser und die Fabrik zeigen eine vielfältige Wirtschaftslandschaft.",part:"Teil IV"},
+ {eyebrow:"V · BILDUNG",title:"Lernen braucht Orte.",text:"Schule, Bibliothek und öffentliche Räume gehören ebenso zur Landschaft wie Wohnen und Arbeit.",part:"Teil V"},
+ {eyebrow:"VI · LANDWIRTSCHAFT",title:"Nahrung beginnt vor der Stadt.",text:"Felder, Gewächshäuser, Hofverkauf und Untergrundplantagen verbinden Ernährung mit sichtbarer Infrastruktur.",part:"Teil VI"},
+ {eyebrow:"VII · ENERGIE & INFRASTRUKTUR",title:"Eine Stadt ist ein Netzwerk.",text:"Straßen, Gehwege, Fluss, Energie, Industrie und öffentliche Infrastruktur greifen ineinander.",part:"Teil VII"},
+ {eyebrow:"VIII · KRISENORDNUNG",title:"Auch Krisen brauchen Räume.",text:"Reserve, Analyse und gemeinschaftliche Reaktion werden als Teil der Landschaft nachvollziehbar.",part:"Teil VIII"}
+];
+let heroIndex=0;
+function renderHeroSlide(){const s=heroSlides[heroIndex];document.querySelector('.hero .eyebrow').textContent=s.eyebrow;const parts=s.title.split(', ');document.querySelector('.hero h1').innerHTML=parts.length>1?`${parts[0]},<br><em>${parts.slice(1).join(', ')}</em>`:s.title;document.querySelector('.hero p').textContent=s.text;const pager=document.querySelector('#heroPager');if(pager)pager.innerHTML=`<button class="hero-arrow" data-dir="-1" aria-label="Vorheriger Bereich">←</button><span>${heroIndex+1} / ${heroSlides.length}</span><button class="hero-arrow" data-dir="1" aria-label="Nächster Bereich">→</button><small>${s.part}</small>`;}
+function moveHeroSlide(dir){heroIndex=(heroIndex+dir+heroSlides.length)%heroSlides.length;renderHeroSlide();}
 function setupViews(){
  document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.view)));
+ document.addEventListener("click",e=>{const b=e.target.closest(".hero-arrow");if(b)moveHeroSlide(Number(b.dataset.dir));});
+ renderHeroSlide();
 }
 function switchView(id){
  document.querySelector("#infoPanel")?.classList.remove("open");
@@ -301,7 +345,10 @@ document.querySelector("#resetSim").onclick=()=>{state={food:100,energy:100,trus
 ["food","energy","trust","conc","invest"].forEach(k=>document.getElementById(k).oninput=e=>{state[k]=+e.target.value;simRender()});
 document.querySelectorAll("[data-scenario]").forEach(b=>b.onclick=()=>scenario(b.dataset.scenario));
 document.querySelectorAll("[data-focus]").forEach(b=>b.onclick=()=>{switchView("world");const o=objects.find(x=>x.userData.key===b.dataset.focus);if(o){focus(o);showInfo(o.userData.key)}});
-document.addEventListener("keydown",e=>{if(e.key.toLowerCase()==="r")resetCamera()});
+document.addEventListener("keydown",e=>{
+ if(e.key.toLowerCase()==="r")resetCamera();
+ if(document.querySelector("#world").classList.contains("active")){ if(e.key==="ArrowLeft"){e.preventDefault();moveHeroSlide(-1);} if(e.key==="ArrowRight"){e.preventDefault();moveHeroSlide(1);} }
+});
 renderDocument();
 document.querySelector("#critgrid").innerHTML=critique.map(x=>`<article class="critcard"><div class="label">PRÜFPUNKT</div><h3>${x[0]}</h3><p><strong>Gedanke:</strong> ${x[1]}</p><p><strong>Offene Frage:</strong> ${x[2]}</p></article>`).join("");
 setupViews();simRender();

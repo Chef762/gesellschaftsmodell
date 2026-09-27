@@ -11,3 +11,16 @@ body{background:#edf0e5;color:#1e2a21}.topbar{background:rgba(248,246,237,.88)!i
 /* V8: world view polish */
 .hero{width:min(430px,38vw);top:118px}.hero h1{font-size:clamp(38px,4.4vw,66px)}.hero p{max-width:390px}.metrics{top:96px;width:205px}
 @media(max-width:900px){.hero{width:calc(100vw - 40px);top:108px}.hero h1{font-size:43px}}
+
+
+/* V10 — cinematic landscape / living town */
+#canvasWrap{background:linear-gradient(#b8d2c2,#8ba96f 48%,#718b5f 100%)!important}
+.hero{width:min(500px,43vw);top:118px;background:linear-gradient(90deg,rgba(248,246,237,.94),rgba(248,246,237,.62),transparent)!important;padding:12px 28px 18px 0;border-radius:0 22px 22px 0}
+.hero h1{font-size:clamp(38px,4.8vw,72px);max-width:500px}
+.hero p{max-width:460px;color:#314536!important}
+.hero-pager{pointer-events:auto;display:flex;align-items:center;gap:10px;margin-top:16px;width:max-content;padding:8px 10px;border-radius:14px;background:rgba(248,246,237,.78);border:1px solid rgba(45,72,49,.14);box-shadow:0 12px 28px rgba(39,56,42,.08);color:#4c624e;font-size:11px}
+.hero-pager span{min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+.hero-pager small{padding-left:6px;border-left:1px solid rgba(45,72,49,.16);font-size:9px;letter-spacing:.11em;text-transform:uppercase;color:#71836f}
+.hero-arrow{width:30px;height:30px;border-radius:50%;border:1px solid rgba(45,72,49,.22);background:rgba(255,255,255,.72);color:#2c4b32;font-size:16px;line-height:1}
+.hero-arrow:hover{background:#274d34;color:#fff}
+@media(max-width:900px){.hero{width:calc(100vw - 40px);padding-right:18px}.hero-pager{margin-top:10px}}
