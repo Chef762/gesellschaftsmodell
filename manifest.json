@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "articles": 363,
+  "parts": [
+    {
+      "part": "I",
+      "title": "Grundlagen und Grundrechte",
+      "from": 1,
+      "to": 47
+    },
+    {
+      "part": "II",
+      "title": "Familie, Kinder, Bildung und Forschung",
+      "from": 48,
+      "to": 94
+    },
+    {
+      "part": "III",
+      "title": "Wirtschaft und Unternehmen",
+      "from": 95,
+      "to": 140
+    },
+    {
+      "part": "IV",
+      "title": "Familie, Religion, Grundversorgung und Gesellschaft",
+      "from": 141,
+      "to": 194
+    },
+    {
+      "part": "V",
+      "title": "Gesundheit und medizinische Ordnung",
+      "from": 195,
+      "to": 214
+    },
+    {
+      "part": "VI",
+      "title": "Landwirtschaft, Ernährung, Wohnen, Energie und Infrastruktur",
+      "from": 215,
+      "to": 275
+    },
+    {
+      "part": "VII",
+      "title": "Geld, Steuern, Bürgerkapital und Finanzen",
+      "from": 276,
+      "to": 312
+    },
+    {
+      "part": "VIII",
+      "title": "Arbeit, Soziales, Daten und Technologie",
+      "from": 313,
+      "to": 331
+    },
+    {
+      "part": "IX",
+      "title": "Justiz, Polizei, Verteidigung, Außenbeziehungen und Umwelt",
+      "from": 332,
+      "to": 363
+    }
+  ]
+}

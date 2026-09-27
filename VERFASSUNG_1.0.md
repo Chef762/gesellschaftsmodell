@@ -1,0 +1,1118 @@
+# Verfassung des Gesellschaftsmodells — Arbeitsfassung 1.0
+
+**Status:** politischer Entwurf / Gedankenmodell. Keine geltende Rechtsordnung.
+
+**Leitgedanke:** Nicht alle Menschen müssen gleich sein, aber jeder Mensch ist gleich wertvoll. Vielfalt, Freiheit, Verantwortung, Würde, faire Chancen und gesellschaftliche Teilhabe bilden den normativen Ausgangspunkt.
+
+**Hinweis zur Prüfung:** Die Artikel sind bewusst so formuliert, dass sie kritisiert, geändert, gestrichen oder durch bessere Regeln ersetzt werden können. Wo konkrete Prozentwerte oder Institutionen genannt werden, handelt es sich um Festlegungen dieses Entwurfs und nicht um empirisch bewiesene optimale Werte.
+
+## Teil I — Grundlagen und Grundrechte
+
+### Artikel 1 — Menschenwürde
+Jeder Mensch besitzt denselben unveräußerlichen menschlichen Wert. Staatliche und gesellschaftliche Einrichtungen dürfen Menschen nicht zum bloßen Mittel machen.
+
+### Artikel 2 — Gleichwertigkeit
+Unterschiede in Fähigkeiten, Herkunft, Lebensweg, Einkommen oder Beitrag begründen keinen unterschiedlichen menschlichen Wert.
+
+### Artikel 3 — Freiheit
+Jeder Mensch darf sein Leben nach eigenen Vorstellungen gestalten, soweit dadurch Rechte anderer nicht verletzt werden.
+
+### Artikel 4 — Verantwortung
+Freiheit und Verantwortung gehören zusammen. Wer Rechte ausübt, achtet die Rechte und die Sicherheit anderer.
+
+### Artikel 5 — Rechtsbindung
+Alle staatlichen Organe sind an diese Verfassung und das Gesetz gebunden.
+
+### Artikel 6 — Gesellschaftlicher Zweck
+Staatliche Einrichtungen dienen dem Schutz der Menschen, ihrer Rechte und der gemeinsamen Handlungsfähigkeit.
+
+### Artikel 7 — Vielfalt
+Unterschiedliche Lebensentwürfe, Fähigkeiten, Kulturen und Überzeugungen dürfen nebeneinander bestehen.
+
+### Artikel 8 — Gleichheit vor dem Recht
+Alle Menschen sind vor dem Gesetz gleich. Unterschiede bedürfen eines sachlichen und verhältnismäßigen Grundes.
+
+### Artikel 9 — Diskriminierungsverbot
+Benachteiligungen wegen persönlicher Merkmale sind unzulässig, soweit sie nicht zum Schutz gleichwertiger Rechte zwingend gerechtfertigt sind.
+
+### Artikel 10 — Meinungsfreiheit
+Jeder Mensch darf Meinungen äußern, verbreiten, kritisieren und ändern.
+
+### Artikel 11 — Informationsfreiheit
+Jeder Mensch hat grundsätzlich Zugang zu öffentlichen Informationen und zu den Grundlagen staatlicher Entscheidungen.
+
+### Artikel 12 — Versammlungsfreiheit
+Menschen dürfen sich friedlich und ohne Waffen versammeln.
+
+### Artikel 13 — Vereinigungsfreiheit
+Menschen dürfen Vereinigungen gründen, ihnen beitreten und sie verlassen.
+
+### Artikel 14 — Religionsfreiheit
+Jeder Mensch darf eine Religion ausüben, wechseln, ablehnen oder keiner Religion angehören.
+
+### Artikel 15 — Gewissensfreiheit
+Niemand darf wegen einer persönlichen Gewissensentscheidung staatlich benachteiligt werden, soweit dadurch Rechte anderer nicht verletzt werden.
+
+### Artikel 16 — Privatleben
+Das Privatleben, die Wohnung und persönliche Kommunikation stehen unter besonderem Schutz.
+
+### Artikel 17 — Körperliche Unversehrtheit
+Jeder Mensch hat Anspruch auf Schutz vor rechtswidriger Gewalt und Eingriffen in den eigenen Körper.
+
+### Artikel 18 — Persönliche Freiheit
+Freiheitsentzug ist nur aufgrund eines Gesetzes, eines rechtmäßigen Verfahrens und unter gerichtlicher Kontrolle zulässig.
+
+### Artikel 19 — Eigentum
+Eigentum wird geschützt und verpflichtet zugleich. Sein Gebrauch darf dem Schutz anderer und der Allgemeinheit nicht widersprechen.
+
+### Artikel 20 — Erbrecht
+Vermögen darf grundsätzlich vererbt werden, soweit besondere Regeln dieser Verfassung für gesellschaftlich gebundene Unternehmensrechte gelten.
+
+### Artikel 21 — Berufsfreiheit
+Jeder Mensch darf Beruf, Ausbildung und Erwerbsform grundsätzlich frei wählen.
+
+### Artikel 22 — Unternehmerische Freiheit
+Jeder darf im Rahmen des Rechts Unternehmen gründen, führen, verändern oder aufgeben.
+
+### Artikel 23 — Forschungsfreiheit
+Wissenschaftliche Forschung und Lehre sind frei, soweit sie Rechte anderer und geltendes Recht achten.
+
+### Artikel 24 — Kunstfreiheit
+Kunst und kulturelle Tätigkeit sind frei.
+
+### Artikel 25 — Pressefreiheit
+Journalistische Tätigkeit ist frei. Medien sollen ihre Finanzierung und wesentliche Interessenkonflikte offenlegen.
+
+### Artikel 26 — Quellenschutz
+Journalistische Quellen werden geschützt, soweit nicht ein überwiegendes gesetzliches Interesse nach gerichtlicher Prüfung entgegensteht.
+
+### Artikel 27 — Datenschutz
+Personenbezogene Daten dürfen nur zweckgebunden, nachvollziehbar und nach klaren gesetzlichen Regeln verarbeitet werden.
+
+### Artikel 28 — Digitale Selbstbestimmung
+Menschen haben Anspruch auf verständliche Informationen darüber, welche digitalen Systeme ihre Daten verarbeiten und zu welchem Zweck.
+
+### Artikel 29 — Analoge Teilhabe
+Wesentliche staatliche Leistungen müssen eine zumutbare nicht-digitale Alternative vorsehen.
+
+### Artikel 30 — Zugang zum Recht
+Jeder Mensch hat Anspruch auf wirksamen Rechtsschutz und ein faires Verfahren.
+
+### Artikel 31 — Unschuldsvermutung
+Bis zu einer rechtskräftigen Verurteilung gilt jede beschuldigte Person als unschuldig.
+
+### Artikel 32 — Verhältnismäßigkeit
+Staatliche Eingriffe müssen geeignet, erforderlich und angemessen sein.
+
+### Artikel 33 — Rückwirkungsverbot
+Strafbarkeit darf grundsätzlich nicht rückwirkend begründet oder verschärft werden.
+
+### Artikel 34 — Keine politische Justiz
+Gerichte und Strafverfolgung dürfen nicht zur Verfolgung politischer Gegner eingesetzt werden.
+
+### Artikel 35 — Recht auf Verteidigung
+Jede beschuldigte Person hat Anspruch auf wirksame Verteidigung und auf Kenntnis der gegen sie erhobenen Vorwürfe.
+
+### Artikel 36 — Opferschutz
+Opfer von Straftaten haben Anspruch auf Schutz, Information und Zugang zu geeigneter Unterstützung.
+
+### Artikel 37 — Jugendschutz im Strafrecht
+Jugendliche werden nach einem eigenständigen, entwicklungsorientierten Rechtssystem behandelt.
+
+### Artikel 38 — Resozialisierung
+Strafvollzug soll Sicherheit gewährleisten und zugleich die Rückkehr in ein rechtmäßiges Leben ermöglichen.
+
+### Artikel 39 — Recht auf grundlegende Versorgung
+Niemand darf ohne Zugang zu lebensnotwendiger Versorgung gelassen werden.
+
+### Artikel 40 — Schutz vor Obdachlosigkeit
+Öffentliche Stellen müssen angemessene Verfahren zur Vermeidung und Beendigung von Wohnungslosigkeit vorhalten.
+
+### Artikel 41 — Schutz vor Ausbeutung
+Arbeit und wirtschaftliche Abhängigkeit dürfen nicht zur rechtswidrigen Ausbeutung von Menschen führen.
+
+### Artikel 42 — Kinderrechte
+Kinder und Jugendliche besitzen eigene Rechte und erhalten besonderen Schutz.
+
+### Artikel 43 — Rechte älterer Menschen
+Ältere Menschen behalten volle gesellschaftliche Teilhabe und Entscheidungsfreiheit.
+
+### Artikel 44 — Rechte von Menschen mit Behinderungen
+Barrierefreiheit und gleichberechtigte Teilhabe werden schrittweise als verbindliche öffentliche Aufgabe umgesetzt.
+
+### Artikel 45 — Staatliche Neutralität
+Der Staat darf keine persönliche Weltanschauung oder Lebensform als verbindlich vorschreiben.
+
+### Artikel 46 — Verfassungsfestigkeit
+Die Grundrechte bilden den verbindlichen Rahmen jeder weiteren Regelung.
+
+### Artikel 47 — Schutz des Rechtswegs
+Die Regelungen zu schutz des rechtswegs werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+## Teil II — Familie, Kinder, Bildung und Forschung
+
+### Artikel 48 — Familie
+Familien und andere verantwortliche Sorgegemeinschaften stehen unter besonderem Schutz.
+
+### Artikel 49 — Elterliche Verantwortung
+Eltern tragen die vorrangige Verantwortung für die Erziehung ihrer Kinder innerhalb der Grenzen der Kinderrechte.
+
+### Artikel 50 — Staatliche Zurückhaltung
+Der Staat greift in gewöhnliche Erziehungsentscheidungen nur ein, wenn konkrete Gefahren oder erhebliche Rechtsverletzungen vorliegen.
+
+### Artikel 51 — Kindeswohl
+Bei staatlichen Entscheidungen, die Kinder betreffen, ist ihr Wohl vorrangig zu berücksichtigen.
+
+### Artikel 52 — Frühe Unterstützung
+Familien erhalten frühzeitig freiwillige Unterstützungsangebote, wenn Belastungen die Entwicklung eines Kindes gefährden können.
+
+### Artikel 53 — Entlastung
+Eltern dürfen Hilfen zur Betreuung, Pflege und Alltagsentlastung in Anspruch nehmen, ohne dadurch ihre familiäre Verantwortung zu verlieren.
+
+### Artikel 54 — Familiengerechte Grundversorgung
+Haushalte mit Kindern erhalten zusätzliche Grundversorgungs- und Wohnressourcen nach transparenten Regeln.
+
+### Artikel 55 — Gesundheit von Kindern
+Kinder und Jugendliche erhalten besonderen Zugang zu medizinischer Versorgung, Prävention und psychologischer Unterstützung.
+
+### Artikel 56 — Schutz vor Gewalt
+Körperliche, psychische und sexualisierte Gewalt gegen Kinder wird konsequent verfolgt und präventiv bekämpft.
+
+### Artikel 57 — Frühe Bildung
+Jedes Kind erhält Zugang zu hochwertiger frühkindlicher Bildung und Betreuung.
+
+### Artikel 58 — Schulbildung
+Schulische Bildung vermittelt Grundlagenwissen, selbstständiges Denken, soziale Fähigkeiten und Orientierung.
+
+### Artikel 59 — Lernfreiheit
+Innerhalb verbindlicher Grundlagen sollen Lernwege an Interessen, Fähigkeiten und Entwicklungsstand angepasst werden.
+
+### Artikel 60 — Weniger Prüfungsdruck
+Leistungsfeststellungen werden auf für Bildung und Orientierung relevante Grundlagen konzentriert.
+
+### Artikel 61 — Projektlernen
+Schulen ermöglichen individuelle und gemeinsame Projekte, in denen Interessen praktisch erprobt werden.
+
+### Artikel 62 — Gesellschafts- und Eigenentwicklungskunde
+Ein verbindlicher Lernbereich unterstützt junge Menschen dabei, eigene Interessen, Fähigkeiten und mögliche Beiträge zur Gesellschaft zu erkennen.
+
+### Artikel 63 — Berufsorientierung
+Berufsorientierung informiert über Tätigkeiten, Ausbildungswege, Anforderungen, Einkommen und gesellschaftlichen Bedarf.
+
+### Artikel 64 — Neuorientierung
+Ein einmal eingeschlagener Bildungs- oder Berufsweg darf ohne unnötige Hürden geändert werden.
+
+### Artikel 65 — Gleichwertige Bildungswege
+Praktische, akademische, technische, kreative und soziale Bildungswege werden als gleichwertige Formen gesellschaftlicher Entwicklung anerkannt.
+
+### Artikel 66 — Ausbildung
+Ausbildungsplätze sollen praktische Fähigkeiten, fachliche Grundlagen und verantwortliches Handeln verbinden.
+
+### Artikel 67 — Hochschulen
+Hochschulen erhalten fachliche und organisatorische Freiheit innerhalb der gesetzlichen Grundordnung.
+
+### Artikel 68 — Akademische Freiheit
+Forschung und Lehre dürfen nicht wegen unliebsamer Ergebnisse politisch unterdrückt werden.
+
+### Artikel 69 — Forschungsförderung
+Öffentliche Forschungsförderung orientiert sich an nachvollziehbaren wissenschaftlichen und gesellschaftlichen Kriterien.
+
+### Artikel 70 — Medizinische Forschung
+Forschung zur Verbesserung von Gesundheit und Versorgung kann besonders gefördert werden, wenn ein plausibler gesellschaftlicher Nutzen besteht.
+
+### Artikel 71 — Grundlagenforschung
+Auch Forschung ohne unmittelbaren wirtschaftlichen Nutzen kann aus öffentlichen Mitteln unterstützt werden.
+
+### Artikel 72 — Bürgerentscheid über Forschung
+Bei außergewöhnlich großen oder langfristigen Forschungsprogrammen kann eine demokratische Entscheidung über den öffentlichen Finanzierungsrahmen vorgesehen werden.
+
+### Artikel 73 — Wissenschaftliche Integrität
+Forschungseinrichtungen müssen Interessenkonflikte, Finanzierungsquellen und wesentliche methodische Einschränkungen offenlegen.
+
+### Artikel 74 — Offene Kritik
+Wissenschaftliche Aussagen dürfen öffentlich kritisiert und durch Gegenbefunde geprüft werden.
+
+### Artikel 75 — Lehrerberuf
+Lehrkräfte erhalten angemessene Vergütung, Weiterbildung und fachliche Autonomie.
+
+### Artikel 76 — Berufsprämie Bildung
+Für Lehrtätigkeit kann eine gesellschaftlich festgelegte Bedarfskomponente vorgesehen werden; der Entwurf sieht zunächst zehn Prozent vor.
+
+### Artikel 77 — Kinderbetreuung
+Betreuungsangebote sollen wohnortnah, verlässlich und mit unterschiedlichen Arbeits- und Familienmodellen vereinbar sein.
+
+### Artikel 78 — Jugendbeteiligung
+Kinder und Jugendliche erhalten altersgerechte Möglichkeiten, Entscheidungen über sie betreffende Angelegenheiten mitzugestalten.
+
+### Artikel 79 — Schutz vor Überforderung
+Bildungsinstitutionen achten auf angemessene Belastung und erkennen psychische Überforderung frühzeitig.
+
+### Artikel 80 — Digitale Bildung
+Digitale Kompetenzen werden vermittelt, ohne analoge Fähigkeiten und kritisches Denken zu ersetzen.
+
+### Artikel 81 — Medienkompetenz
+Schülerinnen und Schüler lernen Quellen zu prüfen, Unsicherheit zu erkennen und unterschiedliche Perspektiven zu vergleichen.
+
+### Artikel 82 — Freiwillige Vertiefung
+Über verbindliche Grundlagen hinaus können Schulen und Lernende zusätzliche Schwerpunkte wählen.
+
+### Artikel 83 — Lebenslanges Lernen
+Weiterbildung und Umschulung bleiben auch im Erwachsenenalter zugänglich.
+
+### Artikel 84 — Bildungsgerechtigkeit
+Finanzielle oder soziale Herkunft darf den Zugang zu grundlegender Bildung nicht bestimmen.
+
+### Artikel 85 — Lernmittel
+Notwendige Lernmittel werden so bereitgestellt, dass wirtschaftliche Unterschiede nicht zum Ausschluss führen.
+
+### Artikel 86 — Forschungsschutz
+Wissenschaftler dürfen Ergebnisse veröffentlichen, solange gesetzliche Schutzgüter gewahrt bleiben.
+
+### Artikel 87 — Technologiefolgen
+Bei neuen Technologien werden Nutzen, Risiken, Abhängigkeiten und Alternativen systematisch untersucht.
+
+### Artikel 88 — Forschungsdaten
+Forschungsdaten werden nach rechtlichen und wissenschaftlichen Standards sicher verarbeitet.
+
+### Artikel 89 — Internationale Wissenschaft
+Internationale Forschung wird ermöglicht, solange Menschenrechte, Sicherheit und wissenschaftliche Unabhängigkeit gewahrt bleiben.
+
+### Artikel 90 — Schutz geistiger Arbeit
+Urheberrechte und andere Schutzrechte werden so ausgestaltet, dass Innovation und Zugang zu Wissen miteinander vereinbar bleiben.
+
+### Artikel 91 — Lehrplanprüfung
+Lehrpläne werden regelmäßig auf Aktualität, Belastung und gesellschaftliche Relevanz überprüft.
+
+### Artikel 92 — Bildungsbericht
+Eine unabhängige Stelle veröffentlicht regelmäßig nachvollziehbare Daten über Bildungsergebnisse und Zugangschancen.
+
+### Artikel 93 — Keine Bildungsmonopole
+Staatliche Bildung darf alternative zulässige Bildungsformen nicht ohne sachlichen Grund verdrängen.
+
+### Artikel 94 — Schulgesundheit
+Die Regelungen zu schulgesundheit werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+## Teil III — Wirtschaft und Unternehmen
+
+### Artikel 95 — Wirtschaftliche Vielfalt
+Die Wirtschaftsordnung ermöglicht private, gemeinschaftliche, genossenschaftliche und andere rechtmäßige Unternehmensformen.
+
+### Artikel 96 — Wettbewerb
+Offener Wettbewerb wird geschützt, soweit er nicht durch berechtigte soziale, ökologische oder sicherheitsbezogene Regeln begrenzt werden muss.
+
+### Artikel 97 — Wettbewerbsaufsicht
+Eine unabhängige Wettbewerbsbehörde überwacht Marktmacht, Kartelle und missbräuchliche Abhängigkeiten.
+
+### Artikel 98 — Markteintritt
+Neue Unternehmen dürfen nicht durch unnötige regulatorische oder wirtschaftliche Barrieren vom Markt ferngehalten werden.
+
+### Artikel 99 — Preisbildung
+Preise entstehen grundsätzlich durch Angebot und Nachfrage sowie durch die realen Kosten der Leistung.
+
+### Artikel 100 — Preisbremsen
+Zeitlich begrenzte Preisbremsen können bei außergewöhnlichen Versorgungslagen eingesetzt werden.
+
+### Artikel 101 — Kostenuntergrenze
+Eine Preisregel darf nicht dauerhaft Preise unter den realen Produktionskosten erzwingen.
+
+### Artikel 102 — Transparenz von Preismaßnahmen
+Außergewöhnliche Preismaßnahmen müssen begründet, befristet und überprüfbar sein.
+
+### Artikel 103 — Unternehmensgründung
+Die Gründung eines Unternehmens steht grundsätzlich allen offen, die die gesetzlichen Voraussetzungen erfüllen.
+
+### Artikel 104 — Gründeranteil
+Der Gründer erhält grundsätzlich fünfzig Prozent des vorgesehenen Unternehmensanteils, sofern die Gründungsvereinbarung nichts sachlich anderes bestimmt.
+
+### Artikel 105 — Mitarbeiteranteil
+Die Beschäftigten halten gemeinsam grundsätzlich die übrigen fünfzig Prozent des vorgesehenen Unternehmensanteils.
+
+### Artikel 106 — Abweichende Beteiligung
+Abweichungen können bei nachvollziehbaren Finanzierungs-, Risiko- oder Sanierungsbedingungen vereinbart werden.
+
+### Artikel 107 — Stimmrechte
+Eigentums- und Stimmrechte werden getrennt geregelt, soweit dies für Unternehmensführung und Beteiligung erforderlich ist.
+
+### Artikel 108 — Mitarbeitervertretung
+Beschäftigte erhalten wirksame Rechte bei wesentlichen Entscheidungen über Arbeit, Sicherheit und langfristige Unternehmensentwicklung.
+
+### Artikel 109 — Gewerkschaften
+Gewerkschaften können Interessen der Beschäftigten unabhängig vertreten.
+
+### Artikel 110 — Unternehmensleitung
+Die Unternehmensleitung trägt Verantwortung für Rechtmäßigkeit, wirtschaftliche Tragfähigkeit und sichere Arbeitsbedingungen.
+
+### Artikel 111 — Zusammenarbeit
+Unternehmensleitung und Arbeitnehmervertretungen sollen Konflikte zunächst durch verhandelte Lösungen bearbeiten.
+
+### Artikel 112 — Gewinnbeteiligung
+Beschäftigte sollen angemessen am Erfolg eines Unternehmens beteiligt werden, wenn dies mit seiner Stabilität vereinbar ist.
+
+### Artikel 113 — Verlustverantwortung
+Beteiligungsrechte dürfen nicht so ausgestaltet werden, dass Beschäftigte für Verluste ohne angemessene Schutzmechanismen persönlich haften.
+
+### Artikel 114 — Gründer-Nachfolge
+Ein persönlicher Gründeranteil kann bei Tod oder dauerhaftem Ausscheiden in die gemeinschaftliche Unternehmensstruktur übergehen.
+
+### Artikel 115 — Nachfolgeperson
+Ein Gründer darf eine Person bestimmen, die innerhalb klarer Grenzen ein erweitertes Stimmrecht erhält, um langfristige Unternehmensgrundsätze fortzuführen.
+
+### Artikel 116 — Grenzen des Sonderstimmrechts
+Ein Sonderstimmrecht darf weder Grundrechte noch Arbeitnehmerrechte, Wettbewerbsrecht oder gesetzliche Aufsicht außer Kraft setzen.
+
+### Artikel 117 — Ende des Sonderstimmrechts
+Das Sonderstimmrecht endet bei den gesetzlich festgelegten Voraussetzungen, insbesondere bei Missbrauch oder dauerhaftem Wegfall seines Zwecks.
+
+### Artikel 118 — Keine Unternehmensaristokratie
+Unternehmensmacht darf nicht erblich auf unbegrenzte Zeit konzentriert werden.
+
+### Artikel 119 — Marktmachtprüfung
+Bei erheblicher Konzentration prüft die Wettbewerbsaufsicht, ob Alternativen bestehen und ob Gegenmaßnahmen erforderlich sind.
+
+### Artikel 120 — Neue Wettbewerber
+Wenn ein Markt dauerhaft ohne ausreichende Alternative bleibt, können öffentliche Mittel den Aufbau junger innovativer Wettbewerber unterstützen.
+
+### Artikel 121 — Staat als Marktteilnehmer
+Der Staat tritt nur dort selbst wirtschaftlich auf, wo ein nachvollziehbarer öffentlicher Zweck besteht.
+
+### Artikel 122 — Subventionsprüfung
+Öffentliche Unternehmenshilfen müssen Zweck, Dauer, Kosten und Rückfallrisiken offenlegen.
+
+### Artikel 123 — Keine Rettung ohne Prüfung
+Nicht tragfähige Unternehmen erhalten keine automatische dauerhafte Rettung aus öffentlichen Mitteln.
+
+### Artikel 124 — Insolvenz
+Insolvenzverfahren sollen Gläubiger, Beschäftigte, Eigentum und die Fortführung gesellschaftlich wichtiger Funktionen angemessen berücksichtigen.
+
+### Artikel 125 — Arbeitsplatzsicherung
+Bei systemrelevanten Betrieben können Übergangsmaßnahmen zur Sicherung kritischer Leistungen vorgesehen werden.
+
+### Artikel 126 — Arbeitszeit
+Arbeitszeiten müssen Gesundheit, Sicherheit und Vereinbarkeit mit dem Privatleben berücksichtigen.
+
+### Artikel 127 — Arbeitsschutz
+Arbeitgeber sind verpflichtet, sichere und gesundheitlich vertretbare Arbeitsbedingungen zu gewährleisten.
+
+### Artikel 128 — Mindeststandards
+Arbeitsverträge müssen gesetzliche Mindeststandards zu Vergütung, Sicherheit und Mitwirkung einhalten.
+
+### Artikel 129 — Vergütung
+Vergütung darf nach Verantwortung, Qualifikation, Belastung, Leistung und gesellschaftlichem Bedarf differieren.
+
+### Artikel 130 — Gleichwertige Arbeit
+Unterschiedliche Berufe können unterschiedliche Vergütung haben, ohne dass dadurch der menschliche Wert ihrer Ausübenden bewertet wird.
+
+### Artikel 131 — Berufsprämien
+Für gesellschaftlich besonders benötigte Berufe können zeitlich überprüfbare Zuschläge vorgesehen werden.
+
+### Artikel 132 — Medizinische Berufe
+Der Entwurf sieht zunächst einen Zuschlag von zwanzig Prozent für Ärztinnen und Ärzte vor.
+
+### Artikel 133 — Pflegeberufe
+Der Entwurf sieht zunächst einen Zuschlag von fünfzehn Prozent für Pflegeberufe vor.
+
+### Artikel 134 — Polizeiberufe
+Der Entwurf sieht zunächst einen Zuschlag von fünf Prozent für Polizeiberufe vor.
+
+### Artikel 135 — Feuerwehr
+Der Entwurf sieht zunächst einen Zuschlag von fünf Prozent für Feuerwehrberufe vor.
+
+### Artikel 136 — Bedarfsprüfung
+Berufszuschläge werden regelmäßig anhand gesellschaftlicher Nachfrage und Arbeitsbedingungen überprüft.
+
+### Artikel 137 — Unternehmensdaten
+Unternehmen müssen für Aufsicht und gesetzliche Planung notwendige Daten nachvollziehbar bereitstellen.
+
+### Artikel 138 — Geschäftsgeheimnisse
+Legitime Geschäftsgeheimnisse werden geschützt, soweit dadurch keine Rechtsverletzungen oder erhebliche öffentliche Risiken verdeckt werden.
+
+### Artikel 139 — Wettbewerbsinformationen
+Wettbewerbsbehörden dürfen notwendige Unternehmensdaten unter strengen Datenschutz- und Verfahrensregeln auswerten.
+
+### Artikel 140 — Internationale Unternehmen
+Ausländische Unternehmen können tätig sein, sofern sie die gleichen grundlegenden Regeln einhalten.
+
+## Teil IV — Familie, Religion, Grundversorgung und Gesellschaft
+
+### Artikel 141 — Ehe und Partnerschaft
+Ehe und andere freiwillige Partnerschaften werden rechtlich geschützt, ohne eine bestimmte Lebensform vorzuschreiben.
+
+### Artikel 142 — Familienfreundlichkeit
+Gesellschaftliche Rahmenbedingungen sollen Familiengründung und verantwortliche Partnerschaft erleichtern.
+
+### Artikel 143 — Haushaltsressourcen
+Grundressourcen eines Haushalts werden nach Haushaltsgröße und besonderen Bedürfnissen bemessen.
+
+### Artikel 144 — Kinder in Haushaltsberechnung
+Kinder werden bei der Berechnung grundlegender Haushaltsressourcen grundsätzlich wie vollwertige Haushaltsmitglieder berücksichtigt.
+
+### Artikel 145 — Wohnraumbudget
+Wohnraumansprüche berücksichtigen Haushaltsgröße, Kinder und besondere Bedürfnisse.
+
+### Artikel 146 — Fahrzeugbudget
+Ein Haushalt kann innerhalb der Grundversorgung ein Fahrzeugbudget erhalten, das sich bei zusätzlichen Kindern erhöht.
+
+### Artikel 147 — Mobilität
+Öffentliche Mobilität soll so ausgebaut werden, dass ein eigenes Fahrzeug nicht Voraussetzung gesellschaftlicher Teilhabe ist.
+
+### Artikel 148 — Öffentlicher Verkehr
+Grundlegende öffentliche Verkehrsleistungen werden grundsätzlich kostenfrei oder über die allgemeine Finanzierung bereitgestellt.
+
+### Artikel 149 — Religion und Staat
+Religiöse Gemeinschaften dürfen frei wirken, bleiben aber an allgemeines Recht und die Grundrechte gebunden.
+
+### Artikel 150 — Religiöse Neutralität
+Keine Religion erhält staatliche Vorrangstellung.
+
+### Artikel 151 — Gewissensfreiheit
+Religiöse oder nichtreligiöse Gewissensentscheidungen werden geschützt, soweit Rechte anderer gewahrt bleiben.
+
+### Artikel 152 — Religiöse Bildung
+Religiöse Bildung darf angeboten werden, sofern sie freiwillig und weltanschaulich transparent erfolgt.
+
+### Artikel 153 — Religionsgemeinschaften
+Religionsgemeinschaften organisieren ihre inneren Angelegenheiten grundsätzlich selbst.
+
+### Artikel 154 — Missbrauchsschutz
+Religiöse oder weltanschauliche Zugehörigkeit rechtfertigt keinen Schutz vor allgemeinem Straf- oder Zivilrecht.
+
+### Artikel 155 — Grundversorgung
+Lebensnotwendige Grundversorgung wird als gemeinsame gesellschaftliche Aufgabe organisiert.
+
+### Artikel 156 — Grundnahrung
+Jede Person erhält Zugang zu einer regional verfügbaren grundlegenden Lebensmittelversorgung.
+
+### Artikel 157 — Wasser
+Sauberes Trinkwasser gehört zur unverzichtbaren Grundversorgung.
+
+### Artikel 158 — Gesundheitsversorgung
+Notwendige medizinische Versorgung steht allen Menschen offen.
+
+### Artikel 159 — Pflege
+Pflegeleistungen werden nach Bedarf und nicht allein nach individueller Zahlungsfähigkeit zugänglich gemacht.
+
+### Artikel 160 — Soziale Sicherheit
+Das System schützt gegen Krankheit, Pflegebedürftigkeit, Arbeitslosigkeit, Erwerbsunfähigkeit, Alter, Unfall und besondere Notlagen.
+
+### Artikel 161 — Soziale Teilhabe
+Soziale Sicherung soll nicht nur Existenz sichern, sondern gesellschaftliche Teilhabe ermöglichen.
+
+### Artikel 162 — Ältere Menschen
+Ältere Menschen sollen aktiv am gesellschaftlichen Leben teilnehmen können.
+
+### Artikel 163 — Generationenprojekte
+Schulen, Betriebe und Gemeinden können generationenübergreifende Projekte fördern.
+
+### Artikel 164 — Erfahrungstransfer
+Erfahrung älterer Menschen kann freiwillig in Ausbildung, Beratung und Gemeinwesen eingebracht werden.
+
+### Artikel 165 — Pflegeentlastung
+Pflegende Angehörige erhalten Entlastungs- und Unterstützungsangebote.
+
+### Artikel 166 — Menschen mit Pflegebedarf
+Pflegebedürftige behalten Selbstbestimmung und werden in Entscheidungen über ihre Versorgung einbezogen.
+
+### Artikel 167 — Armut
+Öffentliche Maßnahmen sollen extreme materielle Not verhindern, ohne Menschen unnötig zu bevormunden.
+
+### Artikel 168 — Soziale Beratung
+Menschen in Notlagen erhalten Zugang zu unabhängiger Beratung.
+
+### Artikel 169 — Gemeinnützigkeit
+Gemeinnützige Organisationen können gesellschaftliche Aufgaben übernehmen, wenn ihre Finanzierung und Arbeitsweise transparent sind.
+
+### Artikel 170 — Kirchen und Gemeinnützige
+Kirchen und andere gemeinnützige Einrichtungen können bei gemeinwohlorientierten Arbeitsangeboten mitwirken.
+
+### Artikel 171 — Freiwilligkeit
+Gemeinwohlorientierte Tätigkeiten sollen grundsätzlich freiwillige Mitwirkung fördern; verpflichtende Maßnahmen bedürfen einer klaren gesetzlichen Grundlage und müssen verhältnismäßig sein.
+
+### Artikel 172 — Schutz vor Zwangsarbeit
+Niemand darf durch soziale Abhängigkeit zu entwürdigender oder unverhältnismäßiger Arbeit gezwungen werden.
+
+### Artikel 173 — Arbeitsvermittlung
+Arbeitslose erhalten Zugang zu Beratung, Qualifizierung und Vermittlung.
+
+### Artikel 174 — Passende Arbeit
+Vermittlung berücksichtigt Fähigkeiten, Gesundheit, Zumutbarkeit und langfristige Entwicklung.
+
+### Artikel 175 — Temporäre Unternehmensvermittlung
+Bei geeignetem Bedarf können Arbeitsuchende mit ihrer Zustimmung zeitweise in Unternehmen vermittelt werden, auch wenn dort eine höhere Vergütung angeboten wird.
+
+### Artikel 176 — Arbeitslosensicherung
+Bei fehlender Beschäftigung wird eine existenzsichernde soziale Leistung gewährleistet.
+
+### Artikel 177 — Gemeinwohlbeitrag
+Wer Leistungen bezieht, kann innerhalb gesetzlicher Grenzen an zumutbaren gemeinnützigen Angeboten teilnehmen.
+
+### Artikel 178 — Beschwerderecht
+Betroffene können Entscheidungen der Sozialverwaltung überprüfen lassen.
+
+### Artikel 179 — Sozialdaten
+Sozialdaten werden zweckgebunden und besonders geschützt verarbeitet.
+
+### Artikel 180 — Integration
+Menschen, die neu in die Gesellschaft kommen, erhalten Zugang zu Sprache, Bildung, Arbeit und gesellschaftlicher Teilhabe.
+
+### Artikel 181 — Gemeinschaft und Individualität
+Gemeinschaftliche Verantwortung darf individuelle Lebensentwürfe nicht unnötig vereinheitlichen.
+
+### Artikel 182 — Kulturelle Vielfalt
+Kulturelle Vielfalt wird geschützt, solange grundlegende Rechte und Gesetze gewahrt bleiben.
+
+### Artikel 183 — Sport und Bewegung
+Zugang zu Bewegung und Sport wird als Teil von Gesundheit und gesellschaftlicher Teilhabe unterstützt.
+
+### Artikel 184 — Kultur
+Kulturelle Einrichtungen und freie Kultur können öffentlich unterstützt werden, ohne dass der Staat Inhalte politisch vorgibt.
+
+### Artikel 185 — Öffentliche Räume
+Gemeinden sorgen für zugängliche und sichere öffentliche Räume.
+
+### Artikel 186 — Nachbarschaft
+Nachbarschaftliche Selbsthilfe kann durch geeignete Infrastruktur unterstützt werden.
+
+### Artikel 187 — Ehrenamt
+Freiwilliges gesellschaftliches Engagement wird anerkannt und darf nicht durch unnötige Bürokratie behindert werden.
+
+### Artikel 188 — Gemeinschaftliche Verantwortung
+Gesellschaftliche Solidarität ist eine gemeinsame Aufgabe von Staat, Unternehmen, Familien, Vereinen und Einzelpersonen.
+
+### Artikel 189 — Sozialbericht
+Eine unabhängige Stelle veröffentlicht regelmäßig Daten über soziale Teilhabe und Grundversorgung.
+
+### Artikel 190 — Soziale Zielprüfung
+Neue Maßnahmen werden darauf geprüft, ob sie Menschen tatsächlich helfen oder lediglich Verwaltungslasten erzeugen.
+
+### Artikel 191 — Familienberatung
+Die Regelungen zu familienberatung werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+### Artikel 192 — Elternzeit
+Die Regelungen zu elternzeit werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+### Artikel 193 — Pflege von Kindern
+Die Regelungen zu pflege von kindern werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+### Artikel 194 — Kinderschutzbehörden
+Die Regelungen zu kinderschutzbehörden werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+## Teil V — Gesundheit und medizinische Ordnung
+
+### Artikel 195 — Gesundheitsrecht
+Gesundheitsversorgung orientiert sich an medizinischem Bedarf, Menschenwürde und nachvollziehbaren Prioritäten.
+
+### Artikel 196 — Vorsorge
+Prävention und Gesundheitsbildung werden als Teil der Versorgung gefördert.
+
+### Artikel 197 — Notfallversorgung
+In medizinischen Notfällen erhält jede Person unverzüglich notwendige Hilfe.
+
+### Artikel 198 — Kinderpriorität
+Bei vergleichbaren Versorgungslagen erhalten Kinder und Jugendliche besonderen Schutz.
+
+### Artikel 199 — Pflegeversorgung
+Pflege wird als gleichwertiger Bestandteil des Gesundheitswesens behandelt.
+
+### Artikel 200 — Gesundheitsberufe
+Gesundheitsberufe benötigen qualifizierte Ausbildung und regelmäßige Fortbildung.
+
+### Artikel 201 — Medizinische Qualität
+Behandlungen sollen nach anerkannten wissenschaftlichen Standards erfolgen.
+
+### Artikel 202 — Patientenautonomie
+Patientinnen und Patienten werden in medizinische Entscheidungen einbezogen, soweit ihre Entscheidungsfähigkeit dies zulässt.
+
+### Artikel 203 — Einwilligung
+Medizinische Eingriffe bedürfen grundsätzlich einer informierten Einwilligung, außer in gesetzlich geregelten Notfällen.
+
+### Artikel 204 — Gesundheitsdaten
+Gesundheitsdaten gehören zu den besonders geschützten personenbezogenen Daten.
+
+### Artikel 205 — Forschung und Versorgung
+Forschung darf Versorgung verbessern, ohne Patientenrechte aufzugeben.
+
+### Artikel 206 — Arzneimittel
+Arzneimittelversorgung soll sicher, verfügbar und nach wissenschaftlichen Standards kontrolliert sein.
+
+### Artikel 207 — Medizinische Reserven
+Für kritische medizinische Güter werden angemessene strategische Vorräte aufgebaut.
+
+### Artikel 208 — Pandemievorsorge
+Für übertragbare Krankheiten werden Vorsorgepläne mit abgestuften und zeitlich begrenzten Maßnahmen vorgehalten.
+
+### Artikel 209 — Gesundheitskrisen
+Gesundheitskrisen werden fachlich bewertet; politische Entscheidungen bleiben demokratisch legitimiert.
+
+### Artikel 210 — Psychische Gesundheit
+Psychische Gesundheit wird gleichberechtigt mit körperlicher Gesundheit behandelt.
+
+### Artikel 211 — Rehabilitation
+Nach Krankheit oder Unfall wird die Rückkehr zu selbstbestimmter Teilhabe unterstützt.
+
+### Artikel 212 — Berufliche Gesundheit
+Arbeitsbedingungen sollen gesundheitliche Schäden verhindern.
+
+### Artikel 213 — Gesundheitskontrolle
+Unabhängige Stellen überwachen Qualität, Patientenschutz und Interessenkonflikte.
+
+### Artikel 214 — Gesundheitsbericht
+Das Gesundheitswesen wird regelmäßig anhand von Versorgung, Qualität, Kosten und Zugang überprüft.
+
+## Teil VI — Landwirtschaft, Ernährung, Wohnen, Energie und Infrastruktur
+
+### Artikel 215 — Landwirtschaftliche Grundlage
+Landwirtschaft dient Ernährung, Landschaftspflege, ökologischer Stabilität und wirtschaftlicher Tätigkeit.
+
+### Artikel 216 — Ökologischer Standard
+Inländische Grundproduktion soll nach einem verbindlichen ökologischen Standard erfolgen; der Entwurf orientiert sich am Demeter-Niveau oder einem gleichwertigen Standard.
+
+### Artikel 217 — Bodenfruchtbarkeit
+Böden sollen langfristig fruchtbar und ökologisch belastbar erhalten werden.
+
+### Artikel 218 — Wasserschutz
+Landwirtschaft und Industrie müssen die langfristige Qualität von Wasserressourcen berücksichtigen.
+
+### Artikel 219 — Ernteausfälle
+Ernteausfälle werden durch Vorräte, regionale Umverteilung, zusätzliche Produktionskapazität und erforderlichenfalls Handel abgefedert.
+
+### Artikel 220 — Gewächshausproduktion
+Kontrollierte Gewächshausproduktion kann zur Krisenvorsorge und Versorgungssicherung eingesetzt werden.
+
+### Artikel 221 — Unterirdischer Anbau
+Geeignete unterirdische Anlagen, Stollen oder andere sichere Räume können für kontrollierte Produktion genutzt werden.
+
+### Artikel 222 — Produktionssicherheit
+Zusätzliche Produktionskapazitäten sollen so verteilt werden, dass einzelne Ausfälle nicht das gesamte System gefährden.
+
+### Artikel 223 — Saatgut
+Strategisch wichtige Saatgutbestände werden geschützt und erhalten.
+
+### Artikel 224 — Landwirtschaftliche Forschung
+Forschung zu resilienten und ökologischen Anbaumethoden wird unterstützt.
+
+### Artikel 225 — Regionalität
+Regionale Lebensmittel sollen die Grundversorgung möglichst weitgehend tragen.
+
+### Artikel 226 — Importe
+Exotische und ergänzende Lebensmittelimporte bleiben zulässig, dürfen aber die regionale Grundversorgung nicht systematisch verdrängen.
+
+### Artikel 227 — Exporte
+Überschüsse können international gehandelt werden, soweit die inländische Versorgung gesichert bleibt.
+
+### Artikel 228 — Lebensmittelreserven
+Für wichtige Lebensmittel werden angemessene Vorräte nach Risiko und Haltbarkeit bestimmt.
+
+### Artikel 229 — Lebensmittelqualität
+Grundnahrungsmittel unterliegen nachvollziehbaren Qualitäts- und Sicherheitsstandards.
+
+### Artikel 230 — Lebensmittelpreise
+Preisregeln dürfen Versorgung und Produktion nicht dauerhaft durch Preise unter realen Kosten gefährden.
+
+### Artikel 231 — Wasserinfrastruktur
+Trinkwasser- und Abwassersysteme werden als kritische Infrastruktur behandelt.
+
+### Artikel 232 — Wohnraumanspruch
+Jeder Haushalt hat Anspruch auf angemessenen Wohnraum nach Haushaltsgröße und Bedarf.
+
+### Artikel 233 — Wohnraumverteilung
+Wohnraum wird nach transparenten Regeln vergeben, die Größe, Bedarf, Kinder und Verfügbarkeit berücksichtigen.
+
+### Artikel 234 — Umzug
+Bei Veränderung der Lebenssituation soll ein geeigneter Wohnungstausch oder eine neue Zuweisung ermöglicht werden, ohne unnötige Verdrängung.
+
+### Artikel 235 — Wohnungsbau
+Neue Wohnungen werden entsprechend regionalem Bedarf geplant.
+
+### Artikel 236 — Bestandsschutz
+Bewohnbarer Wohnraum soll nicht ohne sachlichen Grund dauerhaft leer stehen.
+
+### Artikel 237 — Barrierefreiheit
+Wohnraum soll bei Neubau und Sanierung zunehmend barrierearm oder barrierefrei gestaltet werden.
+
+### Artikel 238 — Energieversorgung
+Energieversorgung muss sicher, bezahlbar, resilient und langfristig ökologisch tragfähig sein.
+
+### Artikel 239 — Energievielfalt
+Die Energieversorgung soll nicht von einer einzigen Technologie oder Lieferquelle abhängen.
+
+### Artikel 240 — Wasserkraft
+Wasserkraft kann Teil der Energieversorgung sein, soweit ökologische Anforderungen eingehalten werden.
+
+### Artikel 241 — Solarenergie
+Solarenergie wird als dezentrale Energiequelle ausgebaut.
+
+### Artikel 242 — Kernenergie
+Kleine modulare Reaktoren können als Übergangstechnologie geprüft und eingesetzt werden, bis gleichwertige oder bessere Alternativen verfügbar sind.
+
+### Artikel 243 — Netzstabilität
+Stromnetze werden dezentral, redundant und gegen Ausfälle geschützt.
+
+### Artikel 244 — Energiespeicher
+Speicher werden zur Abfederung von Schwankungen und Krisen ausgebaut.
+
+### Artikel 245 — Wärmeversorgung
+Wärmeversorgung soll unterschiedliche Quellen und regionale Gegebenheiten berücksichtigen.
+
+### Artikel 246 — Verkehr
+Verkehrsinfrastruktur wird nach Versorgungssicherheit, Zugänglichkeit und Umweltverträglichkeit entwickelt.
+
+### Artikel 247 — Öffentlicher Verkehr
+Öffentlicher Verkehr wird als Teil der Grundmobilität finanziert.
+
+### Artikel 248 — Straßen
+Straßen werden nach notwendigem Verkehrs- und Versorgungsbedarf instand gehalten.
+
+### Artikel 249 — Schienen
+Schieneninfrastruktur soll regionale und überregionale Versorgung resilient verbinden.
+
+### Artikel 250 — Logistik
+Kritische Logistiksysteme müssen Ausweichwege und Notbetriebsverfahren vorhalten.
+
+### Artikel 251 — Lagerung
+Wichtige Güter erhalten angemessene dezentrale Lagerkapazitäten.
+
+### Artikel 252 — Reparatur
+Öffentliche Infrastruktur wird nach Lebenszykluskosten und Reparierbarkeit geplant.
+
+### Artikel 253 — Digitale Infrastruktur
+Digitale Netze werden als kritische Infrastruktur geschützt und redundant aufgebaut.
+
+### Artikel 254 — Analoge Reserve
+Für zentrale Verwaltungs-, Zahlungs- und Kommunikationsfunktionen bestehen analoge oder dezentrale Notfallverfahren.
+
+### Artikel 255 — Kommunikation
+Notfallkommunikation darf nicht von einem einzigen Anbieter abhängen.
+
+### Artikel 256 — Gebäude
+Öffentliche Gebäude sollen energieeffizient und krisenfest gestaltet werden.
+
+### Artikel 257 — Katastrophenschutz
+Katastrophenschutz hält Material, Personal und Kommunikationswege für größere Schadenslagen bereit.
+
+### Artikel 258 — Kommunale Infrastruktur
+Kommunen erhalten die notwendigen Mittel und Kompetenzen für lokale Versorgungssicherheit.
+
+### Artikel 259 — Regionale Selbstversorgung
+Regionen sollen grundlegende Versorgung teilweise selbst aufrechterhalten können.
+
+### Artikel 260 — Kritische Infrastruktur
+Kritische Infrastrukturen werden nach Abhängigkeiten und möglichen Kaskadeneffekten bewertet.
+
+### Artikel 261 — Versorgungskaskaden
+Bei Planung und Krisenvorsorge werden Wechselwirkungen zwischen Energie, Wasser, Nahrung, Verkehr, Kommunikation und Gesundheit berücksichtigt.
+
+### Artikel 262 — Infrastrukturprüfung
+Große Infrastrukturvorhaben werden vor Umsetzung auf Kosten, Nutzen, Risiken und Alternativen geprüft.
+
+### Artikel 263 — Infrastrukturreserve
+Für besonders kritische Anlagen werden Ersatzteile und Wiederherstellungskapazitäten vorgehalten.
+
+### Artikel 264 — Naturgefahren
+Infrastrukturplanung berücksichtigt Hochwasser, Dürre, Hitze, Stürme und andere Naturgefahren.
+
+### Artikel 265 — Wald
+Wälder werden als ökologische, wirtschaftliche und klimatische Ressourcen geschützt.
+
+### Artikel 266 — Biodiversität
+Biologische Vielfalt wird bei Landnutzung und Infrastrukturplanung berücksichtigt.
+
+### Artikel 267 — Tierwohl
+Tierhaltung muss unnötiges Leiden vermeiden und an überprüfbaren Haltungsstandards ausgerichtet sein.
+
+### Artikel 268 — Ressourcenschutz
+Endliche Rohstoffe werden sparsam und langfristig planbar genutzt.
+
+### Artikel 269 — Kreislaufwirtschaft
+Wiederverwendung, Reparatur und Recycling werden gegenüber unnötigem Verbrauch bevorzugt.
+
+### Artikel 270 — Altlasten
+Gefährliche Altlasten werden systematisch erfasst und saniert.
+
+### Artikel 271 — Infrastrukturtransparenz
+Wesentliche Infrastrukturentscheidungen werden öffentlich nachvollziehbar dokumentiert.
+
+### Artikel 272 — Bodenordnung
+Die Regelungen zu bodenordnung werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+### Artikel 273 — Landvergabe
+Die Regelungen zu landvergabe werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+### Artikel 274 — Landwirtschaftliche Ausbildung
+Die Regelungen zu landwirtschaftliche ausbildung werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+### Artikel 275 — Tiergesundheit
+Die Regelungen zu tiergesundheit werden durch transparente, überprüfbare und verhältnismäßige Verfahren umgesetzt. Zuständigkeiten, Finanzierung und Rechtsschutz müssen gesetzlich nachvollziehbar bestimmt werden.
+
+## Teil VII — Geld, Steuern, Bürgerkapital und Finanzen
+
+### Artikel 276 — Zweck der Abgaben
+Öffentliche Abgaben finanzieren die tatsächlich notwendigen gemeinsamen Aufgaben.
+
+### Artikel 277 — Bedarfsorientierung
+Der Abgabenbedarf wird regelmäßig aus Ausgaben, Sozialleistungen, Infrastruktur, Bildung, Gesundheit, Forschung, Krisenvorsorge, Rücklagen und sonstigen Einnahmen berechnet.
+
+### Artikel 278 — Monatliche Berechnung
+Der Finanzbedarf wird mindestens monatlich neu berechnet.
+
+### Artikel 279 — Stufenweise Anpassung
+Änderungen der laufenden Abgaben erfolgen grundsätzlich schrittweise, damit Haushalte und Unternehmen Planungssicherheit behalten.
+
+### Artikel 280 — Änderungsgrenze
+Im Normalfall soll eine monatliche Veränderung der laufenden Abgabenquote höchstens einen halben Prozentpunkt betragen; außergewöhnliche Krisen müssen gesondert begründet werden.
+
+### Artikel 281 — Transparenter Finanzplan
+Die Berechnung der notwendigen Einnahmen wird öffentlich nachvollziehbar dargestellt.
+
+### Artikel 282 — Nichtsteuerliche Einnahmen
+Gebühren, Gewinne öffentlicher Unternehmen, Abgaben und sonstige Einnahmen werden vor einer zusätzlichen Belastung berücksichtigt.
+
+### Artikel 283 — Keine Zwecküberschüsse
+Überschüsse dürfen nicht ohne festgelegten Zweck dauerhaft als laufende Mehreinnahmen eingesetzt werden.
+
+### Artikel 284 — Krisenreserve
+In wirtschaftlich guten Jahren wird eine Reserve aufgebaut, die nicht für gewöhnliche laufende Ausgaben verwendet werden soll.
+
+### Artikel 285 — Reservehöhe
+Die Mindesthöhe der Reserve wird nach Risiko, Bevölkerungsgröße, kritischer Infrastruktur und Wiederherstellungszeit bestimmt.
+
+### Artikel 286 — Reserveverwendung
+Reservemittel dürfen bei außergewöhnlichen Krisen, schweren Versorgungslücken und vergleichbaren Notlagen eingesetzt werden.
+
+### Artikel 287 — Reserveaufbau
+Nach einer Krisennutzung wird ein Wiederaufbauplan beschlossen und veröffentlicht.
+
+### Artikel 288 — Vierfache Reserve
+Gesellschaftliche Stabilität wird nicht nur finanziell, sondern auch durch materielle Vorräte, Produktionskapazität und menschlich-soziale Handlungsfähigkeit abgesichert.
+
+### Artikel 289 — Reale Bilanz
+Neben Geldgrößen werden reale Ressourcen wie Nahrung, Wasser, Energie, Wohnraum, Rohstoffe, Maschinen, Transportmittel und medizinische Güter erfasst.
+
+### Artikel 290 — Ressourcenindex
+Ein öffentliches Lagebild kann reale Versorgungsindizes mit Warnstufen ausweisen.
+
+### Artikel 291 — Geldordnung
+Die Geldordnung dient der zuverlässigen Zahlungsfähigkeit, Preisstabilität und Finanzierung realer wirtschaftlicher Tätigkeit.
+
+### Artikel 292 — Zentralbank
+Die zentrale Geldinstitution führt die Währungs- und Liquiditätsordnung und ist von kurzfristiger politischer Weisung unabhängig.
+
+### Artikel 293 — Keine Geschäftsbanken
+Der Entwurf sieht keine klassischen kommerziellen Geschäftsbanken als notwendige Institution vor.
+
+### Artikel 294 — Persönliches Konto
+Jede Person erhält ein persönliches Zahlungskonto mit Schutz vor unbefugtem Zugriff.
+
+### Artikel 295 — Finanzielle Selbstverwaltung
+Menschen können ihre eigenen Zahlungen, Sparvorgänge und zulässigen Investitionen selbst verwalten.
+
+### Artikel 296 — Funktionstrennung
+Zahlungsverkehr, Investitionsentscheidungen, Unternehmensfinanzierung und öffentliche Finanzverwaltung werden organisatorisch getrennt.
+
+### Artikel 297 — Geldschöpfung
+Neue Geldmittel dürfen nicht automatisch allein zur Deckung staatlicher Ausgaben geschaffen werden.
+
+### Artikel 298 — Geldmengenprüfung
+Bei Entscheidungen über Geldschöpfung werden Preise, Produktion, Kreditvolumen, Investitionen, Beschäftigung, Geldumlauf, Kapazitäten und Ressourcenknappheit berücksichtigt.
+
+### Artikel 299 — Keine starre Wachstumsregel
+Die Geldordnung folgt keiner mechanischen Vorgabe, wonach Geldmenge immer im gleichen Verhältnis wachsen muss.
+
+### Artikel 300 — Kredit und Rückzahlung
+Kredit schafft zeitweise zusätzliche Kaufkraft und wird grundsätzlich mit Rückzahlung und realer wirtschaftlicher Leistung verbunden.
+
+### Artikel 301 — Krisenliquidität
+In Krisen kann zusätzliche Liquidität bereitgestellt werden, ohne wirtschaftlich nicht tragfähige Unternehmen automatisch dauerhaft zu retten.
+
+### Artikel 302 — Sofortkredit
+Jede Person kann nach transparenten Regeln grundsätzlich einmal innerhalb von fünf Jahren einen kleinen gesellschaftlich abgesicherten Sofortkredit erhalten.
+
+### Artikel 303 — Wohnkredit
+Für den Erwerb angemessenen selbstgenutzten Wohnraums kann ein einmaliger oder nach Rückzahlung erneut zugänglicher Kredit vorgesehen werden.
+
+### Artikel 304 — Kredittransparenz
+Kreditbedingungen, Risiken und Rückzahlungsregeln müssen verständlich dargestellt werden.
+
+### Artikel 305 — Bürgerkapital
+Jede Person besitzt persönliches Bürgerkapital nach den gesetzlichen Regeln dieses Modells.
+
+### Artikel 306 — Bürgerkapital-Investition
+Ein definierter Anteil des Bürgerkapitals und ein definierter Anteil geeigneter Einkommensbestandteile können in das Bürgerinvestitionssystem fließen.
+
+### Artikel 307 — Fünf-Prozent-Regel
+Der Entwurf sieht zunächst vor, fünf Prozent des Bürgerkapitals und fünf Prozent des dafür vorgesehenen Einkommensanteils für das Investitionssystem vorzusehen.
+
+### Artikel 308 — Freiwillige Projekte
+Bürger entscheiden grundsätzlich selbst, welche zugelassenen Vorhaben sie durch Investitionen unterstützen.
+
+### Artikel 309 — Kein Gewinnversprechen
+Bürgerinvestitionen garantieren keinen Gewinn.
+
+### Artikel 310 — Risikostreuung
+Das System soll eine Streuung über unterschiedliche Vorhaben ermöglichen und Konzentrationsrisiken sichtbar machen.
+
+### Artikel 311 — Gewinnverwendung
+Erträge können reinvestiert, zur Refinanzierung verwendet oder nach den Regeln des Systems ausgezahlt werden.
+
+### Artikel 312 — Soziale Projekte
+Bürgerkapital kann auch Projekte finanzieren, die gesellschaftlich nützlich sind, aber keine gewöhnliche private Rendite erwarten lassen.
+
+## Teil VIII — Arbeit, Soziales, Daten und Technologie
+
+### Artikel 313 — Arbeitsgesellschaft
+Arbeit wird als Beitrag zur Gesellschaft anerkannt, ohne den menschlichen Wert an Erwerbsleistung zu knüpfen.
+
+### Artikel 314 — Arbeitslosigkeit
+Arbeitslosigkeit ist kein persönliches Versagen und wird nicht automatisch als Schuld bewertet.
+
+### Artikel 315 — Vermittlung
+Arbeitsvermittlung verbindet freie Stellen, Fähigkeiten und Qualifizierungsangebote.
+
+### Artikel 316 — Qualifizierung
+Wer keine passende Arbeit findet, erhält Zugang zu Qualifizierung und Neuorientierung.
+
+### Artikel 317 — Gemeinwohlangebote
+Gemeinwohlorientierte Arbeit kann angeboten werden, wenn sie sinnvoll, sicher und verhältnismäßig ist.
+
+### Artikel 318 — Beschäftigungspool
+Bei starkem Arbeitsmangel kann ein staatlich koordinierter Beschäftigungspool zeitweise zusätzliche Arbeitsmöglichkeiten vermitteln.
+
+### Artikel 319 — Unternehmensvermittlung
+Geeignete Personen können mit Zustimmung in Unternehmen vermittelt werden, wenn dort zusätzliche Arbeitskräfte benötigt werden.
+
+### Artikel 320 — Arbeitsrechte
+Alle Beschäftigten behalten die allgemeinen Arbeits- und Grundrechte.
+
+### Artikel 321 — Digitale Identität
+Eine sichere digitale Identität darf nur für festgelegte Zwecke verwendet werden.
+
+### Artikel 322 — Dateneinwilligung
+Personenbezogene Daten werden grundsätzlich nur nach verständlicher, zweckgebundener und widerrufbarer Zustimmung verarbeitet, sofern keine eng begrenzte gesetzliche Ausnahme besteht.
+
+### Artikel 323 — Ausnahmen
+Gesetzliche Ausnahmen vom Einwilligungsprinzip müssen konkret begründet, zweckgebunden und kontrollierbar sein.
+
+### Artikel 324 — Aggregierte Planung
+Für gesellschaftliche Planung dürfen erforderliche Daten möglichst anonymisiert oder aggregiert verwendet werden.
+
+### Artikel 325 — Keine Totalüberwachung
+Eine umfassende individuelle Überwachung ohne konkreten gesetzlichen Zweck ist unzulässig.
+
+### Artikel 326 — Daten-Trennung
+Finanz-, Gesundheits-, Bildungs-, Kommunikations- und andere sensible Daten bleiben grundsätzlich getrennt.
+
+### Artikel 327 — Digitale Kontrollbehörde
+Eine unabhängige digitale Kontrollbehörde überwacht Datenschutz, Datennutzung und digitale Grundrechte.
+
+### Artikel 328 — Technologieprüfung
+Technologien, die in kritischen Bereichen eingesetzt werden, werden auf Sicherheits-, Spionage- und Datenabflussrisiken geprüft.
+
+### Artikel 329 — Ausländische Datenübertragung
+Unzulässige Datenübertragung an ausländische Stellen oder Systeme wird verhindert.
+
+### Artikel 330 — Sichere Technik
+Kritische digitale Systeme müssen nachweisbare Sicherheits- und Wiederherstellungsverfahren besitzen.
+
+### Artikel 331 — Algorithmische Entscheidungen
+Automatisierte Entscheidungen mit erheblichen Auswirkungen auf Menschen müssen erklärbar und überprüfbar sein.
+
+## Teil IX — Justiz, Polizei, Verteidigung, Außenbeziehungen und Umwelt
+
+### Artikel 332 — Rechtsstaat
+Rechtsprechung ist unabhängig und an Verfassung und Gesetz gebunden.
+
+### Artikel 333 — Gerichtsorganisation
+Gerichte werden nach transparenten gesetzlichen Zuständigkeitsregeln organisiert.
+
+### Artikel 334 — Richterliche Unabhängigkeit
+Richter dürfen bei ihrer Entscheidung keinen politischen Weisungen unterliegen.
+
+### Artikel 335 — Staatsanwaltschaft
+Strafverfolgung erfolgt nach Gesetz und fachlichen Regeln, nicht nach parteipolitischer Weisung.
+
+### Artikel 336 — Verfassungsgericht
+Ein unabhängiges Verfassungsgericht wacht über die Einhaltung der Verfassung.
+
+### Artikel 337 — Polizeiaufgabe
+Die Polizei schützt Menschen, Eigentum, öffentliche Sicherheit und die freiheitliche Ordnung.
+
+### Artikel 338 — Polizeiliche Verhältnismäßigkeit
+Polizeiliche Maßnahmen müssen geeignet, erforderlich und angemessen sein.
+
+### Artikel 339 — Deeskalation
+Polizeiliches Handeln soll Konflikte möglichst deeskalieren und unnötige Gewalt vermeiden.
+
+### Artikel 340 — Polizeikontrolle
+Eine unabhängige Stelle kontrolliert polizeiliches Fehlverhalten und Beschwerden.
+
+### Artikel 341 — Dokumentation
+Schwerwiegende polizeiliche Maßnahmen werden nachvollziehbar dokumentiert.
+
+### Artikel 342 — Körperkameras
+Körperkameras können unter klaren Datenschutz- und Dokumentationsregeln eingesetzt werden.
+
+### Artikel 343 — Polizeilicher Missbrauch
+Absichtlicher Machtmissbrauch wird unabhängig verfolgt; ehrliche Fehler werden von vorsätzlichem Fehlverhalten unterschieden.
+
+### Artikel 344 — Terrorismus
+Der Staat schützt die Bevölkerung vor terroristischer Gewalt und wahrt dabei die gesetzlichen Grenzen.
+
+### Artikel 345 — Grenzschutz
+Grenzen werden nach geltendem Recht geschützt, ohne Menschenwürde und rechtsstaatliche Verfahren aufzugeben.
+
+### Artikel 346 — Verteidigung
+Die Verteidigung dient dem Schutz der Bevölkerung und nicht der Eroberung fremden Gebiets.
+
+### Artikel 347 — Keine Angriffskriege
+Aggressive militärische Gewalt zur Erweiterung politischer oder wirtschaftlicher Macht ist ausgeschlossen.
+
+### Artikel 348 — Verteidigungsfähigkeit
+Die Gesellschaft hält angemessene Fähigkeiten zur Abwehr äußerer Angriffe vor.
+
+### Artikel 349 — Freiwillige Streitkräfte
+Militärische Dienste werden grundsätzlich freiwillig organisiert.
+
+### Artikel 350 — Zivile Kontrolle
+Die Streitkräfte unterstehen demokratischer ziviler Kontrolle.
+
+### Artikel 351 — Soldatenrechte
+Soldatinnen und Soldaten behalten ihre grundlegenden Menschen- und Rechtsrechte.
+
+### Artikel 352 — Militärrecht
+Militärisches Handeln unterliegt Recht, Menschenrechten und den Regeln bewaffneter Konflikte.
+
+### Artikel 353 — Zivilschutz
+Für schwere äußere und innere Krisen bestehen zivile Schutz- und Evakuierungspläne.
+
+### Artikel 354 — Internationale Zusammenarbeit
+Internationale Zusammenarbeit ist zulässig, soweit sie Rechte, Sicherheit und Selbstbestimmung wahrt.
+
+### Artikel 355 — Außenvertretungen
+Ausländische Vertreter können vor zuständigen Gremien angehört werden, besitzen dort aber kein Stimmrecht.
+
+### Artikel 356 — Internationale Verträge
+Internationale Verträge werden auf Souveränität, Rechte, Wirtschaft, Sicherheit und Umweltfolgen geprüft.
+
+### Artikel 357 — Langfristige Verträge
+Grundlegende oder besonders langfristige Bindungen können einer Volksabstimmung unterliegen.
+
+### Artikel 358 — Außenhandel
+Internationaler Handel bleibt grundsätzlich zulässig.
+
+### Artikel 359 — Auslandshilfe
+Staatliche Auslandshilfe darf die langfristige innere wirtschaftliche Tragfähigkeit nicht gefährden.
+
+### Artikel 360 — Keine ausländische Steuerung
+Ausländische Regierungen dürfen keine staatlichen Entscheidungen durch verdeckte Finanzierung oder Abhängigkeit bestimmen.
+
+### Artikel 361 — Umweltschutz
+Natur und Umwelt werden als Grundlage gegenwärtiger und zukünftiger Lebensmöglichkeiten geschützt.
+
+### Artikel 362 — Intergenerationelle Verantwortung
+Heutige Entscheidungen berücksichtigen die Rechte zukünftiger Generationen.
+
+### Artikel 363 — Klimavorsorge
+Infrastruktur und Versorgung werden auf langfristige klimatische Veränderungen und Extremereignisse vorbereitet.
+
+## Schlussbestimmung
+
+Diese Fassung ist offen für demokratische Änderung. Keine einzelne Generation und keine einzelne Institution erhält das Recht, die zukünftige Entwicklung der Gesellschaft unumkehrbar festzulegen.
