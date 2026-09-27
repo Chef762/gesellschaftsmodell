@@ -23,6 +23,3 @@ Die Website lädt Three.js 0.186.0 vom jsDelivr-CDN.
 Für einen echten öffentlichen Betrieb sollte die Abhängigkeit später lokal gebündelt bzw. mit einem Build-System wie Vite gebaut werden.
 
 Die Verfassung ist ein politischer Entwurf und keine geltende Rechtsordnung. Die Simulation enthält illustrative Modellannahmen und ist keine Prognose.
-
-
-V4 Design: Demeter / Living Landscape – nature-focused visual layer.
