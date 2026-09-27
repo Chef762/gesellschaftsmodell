@@ -52,16 +52,19 @@ function init3D(){
  scene.add(new THREE.HemisphereLight(0xeaf5e9,0x58715b,2.1));
  const sun=new THREE.DirectionalLight(0xfff3d6,2.6);
  sun.position.set(-20,30,12); scene.add(sun);
- createLivingLandscape();
+ // Build the detailed landscape on the next frame, after the renderer is alive.
  raycaster=new THREE.Raycaster(); mouse=new THREE.Vector2();
  renderer.domElement.addEventListener("pointerdown",onPointer);
  addEventListener("resize",resize);
- // Start rendering immediately; build the detailed world on the next frame so the boot screen cannot get stuck.
+ // Start the renderer first. The heavy landscape build happens after the first paint.
  animate();
  requestAnimationFrame(()=>{
-   try { createLivingLandscape(); }
-   catch(err){ console.error(err); const hint=document.querySelector("#statusHint"); if(hint) hint.textContent="Die Landschaft konnte nicht vollständig geladen werden."; }
-   finally { document.querySelector("#boot").style.display="none"; }
+   const boot=document.querySelector("#boot");
+   if(boot) boot.style.display="none";
+   setTimeout(()=>{
+     try { createLivingLandscape(); }
+     catch(err){ console.error(err); const hint=document.querySelector("#statusHint"); if(hint) hint.textContent="Die Landschaft konnte nicht vollständig geladen werden."; }
+   },0);
  });
 }
 const textureCache=new Map();
@@ -100,10 +103,10 @@ function detailedBuilding(key,label,x,z,w,d,h,wall,roof){
  const chimney=new THREE.Mesh(new THREE.BoxGeometry(.45,.9,.45),buildingMaterial("brick",0x9b684d));chimney.position.set(w*.22,h+.95,0);g.add(chimney);
  g.userData={key,label,base:h};scene.add(g);objects.push(g);return g;
 }
-function officeBuilding(key,label,x,z,w,d,h,wall,roof){
+function officeBuilding(key,label,x,z,w,d,h,wall,roofColor){
  const g=new THREE.Group();g.position.set(x,0,z);
  const body=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),buildingMaterial("plaster",wall));body.position.y=h/2;g.add(body);
- const roof=new THREE.Mesh(new THREE.BoxGeometry(w+.35,.35,d+.35),new THREE.MeshStandardMaterial({color:roof,roughness:.9}));roof.position.y=h+.2;g.add(roof);
+ const roofMesh=new THREE.Mesh(new THREE.BoxGeometry(w+.35,.35,d+.35),new THREE.MeshStandardMaterial({color:roofColor,roughness:.9}));roofMesh.position.y=h+.2;g.add(roofMesh);
  const glass=new THREE.MeshStandardMaterial({color:0x789f91,roughness:.28,metalness:.12,emissive:0x314f46,emissiveIntensity:.12});
  for(let yy=1.8;yy<h;yy+=1.9) for(let xx=-w/2+1.2;xx<w/2-.4;xx+=1.55){const win=new THREE.Mesh(new THREE.BoxGeometry(.95,.72,.07),glass);win.position.set(xx,yy,d/2+.05);g.add(win)}
  const sign=new THREE.Mesh(new THREE.BoxGeometry(Math.min(4,w*.55),.62,.08),new THREE.MeshStandardMaterial({color:0xf0e5c5,roughness:.8}));sign.position.set(0,h*.64,d/2+.09);g.add(sign);
