@@ -55,10 +55,19 @@ function init3D(){
  createLivingLandscape();
  raycaster=new THREE.Raycaster(); mouse=new THREE.Vector2();
  renderer.domElement.addEventListener("pointerdown",onPointer);
- addEventListener("resize",resize); animate();
- setTimeout(()=>document.querySelector("#boot").style.display="none",700);
+ addEventListener("resize",resize);
+ // Start rendering immediately; build the detailed world on the next frame so the boot screen cannot get stuck.
+ animate();
+ requestAnimationFrame(()=>{
+   try { createLivingLandscape(); }
+   catch(err){ console.error(err); const hint=document.querySelector("#statusHint"); if(hint) hint.textContent="Die Landschaft konnte nicht vollständig geladen werden."; }
+   finally { document.querySelector("#boot").style.display="none"; }
+ });
 }
+const textureCache=new Map();
 function canvasTexture(type, seed=1){
+ const cacheKey=type+":"+seed;
+ if(textureCache.has(cacheKey)) return textureCache.get(cacheKey);
  const c=document.createElement("canvas"); c.width=1024; c.height=1024; const x=c.getContext("2d");
  const rand=n=>{const v=Math.sin(n*12.9898+seed*78.233)*43758.5453;return v-Math.floor(v)};
  if(type==="ground"){
@@ -77,7 +86,7 @@ function canvasTexture(type, seed=1){
    x.fillStyle="#6f5037";x.fillRect(0,0,1024,1024);
    for(let i=0;i<70;i++){x.strokeStyle=`rgba(35,23,14,${.15+rand(i)*.18})`;x.lineWidth=2+rand(i+4)*4;x.beginPath();x.moveTo(0,i*16+rand(i)*10);x.lineTo(1024,i*16+rand(i)*10+rand(i+2)*20);x.stroke()}
  }
- const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=renderer.capabilities.getMaxAnisotropy();t.wrapS=t.wrapT=THREE.RepeatWrapping;return t;
+ const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),8);t.wrapS=t.wrapT=THREE.RepeatWrapping;textureCache.set(cacheKey,t);return t;
 }
 function buildingMaterial(type,color){const m=new THREE.MeshStandardMaterial({color,roughness:.78}); if(type)m.map=canvasTexture(type,Math.floor(color)); return m}
 function detailedBuilding(key,label,x,z,w,d,h,wall,roof){
