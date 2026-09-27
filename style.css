@@ -7,3 +7,7 @@ body{background:#edf0e5;color:#1e2a21}.topbar{background:rgba(248,246,237,.88)!i
 .metrics .metric,.card{background:rgba(250,248,239,.88)!important;border-color:rgba(54,79,58,.14)!important;color:#24352a!important;box-shadow:0 16px 42px rgba(46,62,47,.08)!important;backdrop-filter:blur(12px)}
 .info-panel{background:rgba(247,244,234,.97)!important;color:#24352a!important;border-left:1px solid rgba(41,67,49,.16)!important}.info-panel h2,.info-panel h3{color:#294a32!important}
 #canvasWrap canvas{filter:saturate(.82) brightness(1.04)}.hint{color:#405d46!important;background:rgba(247,244,234,.72)!important;border-color:rgba(57,85,62,.16)!important}
+
+/* V8: world view polish */
+.hero{width:min(430px,38vw);top:118px}.hero h1{font-size:clamp(38px,4.4vw,66px)}.hero p{max-width:390px}.metrics{top:96px;width:205px}
+@media(max-width:900px){.hero{width:calc(100vw - 40px);top:108px}.hero h1{font-size:43px}}

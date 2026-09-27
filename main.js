@@ -269,7 +269,12 @@ function downloadAll(){download("gesellschaftsmodell-arbeitsfassung.md","text/ma
 function setupViews(){
  document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.view)));
 }
-function switchView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));if(id==="world")setTimeout(resize,30)}
+function switchView(id){
+ document.querySelector("#infoPanel")?.classList.remove("open");
+ document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));
+ document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
+ if(id==="world")setTimeout(resize,30);
+}
 document.querySelector("#closePanel").onclick=()=>document.querySelector("#infoPanel").classList.remove("open");
 document.querySelector("#downloadAll").onclick=downloadAll;
 document.querySelector("#downloadMd").onclick=()=>download("gesellschaftsmodell-arbeitsfassung.md","text/markdown;charset=utf-8",fullText());
