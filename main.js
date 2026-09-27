@@ -33,11 +33,12 @@ let scene,camera,renderer,controls,raycaster,mouse;
 const objects=[];
 
 function init3D(){
+ document.querySelector("#infoPanel")?.classList.remove("open");
  scene=new THREE.Scene();
  scene.background=new THREE.Color(0xb8d3c0);
- scene.fog=new THREE.Fog(0xb8d3c0,35,95);
+ scene.fog=new THREE.Fog(0xb8d3c0,55,135);
  camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,250);
- camera.position.set(34,24,48);
+ camera.position.set(48,30,66);
  renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:"high-performance"});
  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
  renderer.setSize(innerWidth,innerHeight-72);
@@ -47,8 +48,8 @@ function init3D(){
  document.querySelector("#canvasWrap").appendChild(renderer.domElement);
  controls=new OrbitControls(camera,renderer.domElement);
  controls.enableDamping=true; controls.dampingFactor=.045;
- controls.minDistance=16; controls.maxDistance=92;
- controls.maxPolarAngle=Math.PI/2.18; controls.target.set(0,0,0);
+ controls.minDistance=22; controls.maxDistance=125;
+ controls.maxPolarAngle=Math.PI/2.18; controls.target.set(0,1.5,0);
  scene.add(new THREE.HemisphereLight(0xeaf5e9,0x58715b,2.1));
  const sun=new THREE.DirectionalLight(0xfff3d6,2.6);
  sun.position.set(-20,30,12); scene.add(sun);
@@ -210,10 +211,12 @@ function createLivingLandscape(){
  for(let i=0;i<3;i++){const stack=new THREE.Mesh(new THREE.CylinderGeometry(.55,.7,10,16),buildingMaterial("brick",0x765042));stack.position.set(-4+i*4,9,1);factory.add(stack);}
  const tank=new THREE.Mesh(new THREE.CylinderGeometry(2,2,6,24),new THREE.MeshStandardMaterial({color:0x7c8b7a,metalness:.4,roughness:.45}));tank.position.set(7,3,1);factory.add(tank);
  factory.userData={key:"economy",label:"FABRIK"};objects.push(factory);
- // Hills around the settlement
- const hillMat=[0x78945f,0x6f8a58,0x8ba26b].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
- const hill=(x,z,sx,sy,sz,c)=>{const h=new THREE.Mesh(new THREE.SphereGeometry(8,24,16),hillMat[c%3]);h.scale.set(sx,sy,sz);h.position.set(x,sy*3.2-1,z);scene.add(h)};
- hill(-44,-6,2.8,1.5,1.6,0);hill(45,-5,3.0,1.8,1.8,1);hill(-35,28,2.8,1.6,1.9,2);hill(34,34,3.2,1.7,2.1,0);hill(0,43,4.0,2.0,2.2,1);
+ // Rolling hills: low and distant so the settlement remains visible.
+ const hillMat=[0x78945f,0x6f8a58,0x8ba26b,0x6f845d].map(c=>new THREE.MeshStandardMaterial({color:c,roughness:1}));
+ const hill=(x,z,sx,sy,sz,c)=>{const h=new THREE.Mesh(new THREE.SphereGeometry(8,32,18),hillMat[c%hillMat.length]);h.scale.set(sx,sy,sz);h.position.set(x,sy*3.0-3.0,z);scene.add(h)};
+ hill(-48,-2,2.8,.58,1.8,0); hill(48,0,3.0,.62,1.9,1);
+ hill(-42,28,2.8,.72,1.8,2); hill(42,30,3.0,.70,2.0,3);
+ hill(-15,46,3.4,.75,2.1,1); hill(18,48,3.8,.82,2.3,0);
  // Distant mountain wall behind the town
  const mountainMat=new THREE.MeshStandardMaterial({color:0x657d72,roughness:1});const snowMat=new THREE.MeshStandardMaterial({color:0xe9e5d6,roughness:.95});
  for(let i=0;i<9;i++){const x=-48+i*12,base=19+(i%3)*2,h=13+(i%4)*4;const m=new THREE.Mesh(new THREE.ConeGeometry(8+(i%2)*3,h,7),mountainMat);m.position.set(x,h/2-1,-52);m.rotation.y=i*.37;scene.add(m);const s=new THREE.Mesh(new THREE.ConeGeometry(3.1+(i%2),3.0,7),snowMat);s.position.set(x,h-1.0,-52);s.rotation.y=i*.37;scene.add(s)}
@@ -267,7 +270,7 @@ function animate(){
  renderer.render(scene,camera);
 }
 function resize(){if(!renderer)return;camera.aspect=innerWidth/(innerHeight-72);camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight-72)}
-function resetCamera(){camera.position.set(34,24,48);controls.target.set(0,0,0)}
+function resetCamera(){camera.position.set(48,30,66);controls.target.set(0,0,0)}
 
 function updateMetrics(){
  const supply=Math.round((state.food*.52+state.energy*.48)*.96);
