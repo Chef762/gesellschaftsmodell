@@ -31,7 +31,8 @@
 <main>
   <section id="world" class="view active">
     <div id="canvasWrap"></div>
-    <div class="hero">
+    <div class="hero" id="heroCard">
+      <button id="heroCollapse" class="hero-collapse" aria-expanded="true" aria-label="Startkarten ein- oder ausklappen">⌃</button>
       <div class="eyebrow">INTERAKTIVES SYSTEMMODELL</div>
       <h1>Eine Gesellschaft,<br><em>die sich erkunden lässt.</em></h1>
       <p>Ein Entwurf für eine Gesellschaft als lebendiges Ganzes. Entdecke die Ideen, ihre Zusammenhänge und die Verfassung – ruhig, verständlich und ohne technisches Beiwerk.</p>
@@ -50,29 +51,52 @@
       <div><span class="eyebrow">SIMULATIONSLABOR</span><h2>Was passiert, wenn …?</h2><p>Die Zahlen sind <strong>Modellannahmen</strong>, keine Prognosen. Verändere einzelne Faktoren und beobachte die Reaktion des vereinfachten Systems.</p></div>
       <button id="resetSim" class="ghost">↺ Ausgangslage</button>
     </div>
-    <div class="simgrid">
-      <div class="card controls">
-        <h3>Rahmenbedingungen</h3>
-        <label>Ernte / Lebensmittel <output id="foodOut">100</output><input id="food" type="range" min="50" max="120" value="100"></label>
-        <label>Energieversorgung <output id="energyOut">100</output><input id="energy" type="range" min="50" max="120" value="100"></label>
-        <label>Vertrauen <output id="trustOut">88</output><input id="trust" type="range" min="30" max="100" value="88"></label>
-        <label>Marktkonzentration <output id="concOut">20</output><input id="conc" type="range" min="0" max="100" value="20"></label>
-        <label>Investitionen Bürgerkapital <output id="investOut">60</output><input id="invest" type="range" min="0" max="100" value="60"></label>
+    <div class="simgrid simgrid-v2">
+      <div class="card controls sim-control-card">
+        <div class="card-kicker">01 · EINGRIFFE</div><h3>Rahmenbedingungen</h3>
+        <p class="card-intro">Verändere nur einen Faktor oder kombiniere mehrere. Die Anzeige reagiert sofort.</p>
+        <label><span>Ernte / Lebensmittel</span><output id="foodOut">100</output><input id="food" type="range" min="50" max="120" value="100"><small>Produktion, Vorräte und regionale Versorgung</small></label>
+        <label><span>Energieversorgung</span><output id="energyOut">100</output><input id="energy" type="range" min="50" max="120" value="100"><small>Produktion, Transport und Infrastruktur</small></label>
+        <label><span>Vertrauen</span><output id="trustOut">88</output><input id="trust" type="range" min="30" max="100" value="88"><small>Kooperation, Akzeptanz und Informationsverarbeitung</small></label>
+        <label><span>Marktkonzentration</span><output id="concOut">20</output><input id="conc" type="range" min="0" max="100" value="20"><small>Höhere Konzentration erhöht Abhängigkeiten</small></label>
+        <label><span>Investitionen Bürgerkapital</span><output id="investOut">60</output><input id="invest" type="range" min="0" max="100" value="60"><small>Zusätzliche Finanzierung für Projekte</small></label>
       </div>
-      <div class="card systemcard">
-        <h3>Systemreaktion</h3>
+
+      <div class="card systemcard sim-system-card">
+        <div class="card-kicker">02 · SYSTEMZUSTAND</div><h3>Systemreaktion</h3>
         <div id="simBars"></div>
+        <div id="simPulse" class="sim-pulse"></div>
         <div class="formula">Versorgung = Lebensmittel + Energie + Reserve − Krisendruck</div>
       </div>
-      <div class="card scenarios">
-        <h3>Szenarien</h3>
-        <button data-scenario="digital">Digitalausfall</button>
-        <button data-scenario="harvest">Erntekrise</button>
-        <button data-scenario="energy">Energieschock</button>
-        <button data-scenario="trust">Vertrauenskrise</button>
-        <button data-scenario="compound">Mehrfachkrise</button>
+
+      <div class="card scenarios sim-scenario-card">
+        <div class="card-kicker">03 · EINGRIFFE</div><h3>Was passiert, wenn …?</h3>
+        <p class="card-intro">Schnelle Tests für typische Störungen. Jede Aktion wird im Protokoll dokumentiert.</p>
+        <button data-scenario="digital"><b>Digitalausfall</b><small>Kommunikation & Logistik</small></button>
+        <button data-scenario="harvest"><b>Erntekrise</b><small>Versorgung & Reserven</small></button>
+        <button data-scenario="energy"><b>Energieschock</b><small>Produktion & Mobilität</small></button>
+        <button data-scenario="trust"><b>Vertrauenskrise</b><small>Kooperation & Investitionen</small></button>
+        <button data-scenario="compound"><b>Mehrfachkrise</b><small>Mehrere Schocks gleichzeitig</small></button>
       </div>
-      <div class="card logcard"><h3>Systemprotokoll</h3><div id="simLog"></div></div>
+
+      <div class="card sim-map-card">
+        <div class="card-kicker">04 · ABHÄNGIGKEITEN</div><h3>Wo schlägt ein Schock durch?</h3>
+        <div id="simNetwork" class="sim-network"></div>
+      </div>
+
+      <div class="card sim-analysis-card">
+        <div class="card-kicker">05 · AUSWERTUNG</div><h3>Systemanalyse</h3>
+        <div id="simAnalysis" class="sim-analysis"></div>
+      </div>
+
+      <div class="card germany-card">
+        <div class="card-kicker">06 · REALER REFERENZRAHMEN</div>
+        <div class="germany-head"><div><h3>Deutschland · aktuelle Kennzahlen</h3><p>Diese Werte sind reale amtliche Daten und <strong>keine Modellannahmen</strong>. Sie machen die Simulation greifbarer, verändern aber nicht automatisch die Modellregler.</p></div><span class="live-pill">STAND 2026</span></div>
+        <div id="germanyStats" class="germany-stats"></div>
+        <div class="germany-foot">Quellen: Statistisches Bundesamt, Bundesagentur für Arbeit, Umweltbundesamt. Jeweils mit Veröffentlichungs-/Bezugszeitraum angegeben.</div>
+      </div>
+
+      <div class="card logcard sim-log-card"><div class="log-head"><div><div class="card-kicker">06 · PROTOKOLL</div><h3>Systemprotokoll</h3></div><button id="clearSimLog" class="mini-btn">Leeren</button></div><div id="simLog"></div></div>
     </div>
   </section>
 

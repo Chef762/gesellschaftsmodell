@@ -6,6 +6,19 @@ import { constitution as constitutionData } from "./constitution.js";
 const constitution = Object.entries(constitutionData).map(([part, value]) => ({part, title:value.title, articles:value.articles.map(a=>[String(a.number),a.title,a.text])}));
 const movingCars=[]; const walkers=[]; const farmers=[]; const undergroundDoors=[];
 
+
+const germanyStats = [
+  {label:"Bevölkerung", value:"83,4 Mio.", detail:"31. März 2026", source:"Destatis", url:"https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Bevoelkerungsstand/_inhalt.html", key:"population"},
+  {label:"Inflationsrate", value:"2,9 %", detail:"August 2026 · gegenüber Vorjahr", source:"Destatis", url:"https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Verbraucherpreisindex/_inhalt.html", key:"inflation"},
+  {label:"Arbeitslosenquote", value:"6,4 %", detail:"Juli 2026 · BA-Quote", source:"Bundesagentur für Arbeit", url:"https://www.arbeitsagentur.de/presse/2026-30-arbeitsmarkt-im-juli-2026", key:"unemployment"},
+  {label:"BIP-Wachstum", value:"+0,3 %", detail:"2. Quartal 2026 · zum Vorquartal", source:"Destatis", url:"https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/08/PD26_303_811.html", key:"gdp"},
+  {label:"Erneuerbare im Strom", value:"57 %", detail:"1. Halbjahr 2026 · Anteil am genutzten Strom", source:"Umweltbundesamt", url:"https://www.umweltbundesamt.de/presse/pressemitteilungen/erstes-halbjahr-2026-erneuerbare-energien-wachsen", key:"renewables"}
+];
+function renderGermanyStats(){
+ const el=document.getElementById("germanyStats"); if(!el)return;
+ el.innerHTML=germanyStats.map(s=>`<article class="gstat"><div class="gstat-top"><span>${s.label}</span><b>${s.value}</b></div><div class="gstat-line"><i></i></div><small>${s.detail}</small><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.source} ↗</a></article>`).join("");
+}
+
 const critique = [
 ["Grundidee","Gleichwertigkeit und Vielfalt sind als Leitprinzipien klar formulierbar.","Wie werden Zielkonflikte zwischen individueller Freiheit und gemeinschaftlichen Pflichten entschieden?"],
 ["Wirtschaft","Mitarbeiterbeteiligung und Wettbewerbsschutz adressieren Machtkonzentration.","Wie bleiben Investitionsanreize, Eigentumsrechte und internationale Kapitalflüsse funktionsfähig?"],
@@ -310,13 +323,23 @@ function updateMetrics(){
  const vals=[["Versorgung",supply],["Energie",energy],["Reserve",reserve],["Vertrauen",trust]];
  document.querySelector("#metrics").innerHTML=vals.map(([n,v])=>`<div class="metric"><div class="mhead"><span>${n}</span><b>${v}</b></div><div class="bar"><i style="width:${Math.max(3,Math.min(100,v))}%"></i></div></div>`).join("");
 }
-function simRender(){
- for(const id of ["food","energy","trust","conc","invest"])document.getElementById(id+"Out").textContent=state[id];
+function simMetrics(){
  const supply=Math.max(0,Math.round((state.food*.55+state.energy*.45)-Math.max(0,state.conc-50)*.2));
  const resilience=Math.max(0,Math.round(state.reserve*.45+state.invest*.28+state.trust*.18+state.energy*.09));
- const risk=Math.max(0,Math.round((100-state.food)*.35+(100-state.energy)*.35+(100-state.trust)*.2+state.conc*.12));
- const rows=[["Versorgung",supply],["Resilienz",resilience],["Systemrisiko",100-risk],["Vertrauen",state.trust]];
- document.getElementById("simBars").innerHTML=rows.map(([n,v])=>`<div class="sbar"><div class="sbarhead"><span>${n}</span><b>${v}</b></div><div class="sbartrack"><i style="width:${Math.max(2,Math.min(100,v))}%"></i></div></div>`).join("");
+ const risk=Math.max(0,Math.min(100,Math.round((100-state.food)*.35+(100-state.energy)*.35+(100-state.trust)*.2+state.conc*.12)));
+ return {supply,resilience,risk,system:100-risk};
+}
+function simRender(){
+ for(const id of ["food","energy","trust","conc","invest"])document.getElementById(id+"Out").textContent=state[id];
+ const {supply,resilience,risk,system}=simMetrics();
+ const rows=[["Versorgung",supply,"Produktion und Energie im Verhältnis zur Belastung"],["Resilienz",resilience,"Puffer aus Reserve, Vertrauen und Investitionen"],["Systemstabilität",system,"Verbleibende Stabilität nach dem berechneten Krisendruck"],["Vertrauen",state.trust,"Kooperations- und Informationsbasis"]];
+ document.getElementById("simBars").innerHTML=rows.map(([n,v,d])=>`<div class="sbar"><div class="sbarhead"><span>${n}</span><b>${v}</b></div><div class="sbartrack"><i style="width:${Math.max(2,Math.min(100,v))}%"></i></div><small>${d}</small></div>`).join("");
+ const pulse=document.getElementById("simPulse");
+ if(pulse){const tone=risk>60?"hoch":risk>30?"angespannt":"ruhig";pulse.innerHTML=`<span class="pulse-dot ${tone}"></span><div><b>Systemlage: ${tone}</b><small>Krisendruck ${risk} · Reserve ${Math.round(state.reserve)} · Konzentration ${Math.round(state.conc)}</small></div>`;}
+ const network=document.getElementById("simNetwork");
+ if(network){const links=[['Lebensmittel','Versorgung',state.food],['Energie','Versorgung',state.energy],['Vertrauen','Kooperation',state.trust],['Investitionen','Projekte',state.invest],['Konzentration','Abhängigkeit',state.conc]];network.innerHTML=links.map(([a,b,v])=>`<div class="network-row"><span>${a}</span><i><em style="width:${Math.max(4,Math.min(100,v))}%"></em></i><b>${b}</b></div>`).join("");}
+ const analysis=document.getElementById("simAnalysis");
+ if(analysis){const notes=[]; if(state.food<75)notes.push("Die Lebensmittelversorgung ist der aktuelle Engpass."); if(state.energy<75)notes.push("Energie wird zum limitierenden Faktor für Produktion und Mobilität."); if(state.trust<65)notes.push("Niedriges Vertrauen schwächt Kooperation und Investitionsbereitschaft."); if(state.conc>60)notes.push("Hohe Marktkonzentration erhöht Abhängigkeiten im Modell."); if(state.invest>75)notes.push("Höhere Bürgerkapital-Investitionen vergrößern den finanziellen Puffer."); if(!notes.length)notes.push("Kein einzelner Faktor dominiert die aktuelle Modelllage."); notes.push("Realitätscheck: Deutschland lag im Juli 2026 bei 6,4 % Arbeitslosenquote und im August 2026 bei 2,9 % Inflation. Diese Werte sind Referenzdaten, keine Modellwerte."); analysis.innerHTML=notes.map((n,i)=>`<div class="analysis-item"><span>${String(i+1).padStart(2,'0')}</span><p>${n}</p></div>`).join("");}
  updateMetrics();
 }
 function log(msg){const el=document.getElementById("simLog");el.insertAdjacentHTML("afterbegin",`<div class="log">${new Date().toLocaleTimeString("de-DE")} · ${msg}</div>`)}
@@ -361,8 +384,14 @@ function findTarget(key){if(key==="shopCafe") return objects.find(x=>x.userData.
 function focusHeroTarget(){const o=findTarget(heroSlides[heroIndex].target); if(o){focus(o);}}
 function renderHeroSlide(){const s=heroSlides[heroIndex];document.querySelector('.hero .eyebrow').textContent=s.eyebrow;const parts=s.title.split(', ');document.querySelector('.hero h1').innerHTML=parts.length>1?`${parts[0]},<br><em>${parts.slice(1).join(', ')}</em>`:s.title;document.querySelector('.hero p').textContent=s.text;const pager=document.querySelector('#heroPager');if(pager)pager.innerHTML=`<button class="hero-arrow" data-dir="-1" aria-label="Vorheriger Bereich">←</button><div class="preview-copy"><span>${heroIndex+1} / ${heroSlides.length}</span><strong>${s.part}</strong><small>Ansicht öffnen · Gebäudesprung</small></div><button class="hero-arrow" data-dir="1" aria-label="Nächster Bereich">→</button>`; focusHeroTarget();}
 function moveHeroSlide(dir){heroIndex=(heroIndex+dir+heroSlides.length)%heroSlides.length;renderHeroSlide();}
+function setupHeroCollapse(){
+ const card=document.getElementById("heroCard"), btn=document.getElementById("heroCollapse");
+ if(!card||!btn)return;
+ btn.addEventListener("click",()=>{const collapsed=card.classList.toggle("collapsed");btn.textContent=collapsed?"⌄":"⌃";btn.setAttribute("aria-expanded",String(!collapsed));});
+}
 function setupViews(){
  document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.view)));
+ setupHeroCollapse();
  document.addEventListener("click",e=>{const b=e.target.closest(".hero-arrow");if(b){moveHeroSlide(Number(b.dataset.dir));return;} if(e.target.closest("#heroPager")) focusHeroTarget();});
  renderHeroSlide();
 }
@@ -377,6 +406,7 @@ document.querySelector("#downloadAll").onclick=downloadAll;
 document.querySelector("#downloadMd").onclick=()=>download("gesellschaftsmodell-arbeitsfassung.md","text/markdown;charset=utf-8",fullText());
 document.querySelector("#downloadTxt").onclick=()=>download("gesellschaftsmodell-arbeitsfassung.txt","text/plain;charset=utf-8",fullText().replaceAll("#",""));
 document.querySelector("#resetSim").onclick=()=>{state={food:100,energy:100,trust:88,conc:20,invest:60,reserve:82};simRender();log("Ausgangslage wiederhergestellt.")};
+document.querySelector("#clearSimLog")?.addEventListener("click",()=>{document.querySelector("#simLog").innerHTML="";});
 ["food","energy","trust","conc","invest"].forEach(k=>document.getElementById(k).oninput=e=>{state[k]=+e.target.value;simRender()});
 document.querySelectorAll("[data-scenario]").forEach(b=>b.onclick=()=>scenario(b.dataset.scenario));
 document.querySelectorAll("[data-focus]").forEach(b=>b.onclick=()=>{switchView("world");const o=objects.find(x=>x.userData.key===b.dataset.focus);if(o){focus(o);showInfo(o.userData.key)}});
@@ -386,6 +416,6 @@ document.addEventListener("keydown",e=>{
 });
 renderDocument();
 document.querySelector("#critgrid").innerHTML=critique.map(x=>`<article class="critcard"><div class="label">PRÜFPUNKT</div><h3>${x[0]}</h3><p><strong>Gedanke:</strong> ${x[1]}</p><p><strong>Offene Frage:</strong> ${x[2]}</p></article>`).join("");
-setupViews();simRender();
+setupViews();renderGermanyStats();simRender();
 init3D();
 window.addEventListener("error", e => { const el=document.querySelector("#statusHint"); if(el) el.textContent="Fehler beim Laden der 3D-Ansicht: bitte Startskript verwenden und Internetverbindung prüfen."; });
