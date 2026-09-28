@@ -5,6 +5,7 @@ import { constitution as constitutionData } from "./constitution.js";
 
 const constitution = Object.entries(constitutionData).map(([part, value]) => ({part, title:value.title, articles:value.articles.map(a=>[String(a.number),a.title,a.text])}));
 const movingCars=[]; const walkers=[]; const farmers=[]; const undergroundDoors=[];
+const relationLines=[]; let relationSelection=null;
 
 
 const germanyStats = [
@@ -58,7 +59,7 @@ const connectionIndex = Object.fromEntries(connections.map(x=>[x.key,x]));
 function renderConnections(){
  const el=document.getElementById("connectionCards"); if(!el)return;
  el.innerHTML=connections.map(c=>`<article class="connection-card" data-conn="${c.key}"><div class="conn-head"><span>${c.icon}</span><div><b>${c.title}</b><small>${c.links.length} Verbindungen</small></div></div><p>${c.text}</p><div class="conn-links">${c.links.map(k=>`<button data-conn-jump="${k}">${connectionIndex[k]?.title||k}</button>`).join("")}</div></article>`).join("");
- el.querySelectorAll("[data-conn-jump]").forEach(b=>b.onclick=()=>openConnection(b.dataset.connJump));
+ el.querySelectorAll("[data-conn-jump]").forEach(b=>b.onclick=()=>{openConnection(b.dataset.connJump); switchView("world"); showRelationNetwork(b.dataset.connJump);});
 }
 function openConnection(key){
  const c=connectionIndex[key]; if(!c)return;
@@ -322,13 +323,56 @@ function createLivingLandscape(){
  scene.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
 }
 function mat(c,em=0){return new THREE.MeshStandardMaterial({color:c,roughness:.62,metalness:.18,emissive:em?c:0,emissiveIntensity:em?0.22:0})}
+function relationAnchor(key){
+ const target=key==="economy" ? (objects.find(x=>x.userData.label==="FABRIK")||findTarget(key)) : findTarget(key);
+ if(target) return target.position.clone().add(new THREE.Vector3(0, key==="factory"||key==="economy"?7:4, 0));
+ const anchors={
+  energy:new THREE.Vector3(28,7,22), infrastructure:new THREE.Vector3(0,3,0), trust:new THREE.Vector3(-1,4,1),
+  democracy:new THREE.Vector3(-11,7,-8), health:new THREE.Vector3(0,9,-12), education:new THREE.Vector3(11,7,-8),
+  food:new THREE.Vector3(-2,5,10), economy:new THREE.Vector3(28,7,22), capital:new THREE.Vector3(12,7,9), crisis:new THREE.Vector3(-1,7,1)
+ };
+ return (anchors[key]||new THREE.Vector3(0,3,0)).clone();
+}
+function makeRelationCurve(a,b,active=false){
+ const mid=a.clone().lerp(b,.5); mid.y+=5.5+Math.min(5,a.distanceTo(b)*.045);
+ const curve=new THREE.CatmullRomCurve3([a,mid,b]);
+ const mat=new THREE.LineBasicMaterial({color:active?0x668f58:0x8da38a,transparent:true,opacity:active?.82:.11,depthWrite:false});
+ const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(24)),mat); scene.add(line); relationLines.push({line,from:a,to:b,base:.11,curve,phase:Math.random()*6.28});
+ return line;
+}
+function clearRelationLines(){while(relationLines.length){const x=relationLines.pop();scene.remove(x.line);x.line.geometry.dispose();x.line.material.dispose();}}
+function showRelationNetwork(key){
+ relationSelection=key; clearRelationLines();
+ const c=connectionIndex[key]; if(!c) return;
+ const a=relationAnchor(key);
+ c.links.forEach(k=>makeRelationCurve(a,relationAnchor(k),true));
+ const pulse=document.getElementById("statusHint"); if(pulse) pulse.textContent=`Verknüpfungen sichtbar · ${c.title} ↔ ${c.links.map(k=>connectionIndex[k]?.title||k).join(" · ")}`;
+}
+function showAllRelationNetwork(){
+ relationSelection="all"; clearRelationLines();
+ const seen=new Set();
+ connections.forEach(c=>c.links.forEach(k=>{
+   const id=[c.key,k].sort().join("|"); if(seen.has(id))return; seen.add(id); makeRelationCurve(relationAnchor(c.key),relationAnchor(k),false);
+ }));
+ const pulse=document.getElementById("statusHint"); if(pulse) pulse.textContent="Systemnetz sichtbar · Verbindungen der ausgewählten Bereiche werden hervorgehoben";
+}
+function refreshRelationLines(){
+ if(!relationSelection)return;
+ const wanted=relationSelection==="all"?null:connectionIndex[relationSelection]?.links||[];
+ relationLines.forEach(r=>{
+   const active=relationSelection==="all" || wanted?.some(k=>relationAnchor(k).distanceTo(r.from)<0.1 || relationAnchor(k).distanceTo(r.to)<0.1);
+   const t=.11+Math.sin(performance.now()/700+r.phase)*.025;
+   r.line.material.opacity=relationSelection==="all"?Math.max(.045,t):Math.max(.18,t+.55);
+ });
+}
+
 function onPointer(e){
  const rect=renderer.domElement.getBoundingClientRect(); mouse.x=(e.clientX-rect.left)/rect.width*2-1; mouse.y=-(e.clientY-rect.top)/rect.height*2+1;
  raycaster.setFromCamera(mouse,camera); const hit=raycaster.intersectObjects(objects,true)[0]; if(!hit)return;
- let o=hit.object; while(o.parent && !o.userData.key)o=o.parent; showInfo(o.userData.key); focus(o);
+ let o=hit.object; while(o.parent && !o.userData.key)o=o.parent; showInfo(o.userData.key); focus(o); showRelationNetwork(o.userData.key);
 }
 function focus(o){const p=o.position.clone();controls.target.lerp(p,.35);camera.position.lerp(new THREE.Vector3(p.x+24,p.y+19,p.z+24),.35)}
-function showInfo(key){const d=blocks[key]; if(!d)return; const c=connectionIndex[key]; const relation=c?`<div class="panel-relations"><h4>Verknüpft mit</h4><div>${c.links.map(k=>`<button class="relation-pill" data-panel-conn="${k}">${connectionIndex[k]?.title||k}</button>`).join("")}</div></div>`:""; document.querySelector("#panelContent").innerHTML=`<span class="tag">${d.tag}</span><h2>${d.title}</h2><p>${d.text}</p><div class="proscons"><div><h4>Mögliche Stärken</h4><ul>${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h4>Offene Fragen</h4><ul>${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>${relation}`; document.querySelector("#panelContent").querySelectorAll("[data-panel-conn]").forEach(b=>b.onclick=()=>openConnection(b.dataset.panelConn));document.querySelector("#infoPanel").classList.add("open")}
+function showInfo(key){const d=blocks[key]; if(!d)return; const c=connectionIndex[key]; const relation=c?`<div class="panel-relations"><h4>Verknüpft mit</h4><div>${c.links.map(k=>`<button class="relation-pill" data-panel-conn="${k}">${connectionIndex[k]?.title||k}</button>`).join("")}</div></div>`:""; document.querySelector("#panelContent").innerHTML=`<span class="tag">${d.tag}</span><h2>${d.title}</h2><p>${d.text}</p><div class="proscons"><div><h4>Mögliche Stärken</h4><ul>${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h4>Offene Fragen</h4><ul>${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>${relation}<div class="panel-3d-links"><button class="relation-pill" data-show-3d="${key}">↗ Verbindungen in der Landschaft zeigen</button></div>`; document.querySelector("#panelContent").querySelectorAll("[data-panel-conn]").forEach(b=>b.onclick=()=>openConnection(b.dataset.panelConn)); document.querySelector("#panelContent").querySelectorAll("[data-show-3d]").forEach(b=>b.onclick=()=>showRelationNetwork(b.dataset.show3d)); document.querySelector("#infoPanel").classList.add("open")}
 function animate(){
  requestAnimationFrame(animate); controls.update();
  const t=performance.now()/1000;
@@ -347,6 +391,7 @@ function animate(){
  if(typeof clouds!=='undefined')clouds.forEach(c=>{c.g.position.x+=c.speed*.01;if(c.g.position.x>38)c.g.position.x=-38});
  if(typeof windFlags!=='undefined')windFlags.forEach(f=>{f.flag.rotation.y=Math.sin(t*2.2+f.phase)*.35;f.flag.rotation.z=Math.sin(t*1.4+f.phase)*.05});
  undergroundDoors.forEach(u=>{u.light.intensity=1.8+Math.sin(t*1.7)*.35;});
+ refreshRelationLines();
  renderer.render(scene,camera);
 }
 function resize(){if(!renderer)return;camera.aspect=innerWidth/(innerHeight-72);camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight-72)}
@@ -438,7 +483,7 @@ function setupHeroCollapse(){
 function setupViews(){
  document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>switchView(b.dataset.view)));
  setupHeroCollapse();
- document.addEventListener("click",e=>{const b=e.target.closest(".hero-arrow");if(b){moveHeroSlide(Number(b.dataset.dir));return;} if(e.target.closest("#heroPager")) focusHeroTarget();});
+ document.addEventListener("click",e=>{const rel=e.target.closest("[data-show-3d]"); if(rel){showRelationNetwork(rel.dataset.show3d);return;} const b=e.target.closest(".hero-arrow");if(b){moveHeroSlide(Number(b.dataset.dir));return;} if(e.target.closest("#heroPager")) focusHeroTarget();});
  renderHeroSlide();
 }
 function switchView(id){
