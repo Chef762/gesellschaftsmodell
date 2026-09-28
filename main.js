@@ -42,6 +42,32 @@ const critique = [
 ["Offene Punkte","Das Modell lässt sich schrittweise präzisieren und mit Szenarien testen.","Geldschöpfung, internationale Verträge, Eigentumsübergänge, Rechtsdurchsetzung und Institutionen benötigen weitere Detailregeln."]
 ];
 
+const connections = [
+ {key:"food", title:"Ernährung", icon:"🌱", links:["energy","health","economy"], text:"Lebensmittelversorgung hängt im Modell mit Energie, Gesundheit und Wirtschaft zusammen."},
+ {key:"energy", title:"Energie", icon:"⚡", links:["food","economy","infrastructure"], text:"Energie beeinflusst Produktion, Transport und damit mehrere Versorgungsketten."},
+ {key:"health", title:"Gesundheit", icon:"✚", links:["food","education","trust"], text:"Gesundheit wird als Grundversorgung betrachtet und berührt Ernährung, Bildung und Vertrauen."},
+ {key:"education", title:"Bildung", icon:"◈", links:["democracy","health","economy"], text:"Bildung verbindet individuelle Entwicklung mit demokratischer Beteiligung und Arbeitswelt."},
+ {key:"economy", title:"Wirtschaft", icon:"▦", links:["capital","food","education","energy"], text:"Wirtschaft verbindet Investitionen, Arbeit, Versorgung und Infrastruktur."},
+ {key:"capital", title:"Bürgerkapital", icon:"◌", links:["economy","infrastructure","trust"], text:"Investitionen können Projekte finanzieren; Vertrauen und Informationslage bleiben dabei relevante Modellfaktoren."},
+ {key:"democracy", title:"Demokratie", icon:"◎", links:["education","crisis","trust"], text:"Entscheidungen werden mit Informationsquellen, Beteiligung und Krisenordnung verbunden."},
+ {key:"crisis", title:"Krisenordnung", icon:"△", links:["food","energy","democracy","health"], text:"Krisenszenarien zeigen, wie mehrere Bereiche gleichzeitig belastet werden können."},
+ {key:"infrastructure", title:"Infrastruktur", icon:"⌁", links:["energy","economy","food"], text:"Straßen, Energie, Logistik und Versorgung bilden eine gemeinsame technische Basis."},
+ {key:"trust", title:"Vertrauen", icon:"♡", links:["democracy","health","capital","education"], text:"Vertrauen ist im Modell eine Querverbindung für Kooperation, Investitionen und Informationsverarbeitung."}
+];
+const connectionIndex = Object.fromEntries(connections.map(x=>[x.key,x]));
+function renderConnections(){
+ const el=document.getElementById("connectionCards"); if(!el)return;
+ el.innerHTML=connections.map(c=>`<article class="connection-card" data-conn="${c.key}"><div class="conn-head"><span>${c.icon}</span><div><b>${c.title}</b><small>${c.links.length} Verbindungen</small></div></div><p>${c.text}</p><div class="conn-links">${c.links.map(k=>`<button data-conn-jump="${k}">${connectionIndex[k]?.title||k}</button>`).join("")}</div></article>`).join("");
+ el.querySelectorAll("[data-conn-jump]").forEach(b=>b.onclick=()=>openConnection(b.dataset.connJump));
+}
+function openConnection(key){
+ const c=connectionIndex[key]; if(!c)return;
+ const panel=document.getElementById("panelContent");
+ panel.innerHTML=`<span class="tag">VERKNÜPFUNG</span><h2>${c.icon} ${c.title}</h2><p>${c.text}</p><div class="proscons"><div><h4>Verbundene Bereiche</h4><ul>${c.links.map(k=>`<li><button class="panel-link" data-panel-conn="${k}">${connectionIndex[k]?.title||k}</button></li>`).join("")}</ul></div><div><h4>Modellhinweis</h4><ul><li>Die Verbindung beschreibt eine Modellannahme.</li><li>Sie ist keine Aussage über eine eindeutige Ursache-Wirkung-Beziehung in der Realität.</li></ul></div></div>`;
+ panel.querySelectorAll("[data-panel-conn]").forEach(b=>b.onclick=()=>openConnection(b.dataset.panelConn));
+ document.getElementById("infoPanel")?.classList.add("open");
+}
+
 const blocks = {
 democracy:{title:"DEMOKRATIE",tag:"ENTSCHEIDUNG",text:"Bürger entscheiden über zentrale Fragen direkt. Kommunale Vertreter bündeln lokale Mandate und bleiben kontrollierbar.",pros:["direkte Beteiligung","mehrere Informationsquellen","begrenzte Mandate"],cons:["hoher Informationsbedarf","Gefahr von Überforderung","Verfahrenskomplexität"]},
 health:{title:"GESUNDHEIT",tag:"VERSORGUNG",text:"Medizinische Versorgung gehört zur Grundversorgung. Kinder und Jugendliche erhalten besonderen Schutz; Forschung wird nach gesellschaftlichem Nutzen unterstützt.",pros:["Grundversorgung","Forschungsförderung","Kinderfokus"],cons:["Ressourcenbedarf","Priorisierung schwieriger Fälle","Gefahr bürokratischer Steuerung"]},
@@ -302,7 +328,7 @@ function onPointer(e){
  let o=hit.object; while(o.parent && !o.userData.key)o=o.parent; showInfo(o.userData.key); focus(o);
 }
 function focus(o){const p=o.position.clone();controls.target.lerp(p,.35);camera.position.lerp(new THREE.Vector3(p.x+24,p.y+19,p.z+24),.35)}
-function showInfo(key){const d=blocks[key]; if(!d)return; document.querySelector("#panelContent").innerHTML=`<span class="tag">${d.tag}</span><h2>${d.title}</h2><p>${d.text}</p><div class="proscons"><div><h4>Mögliche Stärken</h4><ul>${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h4>Offene Fragen</h4><ul>${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`;document.querySelector("#infoPanel").classList.add("open")}
+function showInfo(key){const d=blocks[key]; if(!d)return; const c=connectionIndex[key]; const relation=c?`<div class="panel-relations"><h4>Verknüpft mit</h4><div>${c.links.map(k=>`<button class="relation-pill" data-panel-conn="${k}">${connectionIndex[k]?.title||k}</button>`).join("")}</div></div>`:""; document.querySelector("#panelContent").innerHTML=`<span class="tag">${d.tag}</span><h2>${d.title}</h2><p>${d.text}</p><div class="proscons"><div><h4>Mögliche Stärken</h4><ul>${d.pros.map(x=>`<li>${x}</li>`).join("")}</ul></div><div><h4>Offene Fragen</h4><ul>${d.cons.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>${relation}`; document.querySelector("#panelContent").querySelectorAll("[data-panel-conn]").forEach(b=>b.onclick=()=>openConnection(b.dataset.panelConn));document.querySelector("#infoPanel").classList.add("open")}
 function animate(){
  requestAnimationFrame(animate); controls.update();
  const t=performance.now()/1000;
@@ -352,8 +378,16 @@ function simRender(){
  const analysis=document.getElementById("simAnalysis");
  if(analysis){const notes=[]; if(state.food<75)notes.push("Die Lebensmittelversorgung ist der aktuelle Engpass."); if(state.energy<75)notes.push("Energie wird zum limitierenden Faktor für Produktion und Mobilität."); if(state.trust<65)notes.push("Niedriges Vertrauen schwächt Kooperation und Investitionsbereitschaft."); if(state.conc>60)notes.push("Hohe Marktkonzentration erhöht Abhängigkeiten im Modell."); if(state.invest>75)notes.push("Höhere Bürgerkapital-Investitionen vergrößern den finanziellen Puffer."); if(!notes.length)notes.push("Kein einzelner Faktor dominiert die aktuelle Modelllage."); notes.push("Deutschland-Referenz: 6,4 % Arbeitslosenquote (Juli 2026) und 2,9 % Inflation (August 2026). Das sind externe Vergleichswerte; der Modellindex ist nicht in diese Einheiten übersetzt.");
  const bridge=[]; if(state.energy<75)bridge.push("Der Energie-Regler lässt sich inhaltlich neben den amtlichen Strommix stellen: Im 1. Halbjahr 2026 kamen rund 57 % des genutzten Stroms aus erneuerbaren Energien."); if(state.invest>75)bridge.push("Hohe Modell-Investitionen können als Testfrage für Wachstum und Projektfinanzierung gelesen werden; sie entsprechen nicht direkt dem realen BIP-Wachstum von +0,3 % im 2. Quartal 2026."); if(state.food<75)bridge.push("Eine schwächere Lebensmittelversorgung ist im Modell ein Resilienztest. Der Wert ist keine Prognose für die reale Versorgungslage Deutschlands."); notes.push(...bridge); analysis.innerHTML=notes.map((n,i)=>`<div class="analysis-item"><span>${String(i+1).padStart(2,'0')}</span><p>${n}</p></div>`).join("");}
+ updateConnectionHighlight();
  updateMetrics();
 }
+function updateConnectionHighlight(){
+ const el=document.getElementById("connectionCards"); if(!el)return;
+ const active=new Set();
+ if(state.food<80)active.add("food"); if(state.energy<80)active.add("energy"); if(state.trust<70)active.add("trust"); if(state.invest>75)active.add("capital"); if(state.conc>60)active.add("economy");
+ el.querySelectorAll(".connection-card").forEach(c=>c.classList.toggle("hot",active.has(c.dataset.conn)));
+}
+
 function log(msg){const el=document.getElementById("simLog");el.insertAdjacentHTML("afterbegin",`<div class="log">${new Date().toLocaleTimeString("de-DE")} · ${msg}</div>`)}
 function scenario(s){
  if(s==="digital"){state.trust-=13;state.energy-=5;state.reserve-=7;log("Digitalausfall: Vertrauen und Zahlungs-/Logistikfähigkeit sinken.")}
@@ -428,6 +462,6 @@ document.addEventListener("keydown",e=>{
 });
 renderDocument();
 document.querySelector("#critgrid").innerHTML=critique.map(x=>`<article class="critcard"><div class="label">PRÜFPUNKT</div><h3>${x[0]}</h3><p><strong>Gedanke:</strong> ${x[1]}</p><p><strong>Offene Frage:</strong> ${x[2]}</p></article>`).join("");
-setupViews();renderGermanyStats();renderGermanyBridge();simRender();
+setupViews();renderGermanyStats();renderGermanyBridge();renderConnections();simRender();
 init3D();
 window.addEventListener("error", e => { const el=document.querySelector("#statusHint"); if(el) el.textContent="Fehler beim Laden der 3D-Ansicht: bitte Startskript verwenden und Internetverbindung prüfen."; });

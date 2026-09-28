@@ -107,3 +107,16 @@ body{background:#eef0e6;color:#203126}
 .bridge-value b{font-size:15px;color:#34543b;white-space:nowrap}
 .bridge-item p{margin:0;color:#657265;font-size:9px;line-height:1.45}
 @media(max-width:700px){.bridge-head{display:block}.bridge-head small{text-align:left;display:block;margin-top:7px}.bridge-item{grid-template-columns:1fr}.bridge-value{justify-content:flex-start;gap:16px}}
+
+/* V15 · Verknüpfungen */
+.connections-card{grid-column:1/-1}
+.connection-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:14px}
+.connection-card{padding:12px;border-radius:14px;background:rgba(246,247,241,.78);border:1px solid rgba(52,79,56,.08);transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease}
+.connection-card:hover{transform:translateY(-2px);border-color:rgba(52,79,56,.18);box-shadow:0 8px 24px rgba(35,58,39,.08)}
+.connection-card.hot{background:rgba(229,238,223,.95);border-color:rgba(69,108,73,.28);box-shadow:0 0 0 1px rgba(69,108,73,.06),0 10px 28px rgba(35,58,39,.09)}
+.conn-head{display:flex;align-items:center;gap:9px}.conn-head>span{font-size:19px}.conn-head b{display:block;font-size:11px;color:#304a36}.conn-head small{display:block;font-size:7px;letter-spacing:.08em;text-transform:uppercase;color:#8a968b;margin-top:2px}.connection-card p{font-size:8px;line-height:1.45;color:#69746a;min-height:46px;margin:10px 0}.conn-links{display:flex;flex-wrap:wrap;gap:5px}.conn-links button,.relation-pill,.panel-link{border:1px solid rgba(52,79,56,.11);background:rgba(255,255,255,.72);color:#456049;border-radius:999px;padding:5px 8px;font:inherit;font-size:7px;cursor:pointer}.conn-links button:hover,.relation-pill:hover,.panel-link:hover{background:#fff;border-color:rgba(52,79,56,.25)}
+.panel-relations{margin-top:18px;padding-top:14px;border-top:1px solid rgba(52,79,56,.09)}.panel-relations h4{margin:0 0 8px;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#788479}.panel-relations>div{display:flex;flex-wrap:wrap;gap:6px}
+.link-matrix{margin-top:12px;padding-top:10px;border-top:1px solid rgba(52,79,56,.08)}
+@media(max-width:1100px){.connection-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.connection-cards{grid-template-columns:1fr 1fr}.connection-card p{min-height:0}}
+@media(max-width:480px){.connection-cards{grid-template-columns:1fr}}
