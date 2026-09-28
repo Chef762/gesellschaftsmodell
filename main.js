@@ -19,6 +19,17 @@ function renderGermanyStats(){
  el.innerHTML=germanyStats.map(s=>`<article class="gstat"><div class="gstat-top"><span>${s.label}</span><b>${s.value}</b></div><div class="gstat-line"><i></i></div><small>${s.detail}</small><a href="${s.url}" target="_blank" rel="noopener noreferrer">${s.source} ↗</a></article>`).join("");
 }
 
+const germanyBridge = [
+ {key:"unemployment", title:"Arbeitsmarkt", value:"6,4 %", question:"Modellfrage: Wie robust bleibt Versorgung, wenn Beschäftigung und Einkommen unter Druck geraten?"},
+ {key:"inflation", title:"Preise", value:"2,9 %", question:"Modellfrage: Wie reagieren Reserven und Investitionen, wenn laufende Kosten steigen?"},
+ {key:"gdp", title:"Wirtschaft", value:"+0,3 %", question:"Modellfrage: Welche Kapazitäten bleiben für neue Projekte verfügbar?"},
+ {key:"renewables", title:"Strommix", value:"57 %", question:"Modellfrage: Wie verändert eine resilientere Energieversorgung die Abhängigkeiten?"}
+];
+function renderGermanyBridge(){
+ const el=document.getElementById("germanyBridge"); if(!el)return;
+ el.innerHTML=`<div class="bridge-head"><div><span>REFERENZ → MODELL</span><b>Vier reale Anker, vier Modellfragen</b></div><small>Die Verknüpfung ist bewusst qualitativ: Die amtlichen Werte werden nicht in den 0–100-Modellindex umgerechnet.</small></div>`+germanyBridge.map(x=>`<article class="bridge-item"><div class="bridge-value"><span>${x.title}</span><b>${x.value}</b></div><p>${x.question}</p></article>`).join("");
+}
+
 const critique = [
 ["Grundidee","Gleichwertigkeit und Vielfalt sind als Leitprinzipien klar formulierbar.","Wie werden Zielkonflikte zwischen individueller Freiheit und gemeinschaftlichen Pflichten entschieden?"],
 ["Wirtschaft","Mitarbeiterbeteiligung und Wettbewerbsschutz adressieren Machtkonzentration.","Wie bleiben Investitionsanreize, Eigentumsrechte und internationale Kapitalflüsse funktionsfähig?"],
@@ -339,7 +350,8 @@ function simRender(){
  const network=document.getElementById("simNetwork");
  if(network){const links=[['Lebensmittel','Versorgung',state.food],['Energie','Versorgung',state.energy],['Vertrauen','Kooperation',state.trust],['Investitionen','Projekte',state.invest],['Konzentration','Abhängigkeit',state.conc]];network.innerHTML=links.map(([a,b,v])=>`<div class="network-row"><span>${a}</span><i><em style="width:${Math.max(4,Math.min(100,v))}%"></em></i><b>${b}</b></div>`).join("");}
  const analysis=document.getElementById("simAnalysis");
- if(analysis){const notes=[]; if(state.food<75)notes.push("Die Lebensmittelversorgung ist der aktuelle Engpass."); if(state.energy<75)notes.push("Energie wird zum limitierenden Faktor für Produktion und Mobilität."); if(state.trust<65)notes.push("Niedriges Vertrauen schwächt Kooperation und Investitionsbereitschaft."); if(state.conc>60)notes.push("Hohe Marktkonzentration erhöht Abhängigkeiten im Modell."); if(state.invest>75)notes.push("Höhere Bürgerkapital-Investitionen vergrößern den finanziellen Puffer."); if(!notes.length)notes.push("Kein einzelner Faktor dominiert die aktuelle Modelllage."); notes.push("Realitätscheck: Deutschland lag im Juli 2026 bei 6,4 % Arbeitslosenquote und im August 2026 bei 2,9 % Inflation. Diese Werte sind Referenzdaten, keine Modellwerte."); analysis.innerHTML=notes.map((n,i)=>`<div class="analysis-item"><span>${String(i+1).padStart(2,'0')}</span><p>${n}</p></div>`).join("");}
+ if(analysis){const notes=[]; if(state.food<75)notes.push("Die Lebensmittelversorgung ist der aktuelle Engpass."); if(state.energy<75)notes.push("Energie wird zum limitierenden Faktor für Produktion und Mobilität."); if(state.trust<65)notes.push("Niedriges Vertrauen schwächt Kooperation und Investitionsbereitschaft."); if(state.conc>60)notes.push("Hohe Marktkonzentration erhöht Abhängigkeiten im Modell."); if(state.invest>75)notes.push("Höhere Bürgerkapital-Investitionen vergrößern den finanziellen Puffer."); if(!notes.length)notes.push("Kein einzelner Faktor dominiert die aktuelle Modelllage."); notes.push("Deutschland-Referenz: 6,4 % Arbeitslosenquote (Juli 2026) und 2,9 % Inflation (August 2026). Das sind externe Vergleichswerte; der Modellindex ist nicht in diese Einheiten übersetzt.");
+ const bridge=[]; if(state.energy<75)bridge.push("Der Energie-Regler lässt sich inhaltlich neben den amtlichen Strommix stellen: Im 1. Halbjahr 2026 kamen rund 57 % des genutzten Stroms aus erneuerbaren Energien."); if(state.invest>75)bridge.push("Hohe Modell-Investitionen können als Testfrage für Wachstum und Projektfinanzierung gelesen werden; sie entsprechen nicht direkt dem realen BIP-Wachstum von +0,3 % im 2. Quartal 2026."); if(state.food<75)bridge.push("Eine schwächere Lebensmittelversorgung ist im Modell ein Resilienztest. Der Wert ist keine Prognose für die reale Versorgungslage Deutschlands."); notes.push(...bridge); analysis.innerHTML=notes.map((n,i)=>`<div class="analysis-item"><span>${String(i+1).padStart(2,'0')}</span><p>${n}</p></div>`).join("");}
  updateMetrics();
 }
 function log(msg){const el=document.getElementById("simLog");el.insertAdjacentHTML("afterbegin",`<div class="log">${new Date().toLocaleTimeString("de-DE")} · ${msg}</div>`)}
@@ -416,6 +428,6 @@ document.addEventListener("keydown",e=>{
 });
 renderDocument();
 document.querySelector("#critgrid").innerHTML=critique.map(x=>`<article class="critcard"><div class="label">PRÜFPUNKT</div><h3>${x[0]}</h3><p><strong>Gedanke:</strong> ${x[1]}</p><p><strong>Offene Frage:</strong> ${x[2]}</p></article>`).join("");
-setupViews();renderGermanyStats();simRender();
+setupViews();renderGermanyStats();renderGermanyBridge();simRender();
 init3D();
 window.addEventListener("error", e => { const el=document.querySelector("#statusHint"); if(el) el.textContent="Fehler beim Laden der 3D-Ansicht: bitte Startskript verwenden und Internetverbindung prüfen."; });
